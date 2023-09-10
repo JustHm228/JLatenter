@@ -15,13 +15,27 @@ Over the course of my time, I have visited many sites, many of which you may not
 But besides this, I also read books.
 One of them was Bruce Eckel's book "Thinking in Java", 4th Edition (an excellent book, by the way, I recommend reading it - it will be at least interesting).
 I first saw the idea of implementing latent typing in Java there.
-But I wasn't interested in implementing it - I thought it was a useless exercise.
+But I wasn't interested in it.
 Later, when I had already studied Java to a level acceptable to me personally, I began to write various software for myself, which I might later post on GitHub, and, in fact, I started GitHub itself - at a minimum, it definitely won't be superfluous.
-But then, I simply ran out of ideas, and my study began (just in time...).
+But then, I simply ran out of ideas, and my study began.
 And then, during a regular walk, the idea of combining dynamic proxies and latent typing from Python came to my mind.
 This is how this implementation was born.
+
+---
+
 I wanted to make it as user-friendly and take up the least amount of code space as possible.
-So small that the function call can look like this:
+So small that the method call can look like in this Python example:
+
+```python
+def main(obj):
+	obj.run()  # `obj` may not have a `run()` method
+
+
+if __name__ == '__main__':
+	pass  # Sorry but I just don't have enough time to complete this example (maybe later)
+```
+
+or in this:
 
 ```python
 def main(task):  # <-- Parameter `task` should be a function
@@ -33,16 +47,8 @@ def run():
 
 if __name__ == '__main__':
 	main(run)  # Pass function as an argument
-```
 
-or like this:
-
-```
-def main(obj):
-	obj.run()
-	
-if __name__ == '__main__':
-	pass  # Sorry but I'm too lazy to complete this example - I just have no time (maybe later)
+# P.S. Yes, I know that it's not a latent typing itself, thanks
 ```
 
 But in the end, it looks like this:
@@ -54,16 +60,16 @@ import static com.github.justhm228.jlatenter.latent.Latent.*;
 public class Main {
 
 	public static void main(String[] args) throws LatentException { // <-- If something went wrong
-		
-		final Object instance = new Task();
+
+		final Object instance = new Task(); // <-- Losing the type
 
 		as(instance, Runnable.class).run(); // <-- Interpreting `instance` as a `Runnable`
 	}
 }
 
 class Task { // <-- It doesn't implement `Runnable`
-	
-	void run() {
+
+	public void run() {
 		
 		System.out.println("Hello World!");
 	}
@@ -71,7 +77,9 @@ class Task { // <-- It doesn't implement `Runnable`
 ```
 
 This, of course, isn't particularly similar to Python, but at least it's very short and clear, right?
-And it's as simple as Python itself, because...
+
+---
+
 There is nothing complicated here, because... the only class you will have to work with is `Latent`.
 The class contains 3 overloaded methods:
 
@@ -82,14 +90,18 @@ The class contains 3 overloaded methods:
 `as()` takes as the first argument the object whose method you want to call, and the second argument in the two overloaded versions is different:
 
 - In the first version it's a reference to the interface as which you want to represent the object
-- In the second version it's an object that implements a single interface, as which an object can be represented (it's a failed experiment, please forget about its existence).
+- In the second version it's an object that implements a single interface, as which an object can be represented *(it's
+  a failed experiment, please forget about its existence)*.
 
+but return value is always the same - a "shadow" of the passed object.
 The `isShadowed()` method accepts a single object and returns `true` if the object is the "shadow" of another object, and `false` if not.
 The `find()` method takes as a required parameter a "shadow" object, and as an optional parameter the class to which you want to cast the return value using generics.
 The method itself simply returns a reference to an object whose "shadow" is the argument passed to it.
-Methods of the "shadow" object don't throw exceptions, except for subclasses of `LatentException`, so all checked exceptions can be suppressed in the `catch` block.
-A `LatentException` is thrown if the called method isn't found, its return value is incompatible with the original, the method is inaccessible, an exception has occurred in the initializer, or the method threw an exception.
-Everything is like in the Reflection API.
+Methods of the "shadow" object don't throw any exception, except for subclasses of `LatentException`, so all checked
+exceptions can be suppressed in the `catch` block and all other exceptions can be ignored.
+A `LatentException` is thrown if the called method isn't found/implemented, its signature is incompatible with the
+original method, the method is inaccessible, an exception has occurred in the initializer, or the method threw an
+exception.
 Also, some built-in stub interfaces have been prepared for you that you can use instead of creating a new class with your method (there will be more of them in the future):
 
 - `Startable` - contains a `start()` method which accepts no parameters and returns `void`
@@ -104,7 +116,9 @@ Also, some built-in stub interfaces have been prepared for you that you can use 
 - - `SelfFormatted` - contains a `formatted()` method which accepts `Object...` as a parameter and returns `String`
 - - `SelfPrintableF` - contains a `printf()` method which accepts `Object...` as a parameter and returns `void`
 - - `XFormattable` - contains a `format()` method which accepts `Object` and `Object...` as parameters and returns `void`
-- - `XPrintableF` - contains a `printf()` method which accepts `Object` and `Object...` as paramaters and returns `void`
+-
+	- `XPrintableF` - contains a `printf()` method which accepts `Object` and `Object...` as parameters and
+	  returns `void`
 - `@Shadow` - just an annotation which marks all interface stubs *(it's optional)*
 - `Buildable` - a parent for all build stubs
 - - `XBuildable` - contains a `build()` method which accepts no parameters and returns `void`
@@ -119,10 +133,15 @@ Also, some built-in stub interfaces have been prepared for you that you can use 
 - `Gettable` - contains a `get()` method which accepts no parameters and returns `Object`
 - `Puttable` - contains a `put()` method which accepts no parameters and returns `void`
 
-And, you won't believe it, but that's all.
-Yes, I tried to simplify everything so much.
-Also, if you take into account that you can use static import to call the `as()` method (like in the examples), it turns out that you can call the function you need in almost one line (possibly even without creating a new interface).
-**The only thing remaining is that the garbage collector won't be able to destroy the original object while its "shadow" exists, because it references original directly, so take that into account (I won't fix this).**
+---
+
+And that's all.
+It's very short, isn't it?
+Also, if you take into account that you can use static import to call the `as()` method (like in the examples), it turns
+out that you can call the method you need in almost one line (possibly even without creating a new interface).
+**But note that the garbage collector won't be able to destroy the original object while its "shadow" exists, because it
+references original directly, so take that into account *(I won't fix this due to other problems caused by such fixes)*.
+**
 I hope I explained clearly.
 
 ## Examples
@@ -141,13 +160,15 @@ public class Example {
 
 	public static void start(Object process) throws LatentException {
 
-		as(process, Startable.class).start();
+		// Do something...
+		as(process, Startable.class).start(); // <-- Calling `start()` from `Startable`
 		// Do something...
 	}
 	
 	public static void stop(Object process) throws LatentException {
-		
-		as(process, Stoppable.class).stop();
+
+		// Do something...
+		as(process, Stoppable.class).stop(); // <-- Calling `stop()` from `Stoppable`
 		// Do something...
 	}
 	
@@ -175,6 +196,8 @@ The possibilities in this regard are endless!
 That's why I decided not to complete this idea that spontaneously came to me with 0.1-build.1 - I want to determine how I can "play" with this implementation, how to expand it, what I can basically do with it.
 So I promise that I will at least try to do something similar.
 
+---
+
 - [x] Come up with an idea.
 - [x] Implement the idea.
 - [ ] Add more stub interfaces.
@@ -187,6 +210,9 @@ So I promise that I will at least try to do something similar.
 - - [ ] And etc.
 - [ ] Possibly get rid of `IncompatibleLatentException` caused by `void` (just return `null`-like values in cases of conflict - it will be hard)
 - [ ] Do something with `@Shadow`
+- [ ] Publish to Maven
 - [ ] Abandon the project?..
+
+---
 
 Well, something like this.
