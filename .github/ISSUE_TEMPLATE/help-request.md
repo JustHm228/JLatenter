@@ -1,7 +1,7 @@
 ---
 name: Help request
 about: Ask a question if you need help
-title: ''
+title: Help!
 labels: question
 assignees: JustHm228
 
