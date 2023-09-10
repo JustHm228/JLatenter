@@ -7,15 +7,11 @@ assignees: JustHm228
 
 ---
 
-## Warning
+## Bug
 
-This is an example of how you should design your issues.
-
-## Issue
-
-A description of your issue.
+A description of your bug.
 
 ## Example
 
-Examples of your issues and how to reproduce.
+Examples of bug and how to reproduce.
 Try to write as detailed as you can.
