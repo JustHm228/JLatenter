@@ -6,35 +6,37 @@
 	<groupId>com.github.justhm228</groupId>
 	<artifactId>jlatenter</artifactId>
 	<version>0.1-build.1</version>
+	<packaging>jar</packaging>
 
 	<name>JLatenter</name>
-	<description>A small implementation of latent typing in Java which uses dynamic proxies to redirect method calls from an interface stub to the real object.</description>
+	<description>A small implementation of latent typing in Java which uses dynamic proxies to redirect method calls
+		from a stub interface to the real object.
+	</description>
 	<url>https://github.com/JustHm228/JLatenter</url>
+	<licenses>
+		<license>
+			<name>MIT</name>
+			<url>https://spdx.org/licenses/MIT.txt</url>
+		</license>
+	</licenses>
 	<inceptionYear>2023</inceptionYear>
 	<developers>
 		<developer>
 			<name>JustHuman228</name>
 			<url>https://github.com/JustHm228</url>
-			<email>justhuman228.github@gmail.com</email>
-			<roles>
-				<role>Owner</role>
-				<role>Programmer</role>
-				<role>Publisher</role>
-			</roles>
 		</developer>
 	</developers>
 	<contributors>
 		<contributor>
 			<name>JustHuman228</name>
 			<url>https://github.com/JustHm228</url>
-			<email>justhuman228.github@gmail.com</email>
-			<roles>
-				<role>Owner</role>
-				<role>Programmer</role>
-				<role>Publisher</role>
-			</roles>
 		</contributor>
 	</contributors>
+
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/JLatenter/issues</url>
+	</issueManagement>
 
 	<dependencies>
 		<dependency>
