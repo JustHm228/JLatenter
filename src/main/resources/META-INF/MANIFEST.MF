@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: annotations-24.0.1.jar
+

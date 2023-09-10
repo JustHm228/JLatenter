@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="jlatenter-sources">
+    <output-path>$PROJECT_DIR$/out/artifacts/jlatenter_sources</output-path>
+    <root id="archive" name="jlatenter-sources.jar">
+      <element id="module-source" name="jlatenter" />
+    </root>
+  </artifact>
+</component>
