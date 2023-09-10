@@ -9,9 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>JLatenter</name>
-	<description>A small implementation of latent typing in Java which uses dynamic proxies to redirect method calls
-		from a stub interface to the real object.
-	</description>
+	<description>A small implementation of latent typing in Java which uses dynamic proxies to redirect method calls from a stub interface to the real object.</description>
 	<url>https://github.com/JustHm228/JLatenter</url>
 	<licenses>
 		<license>
