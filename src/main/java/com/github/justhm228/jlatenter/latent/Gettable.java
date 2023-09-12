@@ -4,15 +4,43 @@ import org.jetbrains.annotations.ApiStatus.*;
 import org.jetbrains.annotations.*;
 import java.lang.*;
 
+/**
+ * Just a stub interface with <code>{@link #get() get}()</code> method (returns <code>void</code>) which can be used in {@link Latent latent typing}.
+ *
+ * @author JustHuman228
+ * @apiNote _
+ * @implSpec _
+ * @implNote _
+ * @see Shadow
+ * @since 0.1-build.1
+ */
 @AvailableSince(value = "0.1-build.1")
-@NonBlocking()
+@NonExtendable() // <-- Shouldn't be implemented!
+@Blocking() // <-- Potentially blocking context!
 @FunctionalInterface()
-@Shadow()
+@Shadow() // <-- Just a stub interface
 public interface Gettable {
 
+	/**
+	 * A stub method which can be called with {@link Latent latent typing}.
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws LatentException If something went wrong with {@link Latent latent typing} implementation.
+	 *
+	 * @apiNote _
+	 * @implSpec _
+	 * @implNote _
+	 *
+	 * @since 0.1-build.1
+	 *
+	 * @see Gettable
+	 * @see Shadow
+	 */
 	@AvailableSince(value = "0.1-build.1")
-	@NonBlocking()
-	@Contract(value = " -> _", pure = true)
+	@NonExtendable() // <-- Shouldn't be implemented!
+	@Blocking() // <-- Potentially blocking context!
+	@Contract(value = " -> _") // <-- "pure" is unknown
 	@Shadow()
-	Object get() throws Error, LatentException; // TODO: 09.09.2023 Expand.
+	// <-- Just a stub method
+	Object get() throws Error, LatentException; // TODO: 09.09.2023 Expand this interface with other methods (like Formattable, Buildable, Puttable).
 }
