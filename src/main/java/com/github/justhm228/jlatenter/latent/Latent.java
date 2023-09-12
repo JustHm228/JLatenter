@@ -30,6 +30,7 @@ public final class Latent {
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
+	@Deprecated(since = "0.1-build.2")
 	public static @NotNull(exception = NullPointerException.class) Object as(@NotNull(value = "The specified latent instance is null!") final Object instance, @NotNull(value = "The specified cast type is null!", exception = NullPointerException.class) final Object type) throws Error, NullPointerException, IllegalArgumentException {
 
 		requireNonNull(instance, "The specified latent instance is null!");
