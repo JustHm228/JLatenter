@@ -1,16 +1,16 @@
 # JLatenter
 
----
-
-**JLatenter** is a small implementation of latent typing in Java which uses dynamic proxies to redirect method calls from an interface stub to the real object.
+**JLatenter** is a small implementation of latent typing in Java which
+uses [dynamic proxies](https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/reflect/Proxy.html) to
+redirect method calls from an interface stub to the real object.
 **I don't know how original this thing is**, I just came up with this implementation of this idea and decided to do it because why not.
 
 ## How to Use
 
----
-
-There's a little background here. I studied the Java programming language for almost 2 years, mostly using the Internet.
-In addition to just studying the theory, I simultaneously wrote my programs, encountered problems and found answers to them on StackOverflow or, in the end, in various English-language articles.
+There's a little background here.
+I studied the Java programming language for almost 2 years, mostly using the Internet.
+In addition to just studying the theory, I simultaneously wrote my programs, encountered problems and found answers to
+them on [StackOverflow](https://stackoverflow.com) or, in the end, in various English-language articles.
 Over the course of my time, I have visited many sites, many of which you may not have even heard of.
 But besides this, I also read books.
 One of them was Bruce Eckel's book "Thinking in Java", 4th Edition (an excellent book, by the way, I recommend reading it - it will be at least interesting).
@@ -18,7 +18,9 @@ I first saw the idea of implementing latent typing in Java there.
 But I wasn't interested in it.
 Later, when I had already studied Java to a level acceptable to me personally, I began to write various software for myself, which I might later post on GitHub, and, in fact, I started GitHub itself - at a minimum, it definitely won't be superfluous.
 But then, I simply ran out of ideas, and my study began.
-And then, during a regular walk, the idea of combining dynamic proxies and latent typing from Python came to my mind.
+And then, during a regular walk, the idea of
+combining [dynamic proxies](https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/reflect/Proxy.html)
+and latent typing from Python came to my mind.
 This is how this implementation was born.
 
 ---
@@ -59,7 +61,7 @@ import static com.github.justhm228.jlatenter.latent.Latent.*;
 
 public class Main {
 
-	public static void main(String[] args) throws LatentException { // <-- If something went wrong
+	public static void main(String[] args) throws LatentException { // <-- If something went wrong (`LatentException` is unchecked, so you don't need to handle it always)
 
 		final Object instance = new Task(); // <-- Losing the type
 
@@ -90,8 +92,8 @@ The class contains 3 overloaded methods:
 `as()` takes as the first argument the object whose method you want to call, and the second argument in the two overloaded versions is different:
 
 - In the first version it's a reference to the interface as which you want to represent the object
-- In the second version it's an object that implements a single interface, as which an object can be represented *(it's
-  a failed experiment, please forget about its existence)*.
+- ~~In the second version it's an object that implements a single interface, as which an object can be
+  represented *(it's a failed experiment, please forget about its existence)*.~~
 
 but return value is always the same - a "shadow" of the passed object.
 The `isShadowed()` method accepts a single object and returns `true` if the object is the "shadow" of another object, and `false` if not.
@@ -140,13 +142,11 @@ It's very short, isn't it?
 Also, if you take into account that you can use static import to call the `as()` method (like in the examples), it turns
 out that you can call the method you need in almost one line (possibly even without creating a new interface).
 **But note that the garbage collector won't be able to destroy the original object while its "shadow" exists, because it
-references original directly, so take that into account *(I won't fix this due to other problems caused by such fixes)*.
+references original directly, so take that into account _(I won't fix this due to other problems caused by such fixes)_.
 **
 I hope I explained clearly.
 
 ## Examples
-
----
 
 I'd write more examples, but... I don't have enough time for this, so for now let there be only 1 example:
 
@@ -179,8 +179,6 @@ public class Example {
 Just wait until I got the time, okay?
 
 ## Future Plans
-
----
 
 I really wanted to finish at 0.1-build.1 initially, but then I realized that I could turn this spontaneous idea into something more and add a little more functionality.
 But first, I need to add more stub interfaces.
