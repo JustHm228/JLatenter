@@ -320,7 +320,7 @@ public final class Latent {
 				InaccessibleLatentException, LatentInitException, LatentTargetException {
 
 			@NotNull(exception = NullPointerException.class)
-			final Class<?> cast = present.getClass();
+			Class<?> cast = present.getClass();
 
 			try {
 
@@ -571,12 +571,72 @@ public final class Latent {
 					}
 				}
 
-				throw new LatentNotPresentException(
+				if (!method.canAccess(Modifier.isStatic(method.getModifiers()) ? null : present)) {
 
-						"The proxied method (" +
-								method +
-						") has no compatible latents!"
-				);
+					@NotNull(exception = NullPointerException.class)
+					@SuppressWarnings(value = { "removal" })
+					final Boolean accessible = AccessController.doPrivileged(
+
+							(PrivilegedAction<Boolean>) method::trySetAccessible,
+							AccessController.getContext(),
+							new ReflectPermission("suppressAccessChecks")
+					);
+
+					if (!accessible) {
+
+						throw new InaccessibleLatentException(
+
+								"The used method (" +
+										method +
+								") is inaccessible!"
+						);
+					}
+				}
+
+				try {
+
+					return method.invoke(present, args);
+
+				} catch (@NotNull(exception = NullPointerException.class) final IllegalArgumentException incompatible) {
+
+					throw new LatentNotPresentException(
+
+							"The proxied method (" +
+									method +
+							") has no compatible latents!",
+							incompatible
+					);
+
+				} catch (@NotNull(exception = NullPointerException.class) final IllegalAccessException inaccessible) {
+
+					throw new InaccessibleLatentException(
+
+							"The used method (" +
+									method +
+							") is inaccessible!",
+							inaccessible
+					);
+
+				} catch (@NotNull(exception = NullPointerException.class) final ExceptionInInitializerError init) {
+
+					throw new LatentInitException(
+
+							"The used method (" +
+									method +
+							") thrown an exception in initializer!",
+							init.getException()
+					);
+
+				} catch (@NotNull(exception = NullPointerException.class) final InvocationTargetException invocation) {
+
+					throw new LatentTargetException(
+
+							"The used method (" +
+									method +
+							") thrown an exception!",
+							invocation.getTargetException()
+					);
+				}
 			}
 		}
 
