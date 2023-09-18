@@ -320,7 +320,7 @@ public final class Latent {
 				InaccessibleLatentException, LatentInitException, LatentTargetException {
 
 			@NotNull(exception = NullPointerException.class)
-			final Class<?> cast = present.getClass();
+			Class<?> cast = present.getClass();
 
 			try {
 
@@ -491,12 +491,36 @@ public final class Latent {
 
 			} catch (@NotNull(exception = NullPointerException.class) final PrivilegedActionException notFound) {
 
-				// TODO: 18.09.2023 Try to get rid of this:
+				// Try set the method to be accessible:
+				if (!method.canAccess(Modifier.isStatic(method.getModifiers()) ? null : present)) {
+
+					@NotNull(exception = NullPointerException.class)
+					@SuppressWarnings(value = { "removal" })
+					final Boolean accessible = AccessController.doPrivileged(
+
+							(PrivilegedAction<Boolean>) method::trySetAccessible,
+							AccessController.getContext(),
+							new ReflectPermission("suppressAccessChecks")
+					);
+
+					if (!accessible) {
+
+						throw new InaccessibleLatentException(
+
+								"The used method (" +
+										method +
+								") is inaccessible!"
+
+						); // <-- If the method is inaccessible at all
+					}
+				}
+
+				// If the current method is from `Object` class:
 				if (Objects.equals(method.getDeclaringClass(), Object.class)) {
 
 					switch (method.getName()) {
 
-						case "toString" -> {
+						case "toString" -> { // Built-in `toString()` implementation:
 
 							if (args != null && args.length > 0) {
 
@@ -505,15 +529,16 @@ public final class Latent {
 										"The proxied method (" +
 												method +
 										") has no compatible latents!"
-								);
+
+								); // <-- Invalid arguments!
 							}
 
 							return proxy.getClass().getName() +
 									"@" +
-									toHexString(identityHashCode(proxy));
+									toHexString(identityHashCode(proxy)); // <-- Default `Object`'s implementation
 						}
 
-						case "equals" -> {
+						case "equals" -> { // Built-in `equals()` implementation:
 
 							if (args == null || args.length != 1) {
 
@@ -522,13 +547,14 @@ public final class Latent {
 										"The proxied method (" +
 												method +
 										") has no compatible latents!"
-								);
+
+								); // <-- Invalid arguments!
 							}
 
-							return proxy == args[0];
+							return proxy == args[0]; // <-- Default `Object`'s implementation
 						}
 
-						case "hashCode" -> {
+						case "hashCode" -> { // Built-in `hashCode()` implementation:
 
 							if (args != null && args.length > 0) {
 
@@ -537,20 +563,33 @@ public final class Latent {
 										"The proxied method (" +
 												method +
 										") has no compatible latents!"
-								);
+
+								); // <-- Invalid arguments!
 							}
 
-							return identityHashCode(proxy);
+							return identityHashCode(proxy); // <-- Default `Object`'s implementation
 						}
 
-						case "clone" -> {
+						case "clone" -> { // Built-in `clone()` implementation:
+
+							if (args != null && args.length != 0) {
+
+								throw new LatentNotPresentException(
+
+										"The proxied method (" +
+												method +
+										") has no compatible latents!"
+
+								); // <-- Invalid arguments!
+							}
 
 							try {
 
 								throw new CloneNotSupportedException(
 
 										proxy.getClass().getTypeName()
-								);
+
+								); // <-- Cloning of "shadow" objects isn't supported!
 
 							} catch (@NotNull(exception = NullPointerException.class) final CloneNotSupportedException unsupported) {
 
@@ -560,23 +599,78 @@ public final class Latent {
 												method +
 										") thrown an exception!",
 										unsupported
-								);
+
+								); // Wrap the thrown exception to a `LatentTargetException`
 							}
 						}
 
-						case "finalize" -> {
+						case "finalize" -> { // Built-in `finalize()` implementation:
 
-							return null;
+							if (args != null && args.length != 0) {
+
+								throw new LatentNotPresentException(
+
+										"The proxied method (" +
+												method +
+												") has no compatible latents!"
+
+								); // <-- Invalid arguments!
+							}
+
+							return null; // Do nothing
 						}
 					}
 				}
 
-				throw new LatentNotPresentException(
+				// If it isn't a method of `Object`:
+				try {
 
-						"The proxied method (" +
-								method +
-						") has no compatible latents!"
-				);
+					return method.invoke(present, args); // Just try to call it
+
+				} catch (@NotNull(exception = NullPointerException.class) final IllegalArgumentException incompatible) {
+
+					throw new LatentNotPresentException(
+
+							"The proxied method (" +
+									method +
+							") has no compatible latents!",
+							incompatible
+
+					); // Incompatible signatures!
+
+				} catch (@NotNull(exception = NullPointerException.class) final IllegalAccessException inaccessible) {
+
+					throw new InaccessibleLatentException(
+
+							"The used method (" +
+									method +
+							") is inaccessible!",
+							inaccessible
+
+					); // Method is inaccessible!
+
+				} catch (@NotNull(exception = NullPointerException.class) final ExceptionInInitializerError init) {
+
+					throw new LatentInitException(
+
+							"The used method (" +
+									method +
+							") thrown an exception in initializer!",
+							init.getException()
+
+					); // Exception in initializer!
+
+				} catch (@NotNull(exception = NullPointerException.class) final InvocationTargetException invocation) {
+
+					throw new LatentTargetException(
+
+							"The used method (" +
+									method +
+							") thrown an exception!",
+							invocation.getTargetException()
+
+					); // The method has thrown an exception!
+				}
 			}
 		}
 
