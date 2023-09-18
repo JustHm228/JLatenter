@@ -552,7 +552,7 @@ public final class Latent {
 										proxy.getClass().getTypeName()
 								);
 
-							} catch (final CloneNotSupportedException unsupported) {
+							} catch (@NotNull(exception = NullPointerException.class) final CloneNotSupportedException unsupported) {
 
 								throw new LatentTargetException(
 
