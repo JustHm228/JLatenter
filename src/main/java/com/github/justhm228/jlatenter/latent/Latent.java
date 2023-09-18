@@ -491,86 +491,7 @@ public final class Latent {
 
 			} catch (@NotNull(exception = NullPointerException.class) final PrivilegedActionException notFound) {
 
-				// TODO: 18.09.2023 Try to get rid of this:
-				if (Objects.equals(method.getDeclaringClass(), Object.class)) {
-
-					switch (method.getName()) {
-
-						case "toString" -> {
-
-							if (args != null && args.length > 0) {
-
-								throw new LatentNotPresentException(
-
-										"The proxied method (" +
-												method +
-										") has no compatible latents!"
-								);
-							}
-
-							return proxy.getClass().getName() +
-									"@" +
-									toHexString(identityHashCode(proxy));
-						}
-
-						case "equals" -> {
-
-							if (args == null || args.length != 1) {
-
-								throw new LatentNotPresentException(
-
-										"The proxied method (" +
-												method +
-										") has no compatible latents!"
-								);
-							}
-
-							return proxy == args[0];
-						}
-
-						case "hashCode" -> {
-
-							if (args != null && args.length > 0) {
-
-								throw new LatentNotPresentException(
-
-										"The proxied method (" +
-												method +
-										") has no compatible latents!"
-								);
-							}
-
-							return identityHashCode(proxy);
-						}
-
-						case "clone" -> {
-
-							try {
-
-								throw new CloneNotSupportedException(
-
-										proxy.getClass().getTypeName()
-								);
-
-							} catch (@NotNull(exception = NullPointerException.class) final CloneNotSupportedException unsupported) {
-
-								throw new LatentTargetException(
-
-										"The used method (" +
-												method +
-										") thrown an exception!",
-										unsupported
-								);
-							}
-						}
-
-						case "finalize" -> {
-
-							return null;
-						}
-					}
-				}
-
+				// Try set the method to be accessible:
 				if (!method.canAccess(Modifier.isStatic(method.getModifiers()) ? null : present)) {
 
 					@NotNull(exception = NullPointerException.class)
@@ -589,13 +510,122 @@ public final class Latent {
 								"The used method (" +
 										method +
 								") is inaccessible!"
-						);
+
+						); // <-- If the method is inaccessible at all
 					}
 				}
 
+				// If the current method is from `Object` class:
+				if (Objects.equals(method.getDeclaringClass(), Object.class)) {
+
+					switch (method.getName()) {
+
+						case "toString" -> { // Built-in `toString()` implementation:
+
+							if (args != null && args.length > 0) {
+
+								throw new LatentNotPresentException(
+
+										"The proxied method (" +
+												method +
+										") has no compatible latents!"
+
+								); // <-- Invalid arguments!
+							}
+
+							return proxy.getClass().getName() +
+									"@" +
+									toHexString(identityHashCode(proxy)); // <-- Default `Object`'s implementation
+						}
+
+						case "equals" -> { // Built-in `equals()` implementation:
+
+							if (args == null || args.length != 1) {
+
+								throw new LatentNotPresentException(
+
+										"The proxied method (" +
+												method +
+										") has no compatible latents!"
+
+								); // <-- Invalid arguments!
+							}
+
+							return proxy == args[0]; // <-- Default `Object`'s implementation
+						}
+
+						case "hashCode" -> { // Built-in `hashCode()` implementation:
+
+							if (args != null && args.length > 0) {
+
+								throw new LatentNotPresentException(
+
+										"The proxied method (" +
+												method +
+										") has no compatible latents!"
+
+								); // <-- Invalid arguments!
+							}
+
+							return identityHashCode(proxy); // <-- Default `Object`'s implementation
+						}
+
+						case "clone" -> { // Built-in `clone()` implementation:
+
+							if (args != null && args.length != 0) {
+
+								throw new LatentNotPresentException(
+
+										"The proxied method (" +
+												method +
+										") has no compatible latents!"
+
+								); // <-- Invalid arguments!
+							}
+
+							try {
+
+								throw new CloneNotSupportedException(
+
+										proxy.getClass().getTypeName()
+
+								); // <-- Cloning of "shadow" objects isn't supported!
+
+							} catch (@NotNull(exception = NullPointerException.class) final CloneNotSupportedException unsupported) {
+
+								throw new LatentTargetException(
+
+										"The used method (" +
+												method +
+										") thrown an exception!",
+										unsupported
+
+								); // Wrap the thrown exception to a `LatentTargetException`
+							}
+						}
+
+						case "finalize" -> { // Built-in `finalize()` implementation:
+
+							if (args != null && args.length != 0) {
+
+								throw new LatentNotPresentException(
+
+										"The proxied method (" +
+												method +
+												") has no compatible latents!"
+
+								); // <-- Invalid arguments!
+							}
+
+							return null; // Do nothing
+						}
+					}
+				}
+
+				// If it isn't a method of `Object`:
 				try {
 
-					return method.invoke(present, args);
+					return method.invoke(present, args); // Just try to call it
 
 				} catch (@NotNull(exception = NullPointerException.class) final IllegalArgumentException incompatible) {
 
@@ -605,7 +635,8 @@ public final class Latent {
 									method +
 							") has no compatible latents!",
 							incompatible
-					);
+
+					); // Incompatible signatures!
 
 				} catch (@NotNull(exception = NullPointerException.class) final IllegalAccessException inaccessible) {
 
@@ -615,7 +646,8 @@ public final class Latent {
 									method +
 							") is inaccessible!",
 							inaccessible
-					);
+
+					); // Method is inaccessible!
 
 				} catch (@NotNull(exception = NullPointerException.class) final ExceptionInInitializerError init) {
 
@@ -625,7 +657,8 @@ public final class Latent {
 									method +
 							") thrown an exception in initializer!",
 							init.getException()
-					);
+
+					); // Exception in initializer!
 
 				} catch (@NotNull(exception = NullPointerException.class) final InvocationTargetException invocation) {
 
@@ -635,7 +668,8 @@ public final class Latent {
 									method +
 							") thrown an exception!",
 							invocation.getTargetException()
-					);
+
+					); // The method has thrown an exception!
 				}
 			}
 		}
