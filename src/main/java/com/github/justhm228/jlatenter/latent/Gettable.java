@@ -64,7 +64,7 @@ public interface Gettable {
 	@NonExtendable() // <-- Shouldn't be implemented!
 	@Blocking() // <-- Potentially blocking context!
 	@Contract(value = " -> _") // <-- "pure" is unknown
-	@Shadow()
-	// <-- Just a stub method
-	Object get() throws Error, LatentException; // TODO: 09.09.2023 Expand this interface with other methods (like Formattable, Buildable, Puttable).
+	@Shadow() // <-- Just a stub method
+	// TODO: 09.09.2023 Expand this interface with other methods (like Formattable, Buildable, Puttable):
+	Object get() throws Error, LatentException;
 }

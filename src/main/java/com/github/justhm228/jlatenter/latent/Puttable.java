@@ -66,7 +66,7 @@ public interface Puttable {
 	@NonExtendable() // <-- Shouldn't be implemented!
 	@Blocking() // <-- Potentially blocking context!
 	@Contract() // <-- "pure" is unknown
-	@Shadow()
-	// <-- Just a stub method
-	void put() throws Error, LatentException; // TODO: 09.09.2023 Expand this interface with other methods (like Formattable, Buildable, Gettable).
+	@Shadow() // <-- Just a stub method
+	// TODO: 09.09.2023 Expand this interface with other methods (like Formattable, Buildable, Gettable):
+	void put() throws Error, LatentException;
 }
