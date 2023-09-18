@@ -490,6 +490,7 @@ public final class Latent {
 
 			} catch (@NotNull(exception = NullPointerException.class) final PrivilegedActionException notFound) {
 
+				// TODO: 18.09.2023 Try to get rid of this:
 				if (Objects.equals(method.getDeclaringClass(), Object.class)) {
 
 					switch (method.getName()) {
@@ -562,7 +563,10 @@ public final class Latent {
 							}
 						}
 
-						case "finalize" -> {}
+						case "finalize" -> {
+
+							return null;
+						}
 					}
 				}
 
