@@ -32,12 +32,19 @@ import static java.lang.System.*;
 @AvailableSince(value = "0.1-build.1")
 @NonExtendable()
 @NonBlocking()
-public abstract sealed class LatentException extends RuntimeException implements Serializable permits LatentNotPresentException, IncompatibleLatentException, InaccessibleLatentException, LatentInitException, LatentTargetException {
+public abstract sealed class LatentException extends RuntimeException
+		implements Serializable
+		permits LatentNotPresentException, IncompatibleLatentException,
+				InaccessibleLatentException, LatentInitException,
+				LatentTargetException {
 
 	@AvailableSince(value = "0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
-	protected LatentException(@Nullable(value = "Can be null anytime") final String message, @Nullable(value = "Can be null anytime") final Throwable cause) throws Error {
+	protected LatentException(
+			@Nullable(value = "Can be null anytime") final String message,
+			@Nullable(value = "Can be null anytime") final Throwable cause
+	) throws Error {
 
 		super(message, cause);
 	}
@@ -45,7 +52,9 @@ public abstract sealed class LatentException extends RuntimeException implements
 	@AvailableSince(value = "0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
-	protected LatentException(@Nullable(value = "Can be null anytime") final Throwable cause) throws Error {
+	protected LatentException(
+			@Nullable(value = "Can be null anytime") final Throwable cause
+	) throws Error {
 
 		super(cause);
 	}
@@ -53,7 +62,9 @@ public abstract sealed class LatentException extends RuntimeException implements
 	@AvailableSince(value = "0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
-	protected LatentException(@Nullable(value = "Can be null anytime") final String message) throws Error {
+	protected LatentException(
+			@Nullable(value = "Can be null anytime") final String message
+	) throws Error {
 
 		super(message);
 	}
@@ -88,7 +99,9 @@ public abstract sealed class LatentException extends RuntimeException implements
 	@Blocking()
 	@Contract(value = "_ -> this")
 	@Override()
-	public synchronized @NotNull(exception = NullPointerException.class) LatentException initCause(@Nullable(value = "Can be null anytime") final Throwable cause) throws Error {
+	public synchronized @NotNull(exception = NullPointerException.class) LatentException initCause(
+			@Nullable(value = "Can be null anytime") final Throwable cause
+	) throws Error {
 
 		super.initCause(cause);
 		return this;
@@ -107,7 +120,9 @@ public abstract sealed class LatentException extends RuntimeException implements
 	@Blocking()
 	@Contract()
 	@Override()
-	public void setStackTrace(@NotNull(exception = NullPointerException.class) final StackTraceElement @NotNull(exception = NullPointerException.class) [] stacktrace) throws Error, NullPointerException {
+	public void setStackTrace(
+			@NotNull(exception = NullPointerException.class) final StackTraceElement @NotNull(exception = NullPointerException.class) [] stacktrace
+	) throws Error, NullPointerException {
 
 		super.setStackTrace(requireNonNull(stacktrace));
 	}
@@ -135,7 +150,9 @@ public abstract sealed class LatentException extends RuntimeException implements
 	@Blocking()
 	@Contract(value = "_ -> _", pure = true)
 	@Override()
-	public void printStackTrace(@NotNull(exception = NullPointerException.class) final PrintStream out) throws Error, NullPointerException {
+	public void printStackTrace(
+			@NotNull(exception = NullPointerException.class) final PrintStream out
+	) throws Error, NullPointerException {
 
 		super.printStackTrace(requireNonNull(out));
 	}
@@ -144,7 +161,9 @@ public abstract sealed class LatentException extends RuntimeException implements
 	@Blocking()
 	@Contract(value = "_ -> _", pure = true)
 	@Override()
-	public void printStackTrace(@NotNull(exception = NullPointerException.class) final PrintWriter out) throws Error, NullPointerException {
+	public void printStackTrace(
+			@NotNull(exception = NullPointerException.class) final PrintWriter out
+	) throws Error, NullPointerException {
 
 		super.printStackTrace(requireNonNull(out));
 	}
@@ -174,7 +193,9 @@ public abstract sealed class LatentException extends RuntimeException implements
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	@Override()
-	public boolean equals(@Nullable(value = "Can be null anytime") final Object another) throws Error {
+	public boolean equals(
+			@Nullable(value = "Can be null anytime") final Object another
+	) throws Error {
 
 		return super.equals(another);
 	}

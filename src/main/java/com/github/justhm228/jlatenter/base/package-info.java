@@ -21,7 +21,8 @@
  */
 
 /**
- * Contains basic utilities of the implementation (for example, {@link com.github.justhm228.jlatenter.base.Library version information}}).
+ * Contains basic utilities of the implementation
+ * (for example, {@link com.github.justhm228.jlatenter.base.Library version information}}).
  *
  * @apiNote _
  * @implSpec _

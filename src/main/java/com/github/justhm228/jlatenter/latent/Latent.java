@@ -45,7 +45,13 @@ public final class Latent {
 	private Latent() throws Error, UnsupportedOperationException {
 
 		super();
-		throw new UnsupportedOperationException("An instance of this type (" + getClass().getTypeName() + ") can't be instantiated with a constructor!");
+
+		throw new UnsupportedOperationException(
+
+				"An instance of this type (" +
+						getClass().getTypeName() +
+				") can't be instantiated with a constructor!"
+		);
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -53,19 +59,30 @@ public final class Latent {
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
 	@Deprecated(since = "0.1-build.2")
-	public static @NotNull(exception = NullPointerException.class) Object as(@NotNull(value = "The specified latent instance is null!") final Object instance, @NotNull(value = "The specified cast type is null!", exception = NullPointerException.class) final Object type) throws Error, NullPointerException, IllegalArgumentException {
+	public static @NotNull(exception = NullPointerException.class) Object as(
+			@NotNull(value = "The specified latent instance is null!") final Object instance,
+			@NotNull(value = "The specified cast type is null!", exception = NullPointerException.class) final Object type
+	) throws Error, NullPointerException, IllegalArgumentException {
 
 		requireNonNull(instance, "The specified latent instance is null!");
 		requireNonNull(type, "The specified cast type is null!");
 
 		@NotNull(exception = NullPointerException.class)
-		final Class<?> @NotNull(exception = NullPointerException.class) [] latents = type.getClass().getInterfaces();
+		final Class<?> @NotNull(exception = NullPointerException.class) [] latents =
+				type.getClass().getInterfaces();
 
 		final int length = latents.length;
 
 		if (length != 1) {
 
-			throw new IllegalArgumentException("The number of latents (" + length + ") in the specified cast type (" + type + ") isn't equal 1!");
+			throw new IllegalArgumentException(
+
+					"The number of latents (" +
+							length +
+					") in the specified cast type (" +
+							type +
+					") isn't equal 1!"
+			);
 		}
 
 		return as(instance, latents[0]);
@@ -75,19 +92,32 @@ public final class Latent {
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
-	public static <T> @NotNull(exception = NullPointerException.class) T as(@NotNull(value = "The specified latent instance is null!", exception = NullPointerException.class) final Object instance, @NotNull(value = "The specified cast type is null!", exception = NullPointerException.class) final Class<T> type) throws Error, NullPointerException, IllegalArgumentException {
+	public static <T> @NotNull(exception = NullPointerException.class) T as(
+			@NotNull(value = "The specified latent instance is null!", exception = NullPointerException.class) final Object instance,
+			@NotNull(value = "The specified cast type is null!", exception = NullPointerException.class) final Class<T> type
+	) throws Error, NullPointerException, IllegalArgumentException {
 
 		requireNonNull(instance, "The specified latent instance is null!");
 		requireNonNull(type, "The specified cast type is null!");
 
 		if (!type.isInterface()) {
 
-			throw new IllegalArgumentException("The specified cast type (" + type.getTypeName() + ") isn't an interface!");
+			throw new IllegalArgumentException(
+
+					"The specified cast type (" +
+							type.getTypeName() +
+					") isn't an interface!"
+			);
 		}
 
 		@NotNull(exception = NullPointerException.class)
 		@SuppressWarnings(value = { "unchecked" })
-		final T proxy = (T) newProxyInstance(type.getClassLoader(), new Class[] { type }, new LatentHandler(instance));
+		final T proxy = (T) newProxyInstance(
+
+				type.getClassLoader(),
+				new Class[] { type },
+				new LatentHandler(instance)
+		);
 
 		return proxy;
 	}
@@ -107,7 +137,12 @@ public final class Latent {
 
 			@NotNull(exception = NullPointerException.class)
 			@SuppressWarnings(value = { "removal" })
-			final InvocationHandler handler = AccessController.doPrivileged((PrivilegedAction<? extends InvocationHandler>) () -> getInvocationHandler(instance), AccessController.getContext(), new RuntimePermission("accessClassInPackage.*"));
+			final InvocationHandler handler = AccessController.doPrivileged(
+
+					(PrivilegedAction<? extends InvocationHandler>) () -> getInvocationHandler(instance),
+					AccessController.getContext(),
+					new RuntimePermission("accessClassInPackage.*")
+			);
 
 			return handler instanceof LatentHandler;
 		}
@@ -119,11 +154,17 @@ public final class Latent {
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
-	public static <T> @UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance") T find(@NotNull(value = "The specified proxy instance is null!", exception = NullPointerException.class) final Object proxy, @Nullable(value = "Can be null anytime") @SuppressWarnings(value = { "unused" }) final Class<T> cast) throws Error, NullPointerException, ClassCastException {
+	public static <T> @UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance") T find(
+			@NotNull(value = "The specified proxy instance is null!", exception = NullPointerException.class) final Object proxy,
+			@Nullable(value = "Can be null anytime") @SuppressWarnings(value = { "unused" }) final Class<T> cast
+	) throws Error, NullPointerException, ClassCastException {
 
 		@UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance")
 		@SuppressWarnings(value = { "unchecked" })
-		final T instance = (T) find(requireNonNull(proxy, "The specified proxy instance is null!"));
+		final T instance = (T) find(
+
+				requireNonNull(proxy, "The specified proxy instance is null!")
+		);
 
 		return instance;
 	}
@@ -132,7 +173,9 @@ public final class Latent {
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
-	public static @UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance") Object find(@NotNull(value = "The specified proxy instance is null!", exception = NullPointerException.class) final Object proxy) throws Error, NullPointerException {
+	public static @UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance") Object find(
+			@NotNull(value = "The specified proxy instance is null!", exception = NullPointerException.class) final Object proxy
+	) throws Error, NullPointerException {
 
 		requireNonNull(proxy, "The specified proxy instance is null!");
 
@@ -140,9 +183,15 @@ public final class Latent {
 
 			@NotNull(exception = NullPointerException.class)
 			@SuppressWarnings(value = { "removal" })
-			final InvocationHandler handler = AccessController.doPrivileged((PrivilegedAction<? extends InvocationHandler>) () -> getInvocationHandler(proxy), AccessController.getContext(), new RuntimePermission("accessClassInPackage.*"));
+			final InvocationHandler handler = AccessController.doPrivileged(
 
-			if (handler instanceof @NotNull(exception = NullPointerException.class) final LatentHandler latent) {
+					(PrivilegedAction<? extends InvocationHandler>) () -> getInvocationHandler(proxy),
+					AccessController.getContext(),
+					new RuntimePermission("accessClassInPackage.*")
+			);
+
+			if (handler instanceof
+					@NotNull(exception = NullPointerException.class) final LatentHandler latent) {
 
 				return latent.present();
 			}
@@ -166,7 +215,9 @@ public final class Latent {
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	@Override()
-	public boolean equals(@Nullable(value = "Can be null anytime") final Object another) throws Error {
+	public boolean equals(
+			@Nullable(value = "Can be null anytime") final Object another
+	) throws Error {
 
 		return another instanceof Latent;
 	}
@@ -210,15 +261,25 @@ public final class Latent {
 	@Internal()
 	@NonExtendable()
 	@NonBlocking()
-	private record LatentHandler(@NotNull(exception = NullPointerException.class) Object present) implements InvocationHandler {
+	private record LatentHandler(
+
+			@NotNull(exception = NullPointerException.class) Object present
+
+	) implements InvocationHandler {
 
 		@AvailableSince(value = "0.1-build.1")
 		@Internal()
 		@NonBlocking()
 		@Contract(pure = true)
-		private LatentHandler(@NotNull(value = "The specified latent instance is null!", exception = NullPointerException.class) final Object present) {
+		private LatentHandler(
+				@NotNull(value = "The specified latent instance is null!", exception = NullPointerException.class) final Object present
+		) {
 
-			this.present = requireNonNull(present, "The specified latent instance is null!");
+			this.present = requireNonNull(
+
+					present,
+					"The specified latent instance is null!"
+			);
 		}
 
 		@AvailableSince(value = "0.1-build.1")
@@ -226,7 +287,9 @@ public final class Latent {
 		@NonExtendable()
 		@NonBlocking()
 		@Contract(value = "_ -> new", pure = true)
-		public static @NotNull(exception = NullPointerException.class) LatentHandler getInstance(@NotNull(value = "The specified latent instance is null!", exception = NullPointerException.class) final Object present) throws Error, NullPointerException {
+		public static @NotNull(exception = NullPointerException.class) LatentHandler getInstance(
+				@NotNull(value = "The specified latent instance is null!", exception = NullPointerException.class) final Object present
+		) throws Error, NullPointerException {
 
 			return new LatentHandler(present);
 		}
@@ -248,7 +311,12 @@ public final class Latent {
 		@NonBlocking()
 		@Contract(value = "_, _, _ -> _")
 		@Override()
-		public @Nullable(value = "Can be null anytime") Object invoke(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") [] args) throws Error, LatentNotPresentException, IncompatibleLatentException, InaccessibleLatentException, LatentInitException, LatentTargetException {
+		public @Nullable(value = "Can be null anytime") Object invoke(
+				@NotNull(exception = NullPointerException.class) final Object proxy,
+				@NotNull(exception = NullPointerException.class) final Method method,
+				@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") [] args
+		) throws Error, LatentNotPresentException, IncompatibleLatentException,
+				InaccessibleLatentException, LatentInitException, LatentTargetException {
 
 			@NotNull(exception = NullPointerException.class)
 			final Class<?> cast = present.getClass();
@@ -256,7 +324,18 @@ public final class Latent {
 			try {
 
 				@SuppressWarnings(value = { "removal" })
-				final Method called = AccessController.doPrivileged((PrivilegedExceptionAction<Method>) () -> cast.getDeclaredMethod(method.getName(), method.getParameterTypes()), AccessController.getContext(), new RuntimePermission("accessDeclaredMembers"), new RuntimePermission("accessClassInPackage." + cast.getPackageName()));
+				final Method called = AccessController.doPrivileged(
+
+						(PrivilegedExceptionAction<Method>) () -> cast.getDeclaredMethod(
+
+								method.getName(),
+								method.getParameterTypes()
+						),
+
+						AccessController.getContext(),
+						new RuntimePermission("accessDeclaredMembers"),
+						new RuntimePermission("accessClassInPackage." + cast.getPackageName())
+				);
 
 				@NotNull(exception = NullPointerException.class)
 				Class<?> result = called.getReturnType(),
@@ -346,11 +425,21 @@ public final class Latent {
 
 						@NotNull(exception = NullPointerException.class)
 						@SuppressWarnings(value = { "removal" })
-						final Boolean accessible = AccessController.doPrivileged((PrivilegedAction<Boolean>) called::trySetAccessible, AccessController.getContext(), new ReflectPermission("suppressAccessChecks"));
+						final Boolean accessible = AccessController.doPrivileged(
+
+								(PrivilegedAction<Boolean>) called::trySetAccessible,
+								AccessController.getContext(),
+								new ReflectPermission("suppressAccessChecks")
+						);
 
 						if (!accessible) {
 
-							throw new InaccessibleLatentException("The used method (" + called + ") is inaccessible!");
+							throw new InaccessibleLatentException(
+
+									"The used method (" +
+											called +
+									") is inaccessible!"
+							);
 						}
 					}
 
@@ -360,19 +449,44 @@ public final class Latent {
 
 					} catch (@NotNull(exception = NullPointerException.class) final IllegalAccessException inaccessible) {
 
-						throw new InaccessibleLatentException("The used method (" + called + ") is inaccessible!", inaccessible);
+						throw new InaccessibleLatentException(
+
+								"The used method (" +
+										called +
+								") is inaccessible!",
+								inaccessible
+						);
 
 					} catch (@NotNull(exception = NullPointerException.class) final ExceptionInInitializerError init) {
 
-						throw new LatentInitException("The used method (" + called + ") thrown an exception in initializer!", init.getException());
+						throw new LatentInitException(
+
+								"The used method (" +
+										called +
+								") thrown an exception in initializer!",
+								init.getException()
+						);
 
 					} catch (@NotNull(exception = NullPointerException.class) final InvocationTargetException invocation) {
 
-						throw new LatentTargetException("The used method (" + called + ") thrown an exception!", invocation.getTargetException());
+						throw new LatentTargetException(
+
+								"The used method (" +
+										called +
+								") thrown an exception!",
+								invocation.getTargetException()
+						);
 					}
 				}
 
-				throw new IncompatibleLatentException("The proxied method (" + method + ") is incompatible with found (" + called + ")!");
+				throw new IncompatibleLatentException(
+
+						"The proxied method (" +
+								method +
+						") is incompatible with found (" +
+								called +
+						")!"
+				);
 
 			} catch (@NotNull(exception = NullPointerException.class) final PrivilegedActionException notFound) {
 
@@ -384,17 +498,29 @@ public final class Latent {
 
 							if (args != null && args.length > 0) {
 
-								throw new LatentNotPresentException("The proxied method (" + method + ") has no compatible latents!");
+								throw new LatentNotPresentException(
+
+										"The proxied method (" +
+												method +
+										") has no compatible latents!"
+								);
 							}
 
-							return proxy.getClass().getName() + "@" + toHexString(identityHashCode(proxy));
+							return proxy.getClass().getName() +
+									"@" +
+									toHexString(identityHashCode(proxy));
 						}
 
 						case "equals" -> {
 
 							if (args == null || args.length != 1) {
 
-								throw new LatentNotPresentException("The proxied method (" + method + ") has no compatible latents!");
+								throw new LatentNotPresentException(
+
+										"The proxied method (" +
+												method +
+										") has no compatible latents!"
+								);
 							}
 
 							return proxy == args[0];
@@ -404,7 +530,12 @@ public final class Latent {
 
 							if (args != null && args.length > 0) {
 
-								throw new LatentNotPresentException("The proxied method (" + method + ") has no compatible latents!");
+								throw new LatentNotPresentException(
+
+										"The proxied method (" +
+												method +
+										") has no compatible latents!"
+								);
 							}
 
 							return identityHashCode(proxy);
@@ -414,11 +545,20 @@ public final class Latent {
 
 							try {
 
-								throw new CloneNotSupportedException(proxy.getClass().getTypeName());
+								throw new CloneNotSupportedException(
+
+										proxy.getClass().getTypeName()
+								);
 
 							} catch (final CloneNotSupportedException unsupported) {
 
-								throw new LatentTargetException("The used method (" + method + ") thrown an exception!", unsupported);
+								throw new LatentTargetException(
+
+										"The used method (" +
+												method +
+										") thrown an exception!",
+										unsupported
+								);
 							}
 						}
 
@@ -426,7 +566,12 @@ public final class Latent {
 					}
 				}
 
-				throw new LatentNotPresentException("The proxied method (" + method + ") has no compatible latents!");
+				throw new LatentNotPresentException(
+
+						"The proxied method (" +
+								method +
+						") has no compatible latents!"
+				);
 			}
 		}
 
@@ -437,7 +582,10 @@ public final class Latent {
 		@Override()
 		public @NotNull(exception = NullPointerException.class) String toString() throws Error {
 
-			return getClass().getTypeName() + "[present = " + present + "]";
+			return getClass().getTypeName() +
+					"[present = " +
+					present +
+					"]";
 		}
 
 		@AvailableSince(value = "0.1-build.1")
@@ -445,9 +593,13 @@ public final class Latent {
 		@NonBlocking()
 		@Contract(value = "null -> false; !null -> _", pure = true)
 		@Override()
-		public boolean equals(@Nullable(value = "Can be null anytime") final Object another) throws Error {
+		public boolean equals(
+				@Nullable(value = "Can be null anytime") final Object another
+		) throws Error {
 
-			return another instanceof LatentHandler other && present == other.present;
+			return another instanceof
+					final LatentHandler other &&
+					present == other.present;
 		}
 
 		@AvailableSince(value = "0.1-build.1")

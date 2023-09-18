@@ -30,12 +30,16 @@ import java.lang.*;
 @AvailableSince(value = "0.1-build.1")
 @NonExtendable()
 @NonBlocking()
-public final class IncompatibleLatentException extends LatentException implements Serializable {
+public final class IncompatibleLatentException extends LatentException
+		implements Serializable {
 
 	@AvailableSince(value = "0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
-	public IncompatibleLatentException(@Nullable(value = "Can be null anytime") final String message, @Nullable(value = "Can be null anytime") final Throwable cause) throws Error {
+	public IncompatibleLatentException(
+			@Nullable(value = "Can be null anytime") final String message,
+			@Nullable(value = "Can be null anytime") final Throwable cause
+	) throws Error {
 
 		super(message, cause);
 	}
@@ -43,7 +47,9 @@ public final class IncompatibleLatentException extends LatentException implement
 	@AvailableSince(value = "0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
-	public IncompatibleLatentException(@Nullable(value = "Can be null anytime") final Throwable cause) throws Error {
+	public IncompatibleLatentException(
+			@Nullable(value = "Can be null anytime") final Throwable cause
+	) throws Error {
 
 		super(cause);
 	}
@@ -51,7 +57,9 @@ public final class IncompatibleLatentException extends LatentException implement
 	@AvailableSince(value = "0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
-	public IncompatibleLatentException(@Nullable(value = "Can be null anytime") final String message) throws Error {
+	public IncompatibleLatentException(
+			@Nullable(value = "Can be null anytime") final String message
+	) throws Error {
 
 		super(message);
 	}
@@ -86,7 +94,9 @@ public final class IncompatibleLatentException extends LatentException implement
 	@Blocking()
 	@Contract(value = "_ -> this")
 	@Override()
-	public synchronized @NotNull(exception = NullPointerException.class) IncompatibleLatentException initCause(final @Nullable(value = "Can be null anytime") Throwable cause) throws Error {
+	public synchronized @NotNull(exception = NullPointerException.class) IncompatibleLatentException initCause(
+			@Nullable(value = "Can be null anytime") final Throwable cause
+	) throws Error {
 
 		super.initCause(cause);
 		return this;
@@ -105,7 +115,9 @@ public final class IncompatibleLatentException extends LatentException implement
 	@Blocking()
 	@Contract()
 	@Override()
-	public void setStackTrace(@NotNull(exception = NullPointerException.class) final StackTraceElement @NotNull(exception = NullPointerException.class) [] stacktrace) throws Error, NullPointerException {
+	public void setStackTrace(
+			@NotNull(exception = NullPointerException.class) final StackTraceElement @NotNull(exception = NullPointerException.class) [] stacktrace
+	) throws Error, NullPointerException {
 
 		super.setStackTrace(stacktrace);
 	}
@@ -133,7 +145,9 @@ public final class IncompatibleLatentException extends LatentException implement
 	@Blocking()
 	@Contract()
 	@Override()
-	public void printStackTrace(final @NotNull(exception = NullPointerException.class) PrintStream out) throws Error, NullPointerException {
+	public void printStackTrace(
+			@NotNull(exception = NullPointerException.class) final PrintStream out
+	) throws Error, NullPointerException {
 
 		super.printStackTrace(out);
 	}
@@ -142,7 +156,9 @@ public final class IncompatibleLatentException extends LatentException implement
 	@Blocking()
 	@Contract()
 	@Override()
-	public void printStackTrace(final @NotNull(exception = NullPointerException.class) PrintWriter out) throws Error, NullPointerException {
+	public void printStackTrace(
+			@NotNull(exception = NullPointerException.class) final PrintWriter out
+	) throws Error, NullPointerException {
 
 		super.printStackTrace(out);
 	}
@@ -171,7 +187,9 @@ public final class IncompatibleLatentException extends LatentException implement
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	@Override()
-	public boolean equals(@Nullable(value = "Can be null anytime") final Object another) throws Error {
+	public boolean equals(
+			@Nullable(value = "Can be null anytime") final Object another
+	) throws Error {
 
 		return super.equals(another);
 	}
