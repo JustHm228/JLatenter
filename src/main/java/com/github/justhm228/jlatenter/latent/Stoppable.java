@@ -27,7 +27,8 @@ import org.jetbrains.annotations.*;
 import java.lang.*;
 
 /**
- * Just a stub interface with <code>{@link #stop() stop}()</code> method (returns <code>void</code>) which can be used in {@link Latent latent typing}.
+ * Just a stub interface with <code>{@link #stop() stop}()</code> method
+ * (returns <code>void</code>) which can be used in {@link Latent latent typing}.
  *
  * @apiNote _
  * @implSpec _
@@ -49,7 +50,8 @@ public interface Stoppable {
 	 * A stub method which can be called with {@link Latent latent typing}.
 	 *
 	 * @throws Error If something went wrong in the JVM.
-	 * @throws LatentException If something went wrong with {@link Latent latent typing} implementation.
+	 * @throws LatentException If something went wrong with
+	 * 						   {@link Latent latent typing} implementation.
 	 *
 	 * @apiNote _
 	 * @implSpec _

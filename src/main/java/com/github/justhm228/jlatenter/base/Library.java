@@ -33,13 +33,34 @@ import static java.util.Objects.*;
  * <p>
  *     Currently it contains such constants:
  *     <ul>
- *         <li><code>{@link #AUTHOR AUTHOR}</code> - an author/provider/{@link Package#getSpecificationVendor() vendor} of the implementation</li>
- *         <li><code>{@link #URL URL}</code> - a link to the project repository</li>
- *         <li><code>{@link #NAME NAME}</code> - a string display name/title of the implementation</li>
- *         <li><code>{@link #INTERNAL_NAME INTERNAL_NAME}</code> - an internal name of the implementation</li>
- *         <li><code>{@link #DESCRIPTION DESCRIPTION}</code> - a short {@link String string} description of the implementation</li>
- *         <li><code>{@link #VERSION VERSION}</code> - a {@link String string} version name of the used implementation</li>
- *         <li><code>{@link #VERSION_CODE VERSION_CODE}</code> - an integer version identifier of the used implementation</li>
+ *         <li>
+ *             <code>{@link #AUTHOR AUTHOR}</code> -
+ *             an author/provider/{@link Package#getSpecificationVendor() vendor}
+ *             of the implementation
+ *         </li>
+ *         <li>
+ *             <code>{@link #URL URL}</code> - a link to the project repository
+ *         </li>
+ *         <li>
+ *             <code>{@link #NAME NAME}</code> - a string display name/title of
+ *             the implementation
+ *         </li>
+ *         <li>
+ *             <code>{@link #INTERNAL_NAME INTERNAL_NAME}</code> - an internal name of
+ *             the implementation
+ *         </li>
+ *         <li>
+ *             <code>{@link #DESCRIPTION DESCRIPTION}</code> -
+ *             a short {@link String string} description of the implementation
+ *         </li>
+ *         <li>
+ *             <code>{@link #VERSION VERSION}</code> - a {@link String string} version name of
+ *             the used implementation
+ *         </li>
+ *         <li>
+ *             <code>{@link #VERSION_CODE VERSION_CODE}</code> - an integer version identifier of
+ *             the used implementation
+ *         </li>
  *     </ul>
  * </p>
  *
@@ -67,7 +88,12 @@ public final class Library {
     @AvailableSince(value = "0.1-build.2")
     @NotNull(exception = NullPointerException.class)
     @SuppressWarnings(value = { "unused" }) // <-- These constants WILL BE used
-    public static final String AUTHOR = requireNonNullElse(Library.class.getPackage().getSpecificationVendor(), "JustHuman228"), // <-- Obtain the author name from `MANIFEST.MF`
+    public static final String AUTHOR = requireNonNullElse(
+
+            Library.class.getPackage().getSpecificationVendor(),
+            "JustHuman228"
+
+    ), // <-- Obtain the author name from `MANIFEST.MF`
 
                                /**
                                 * A link to the project repository.
@@ -81,14 +107,20 @@ public final class Library {
                                URL = "https://github.com/JustHm228/JLatenter",
 
                                /**
-                                * A {@link String string} display name/title of the implementation.
+                                * A {@link String string} display name/title of
+                                * the implementation.
                                 *
                                 * @apiNote _
                                 * @implSpec _
                                 * @implNote _
                                 * @since 0.1-build.2
                                 */
-                               NAME = requireNonNullElse(Library.class.getPackage().getSpecificationTitle(), "JLatenter"), // <-- Obtain the project name from `MANIFEST.MF`
+                               NAME = requireNonNullElse(
+
+                                       Library.class.getPackage().getSpecificationTitle(),
+                                       "JLatenter"
+
+                               ), // <-- Obtain the project name from `MANIFEST.MF`
 
                                /**
                                 * An internal name of the implementation.
@@ -102,7 +134,8 @@ public final class Library {
                                INTERNAL_NAME = "jlatenter",
 
                                /**
-                                * A short {@link String string} description of the implementation.
+                                * A short {@link String string} description
+                                * of the implementation.
                                 *
                                 * @apiNote _
                                 * @implSpec _
@@ -110,25 +143,38 @@ public final class Library {
                                 *
                                 * @since 0.1-build.2
                                 */
-                               DESCRIPTION = "A small implementation of latent typing in Java which uses dynamic proxies to redirect method calls from a stub interface to the real object",
+                               DESCRIPTION = "A small implementation of " +
+                                       "latent typing in Java which " +
+                                       "uses dynamic proxies to " +
+                                       "redirect method calls from " +
+                                       "a stub interface to the real object",
 
                                /**
                                 * A {@link String string} version name of the used implementation.
                                 *
                                 * @apiNote Should be used only as a user-visible string.
-                                *          To determine which version of the implementation is used you should use <code>{@link #VERSION_CODE VERSION_CODE}</code>.
+                                *          To determine which version of the implementation is used
+                                *          you should use
+                                *          <code>{@link #VERSION_CODE VERSION_CODE}</code>.
                                 * @implSpec _
                                 * @implNote _
                                 *
                                 * @since 0.1-build.2
                                 */
-                               VERSION = requireNonNullElse(Library.class.getPackage().getSpecificationVersion(), "0.1-build.2"); // <-- Obtain the project version's display name from `MANIFEST.MF`
+                               VERSION = requireNonNullElse(
+
+                                       Library.class.getPackage().getSpecificationVersion(),
+                                       "0.1-build.2"
+
+                               ); // <-- Obtain the project version's display name from `MANIFEST.MF`
 
     /**
      * An integer version identifier of the used implementation.
      *
-     * @apiNote Should be used only to determine which version of the implementation is used.
-     *          A user-visible equivalent is <code>{@link #VERSION VERSION}</code>.
+     * @apiNote Should be used only to determine which version of
+     *          the implementation is used.
+     *          A user-visible equivalent is
+     *          <code>{@link #VERSION VERSION}</code>.
      * @implSpec _
      * @implNote _
      *
@@ -143,7 +189,9 @@ public final class Library {
      *
      * <p>Yeah, it just throws an {@link UnsupportedOperationException exception}.</p>
      *
-     * @deprecated This constructor shouldn't be used to instantiate an {@link Library object} - its main goal is to prevent this!
+     * @deprecated This constructor shouldn't be used to instantiate
+     *             an {@link Library object} - its main goal is
+     *             to prevent this!
      *
      * @throws Error If something went wrong in the JVM.
      * @throws UnsupportedOperationException Always.
@@ -162,7 +210,14 @@ public final class Library {
     private Library() throws Error, UnsupportedOperationException {
 
         super();
-        throw new UnsupportedOperationException("You can't instantiate an instance of this type (" + getClass().getTypeName() + ") with a constructor!"); // Prevent instantiation
+
+        throw new UnsupportedOperationException(
+
+                "You can't instantiate an instance of this type (" +
+                        getClass().getTypeName() +
+                ") with a constructor!"
+
+        ); // Prevent instantiation
     }
 
     @AvailableSince(value = "0.1-build.2")
@@ -180,9 +235,14 @@ public final class Library {
     @NonBlocking()
     @Contract(value = "null -> false; !null -> _", pure = true)
     @Override()
-    public boolean equals(@Nullable(value = "Can be null anytime") final Object another) throws Error {
+    public boolean equals(
+            @Nullable(value = "Can be null anytime") final Object another
+    ) throws Error {
 
-        return another instanceof Library; // `Library` can't contain any data so if the passed object is an instance of `Library` - it's already equal to the current object
+        // `Library` can't contain any data so
+        // if the passed object is an instance of `Library` -
+        // it's already equal to the current object:
+        return another instanceof Library;
     }
 
     @AvailableSince(value = "0.1-build.2")
@@ -192,7 +252,8 @@ public final class Library {
     @Override()
     public int hashCode() throws Error {
 
-        return hash(getClass()); // `Library` can't contain any data, so we'll use hash of the class
+        // `Library` can't contain any data, so we'll use hash of the class:
+        return hash(getClass());
     }
 
     /**
@@ -220,20 +281,27 @@ public final class Library {
     @Override()
     protected Library clone() throws Error, CloneNotSupportedException {
 
-        throw new CloneNotSupportedException(getClass().getTypeName()); // Always prevent cloning (even if `Library` will implement `Cloneable`) - no instances should be instantiated!
+        // Always prevent cloning (even if `Library` will implement `Cloneable`) -
+        // no instances should be instantiated!
+        throw new CloneNotSupportedException(getClass().getTypeName());
     }
 
-    // FIXME: 16.09.2023 Remove finalize() - it's marked for removal in the JDK, so its use may lead to compile/runtime errors in the future!
+    // FIXME: 16.09.2023 Remove finalize() - it's marked for removal in the JDK, so
+    //  its use may lead to compile/runtime errors in the future!
     /**
      * Just finalizes the {@link Library object}.
      *
-     * @deprecated <code>{@link Object#finalize() finalize}()</code> is marked for removal in the JDK, so its future use may lead to compile/runtime {@link Error errors} in the newer versions of Java.
-     *             It'll be removed in a future version (including all other {@link Override overriding} methods).
+     * @deprecated <code>{@link Object#finalize() finalize}()</code> is marked for removal
+     *             in the JDK, so its future use may lead to
+     *             compile/runtime {@link Error errors} in the newer versions of Java.
+     *             It'll be removed in a future version (including all other
+     *             {@link Override overriding} methods).
      *
      * @throws Throwable If something went wrong while finalization.
      *
      * @apiNote _
-     * @implSpec <i>Presence of <code>{@link Object#finalize() finalize}()</code> in <code>{@link Object Object}</code>?</i>
+     * @implSpec <i>Presence of <code>{@link Object#finalize() finalize}()</code> in
+     *           <code>{@link Object Object}</code>?</i>
      * @implNote Should be removed in a future version.
      *
      * @since 0.1-build.2

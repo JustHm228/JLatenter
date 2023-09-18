@@ -29,7 +29,8 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;
 
 /**
- * Just a decorative annotation which should be used to mark all stub interfaces/methods used in {@link Latent latent typing}.
+ * Just a decorative annotation which should be used to mark all
+ * stub interfaces/methods used in {@link Latent latent typing}.
  *
  * @author JustHuman228
  * @apiNote _
