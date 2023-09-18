@@ -1,1 +1,3 @@
-Hello World!
+This is a read-only test file.
+The only reason why it was needed is some problems with Git.
+Now it's useless, but it shouldn't be deleted or edited!
