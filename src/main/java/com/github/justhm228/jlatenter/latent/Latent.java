@@ -201,6 +201,7 @@ public final class Latent {
 	 * @apiNote _
 	 * @implSpec _
 	 * @implNote _
+	 *
 	 * @since 0.1-build.1
 	 */
 	@AvailableSince(value = "0.1-build.1")
