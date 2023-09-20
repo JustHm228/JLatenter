@@ -112,12 +112,17 @@ public final class Latent {
 		}
 
 		@NotNull(exception = NullPointerException.class)
-		@SuppressWarnings(value = { "unchecked" })
-		final T proxy = (T) newProxyInstance(
+		@SuppressWarnings(value = { "removal", "unchecked" })
+		final T proxy = AccessController.doPrivileged((PrivilegedAction<? extends T>) () -> (T) newProxyInstance(
 
 				type.getClassLoader(),
 				new Class[] { type },
 				new LatentHandler(instance)
+
+		), AccessController.getContext(),
+		   new RuntimePermission("getClassLoader"),
+		   new RuntimePermission("accessClassInPackage." + type.getPackageName()),
+		   new ReflectPermission("newProxyInPackage.*") // TODO: 20.09.2023 Implement here an algorithm to find the package name.
 		);
 
 		return proxy;
