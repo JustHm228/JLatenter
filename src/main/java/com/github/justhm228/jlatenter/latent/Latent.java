@@ -191,7 +191,7 @@ public final class Latent {
 	@Contract(value = "_ -> _", pure = true)
 	public static @UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance") Object find(
 			@NotNull(value = "The specified proxy instance is null!", exception = NullPointerException.class) final Object proxy
-	) throws Error, NullPointerException {
+	) throws Error, NullPointerException, SecurityException {
 
 		requireNonNull(proxy, "The specified proxy instance is null!");
 
