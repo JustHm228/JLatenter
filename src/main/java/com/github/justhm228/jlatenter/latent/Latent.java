@@ -193,7 +193,10 @@ public final class Latent {
 
 		requireNonNull(proxy, "The specified proxy instance is null!");
 
-		if (isProxyClass(proxy.getClass())) {
+		@NotNull(exception = NullPointerException.class)
+		final Class<?> impl = proxy.getClass();
+
+		if (isProxyClass(impl)) {
 
 			@NotNull(exception = NullPointerException.class)
 			@SuppressWarnings(value = { "removal" })
@@ -201,7 +204,7 @@ public final class Latent {
 
 					(PrivilegedAction<? extends InvocationHandler>) () -> getInvocationHandler(proxy),
 					AccessController.getContext(),
-					new RuntimePermission("accessClassInPackage.*")
+					new RuntimePermission("accessClassInPackage." + impl.getPackageName())
 			);
 
 			if (handler instanceof
