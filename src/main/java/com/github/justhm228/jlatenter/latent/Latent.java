@@ -238,6 +238,31 @@ public final class Latent {
 		return instance;
 	}
 
+	/**
+	 * Returns an {@link Object object} to which refers the specified "shadow" {@link Object object}.
+	 *
+	 * <p>See the {@link Latent class documentation} for details.</p>
+	 *
+	 * @param proxy A "shadow" {@link Object object}.
+	 *
+	 * @return An {@link Object object} "interpreted" by the specified "shadow" {@link Object object}.
+	 * 		   If it isn't a valid "shadow" {@link Object object} - <code>null</code> will be returned.
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws NullPointerException If the specified "shadow" {@link Object object} is <code>null</code>.
+	 * @throws SecurityException If the global <code>AccessControlContext</code> isn't
+	 * 							 initialized and the caller doesn't have permission
+	 * 							 <code>{@link SecurityPermission SecurityPermission}("createAccessControlContext")</code>
+	 * 							 to initialize it and also doesn't have permission
+	 * 							 <code>{@link RuntimePermission RuntimePermission}("accessClassInPackage" + instance.getClass().getPackageName())</code>
+	 * 							 to do an "uncovered" call.
+	 *
+	 * @apiNote _
+	 * @implSpec _
+	 * @implNote _
+	 *
+	 * @since 0.1-build.1
+	 */
 	@AvailableSince(value = "0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
