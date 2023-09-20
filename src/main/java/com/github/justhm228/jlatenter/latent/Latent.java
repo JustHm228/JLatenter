@@ -241,6 +241,7 @@ public final class Latent {
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
+	@Deprecated(since = "0.1-build.2")
 	public static <T> @UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance") T find(
 			@NotNull(value = "The specified proxy instance is null!", exception = NullPointerException.class) final Object proxy,
 			@Nullable(value = "Can be null anytime") @SuppressWarnings(value = { "unused" }) final Class<T> cast
