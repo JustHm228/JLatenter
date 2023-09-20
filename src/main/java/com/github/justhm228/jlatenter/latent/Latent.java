@@ -163,6 +163,29 @@ public final class Latent {
 		return proxy;
 	}
 
+	/**
+	 * Checks if the specified {@link Object object} is a "shadow" {@link Object object} and returns <code>true</code> if it is.
+	 *
+	 * <p>See the {@link Latent class documentation} for details.</p>
+	 *
+	 * @param instance An {@link Object object} to check if it's a "shadow" {@link Object object}.
+	 *
+	 * @return <code>true</code> if the specified object is a "shadow" {@link Object object};
+	 * 		   <code>false</code> - otherwise.
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws SecurityException If the global <code>AccessControlContext</code> isn't
+	 * 							 initialized and the caller doesn't have permission
+	 * 							 <code>{@link SecurityPermission SecurityPermission}("createAccessControlContext")</code>
+	 * 							 to initialize it and also doesn't have permission
+	 * 							 <code>{@link RuntimePermission RuntimePermission}("accessClassInPackage" + instance.getClass().getPackageName())</code>
+	 * 							 to do an "uncovered" call.
+	 *
+	 * @apiNote _
+	 * @implSpec _
+	 * @implNote _
+	 * @since 0.1-build.1
+	 */
 	@AvailableSince(value = "0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
