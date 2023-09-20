@@ -244,7 +244,7 @@ public final class Latent {
 	public static <T> @UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance") T find(
 			@NotNull(value = "The specified proxy instance is null!", exception = NullPointerException.class) final Object proxy,
 			@Nullable(value = "Can be null anytime") @SuppressWarnings(value = { "unused" }) final Class<T> cast
-	) throws Error, NullPointerException, ClassCastException {
+	) throws Error, NullPointerException {
 
 		@UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance")
 		@SuppressWarnings(value = { "unchecked" })
