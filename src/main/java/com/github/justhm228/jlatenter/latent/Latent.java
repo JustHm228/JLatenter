@@ -569,56 +569,6 @@ public final class Latent {
 
 							return identityHashCode(proxy); // <-- Default `Object`'s implementation
 						}
-
-						case "clone" -> { // Built-in `clone()` implementation:
-
-							if (args != null && args.length != 0) {
-
-								throw new LatentNotPresentException(
-
-										"The proxied method (" +
-												method +
-										") has no compatible latents!"
-
-								); // <-- Invalid arguments!
-							}
-
-							try {
-
-								throw new CloneNotSupportedException(
-
-										proxy.getClass().getTypeName()
-
-								); // <-- Cloning of "shadow" objects isn't supported!
-
-							} catch (@NotNull(exception = NullPointerException.class) final CloneNotSupportedException unsupported) {
-
-								throw new LatentTargetException(
-
-										"The used method (" +
-												method +
-										") thrown an exception!",
-										unsupported
-
-								); // Wrap the thrown exception to a `LatentTargetException`
-							}
-						}
-
-						case "finalize" -> { // Built-in `finalize()` implementation:
-
-							if (args != null && args.length != 0) {
-
-								throw new LatentNotPresentException(
-
-										"The proxied method (" +
-												method +
-												") has no compatible latents!"
-
-								); // <-- Invalid arguments!
-							}
-
-							return null; // Do nothing
-						}
 					}
 				}
 
