@@ -96,7 +96,7 @@ public final class Latent {
 	public static <T> @NotNull(exception = NullPointerException.class) T as(
 			@NotNull(value = "The specified latent instance is null!", exception = NullPointerException.class) final Object instance,
 			@NotNull(value = "The specified cast type is null!", exception = NullPointerException.class) final Class<T> type
-	) throws Error, NullPointerException, IllegalArgumentException {
+	) throws Error, NullPointerException, IllegalArgumentException, SecurityException {
 
 		requireNonNull(instance, "The specified latent instance is null!");
 		requireNonNull(type, "The specified cast type is null!");
