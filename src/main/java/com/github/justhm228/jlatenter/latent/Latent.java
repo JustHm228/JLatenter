@@ -144,7 +144,10 @@ public final class Latent {
 			return false;
 		}
 
-		if (isProxyClass(instance.getClass())) {
+		@NotNull(exception = NullPointerException.class)
+		final Class<?> proxy = instance.getClass();
+
+		if (isProxyClass(proxy)) {
 
 			@NotNull(exception = NullPointerException.class)
 			@SuppressWarnings(value = { "removal" })
@@ -152,7 +155,7 @@ public final class Latent {
 
 					(PrivilegedAction<? extends InvocationHandler>) () -> getInvocationHandler(instance),
 					AccessController.getContext(),
-					new RuntimePermission("accessClassInPackage.*")
+					new RuntimePermission("accessClassInPackage." + proxy.getPackageName())
 			);
 
 			return handler instanceof LatentHandler;
