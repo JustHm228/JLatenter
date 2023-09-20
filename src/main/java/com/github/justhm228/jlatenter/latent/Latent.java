@@ -137,7 +137,9 @@ public final class Latent {
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
-	public static boolean isShadowed(@Nullable(value = "Can be null anytime") final Object instance) throws Error {
+	public static boolean isShadowed(
+			@Nullable(value = "Can be null anytime") final Object instance
+	) throws Error, SecurityException {
 
 		if (instance == null) {
 
