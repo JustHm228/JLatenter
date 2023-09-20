@@ -89,6 +89,36 @@ public final class Latent {
 		return as(instance, latents[0]);
 	}
 
+	/**
+	 * "Interprets" the specified {@link Object object} as the specified {@link Class type}.
+	 *
+	 * <p>See the {@link Latent class documentation} for details about "shadow" {@link Object objects}.</p>
+	 *
+	 * @param instance An {@link Object object} to be "interpreted" as the specified {@link Class type}.
+	 * @param type A {@link Class type} as which the specified {@link Object object} will be "interpreted".
+	 *
+	 * @return A "shadow" of the specified {@link Object object}.
+	 * @param <T> The specified {@link Class type} as a generic.
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws NullPointerException If any specified parameter is <code>null</code>.
+	 * @throws IllegalArgumentException If the specified {@link Class type} isn't an <code>interface</code>.
+	 * @throws SecurityException If the global <code>AccessControlContext</code> isn't
+	 * 							 initialized and the caller doesn't have
+	 * 							 permission <code>{@link SecurityPermission SecurityPermission}("createAccessControlContext")</code>
+	 * 							 to initialize it or doesn't have permissions:
+	 * 							 <ul>
+	 * 							     <li><code>{@link RuntimePermission RuntimePermission}("getClassLoader")</code> - if the specified {@link Class type} is loaded by the bootstrap {@link ClassLoader classloader} and the caller's {@link ClassLoader classloader} isn't the {@link ClassLoader same}</li>
+	 * 							     <li><code>{@link RuntimePermission RuntimePermission}("accessClassInPackage." + type.getPackageName())</code> - if the specified {@link Class type}'s {@link ClassLoader classloader} isn't the {@link ClassLoader same} as or an {@link ClassLoader ancestor} of the caller's {@link ClassLoader classloader}</li>
+	 * 							     <li><code>{@link RuntimePermission RuntimePermission}("newProxyInPackage." + proxyPkg)</code> - if the specified {@link Class type} is non-<code>public</code> and the caller isn't in the same <code>{@link Package runtime package}</code> as the {@link Class type}</li>
+	 * 							 </ul>
+	 * 							 to do an "uncovered" call.
+	 *
+	 * @apiNote _
+	 * @implSpec _
+	 * @implNote _
+	 * @since 0.1-build.2
+	 */
 	@AvailableSince(value = "0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
