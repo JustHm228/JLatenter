@@ -169,7 +169,7 @@ public final class LatentTest {
 
 			as(null, null);
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			thrown = true;
 			nullPointer.printStackTrace();
@@ -184,7 +184,7 @@ public final class LatentTest {
 
 			as(test, null);
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			thrown = true;
 			nullPointer.printStackTrace();
@@ -199,7 +199,7 @@ public final class LatentTest {
 
 			as(null, Runnable.class);
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			thrown = true;
 			nullPointer.printStackTrace();
@@ -214,7 +214,7 @@ public final class LatentTest {
 
 			as(test, Thread.class);
 
-		} catch (final IllegalArgumentException notInterface) {
+		} catch (@NotNull(exception = NullPointerException.class) final IllegalArgumentException notInterface) {
 
 			thrown = true;
 			notInterface.printStackTrace();
@@ -232,7 +232,7 @@ public final class LatentTest {
 
 			as(test, Runnable.class).run();
 
-		} catch (final LatentNotPresentException notFound) {
+		} catch (@NotNull(exception = NullPointerException.class) final LatentNotPresentException notFound) {
 
 			thrown = true;
 			notFound.printStackTrace();
@@ -247,12 +247,12 @@ public final class LatentTest {
 
 			as(test, Appendable.class).append("Hello World!").append("How did you get here ._.");
 
-		} catch (final IncompatibleLatentException incompatible) {
+		} catch (@NotNull(exception = NullPointerException.class) final IncompatibleLatentException incompatible) {
 
 			thrown = true;
 			incompatible.printStackTrace();
 
-		} catch (final Exception impossible) {
+		} catch (@NotNull(exception = NullPointerException.class) final Exception impossible) {
 
 			fail("How did you get here ._.");
 			return;
@@ -281,7 +281,7 @@ public final class LatentTest {
 
 			as(test, Iterable.class).iterator();
 
-		} catch (final LatentTargetException target) {
+		} catch (@NotNull(exception = NullPointerException.class) final LatentTargetException target) {
 
 			thrown = true;
 			target.printStackTrace();
@@ -299,7 +299,7 @@ public final class LatentTest {
 
 				result = as(test, Callable.class).call();
 
-			} catch (final Throwable anything) {
+			} catch (@NotNull(exception = NullPointerException.class) final Throwable anything) {
 
 				anything.printStackTrace();
 				fail("Failure test failed!");
@@ -363,7 +363,7 @@ public final class LatentTest {
 			fail("How did you get here ._.");
 			return;
 
-		} catch (final ClassCastException cast) {
+		} catch (@NotNull(exception = NullPointerException.class) final ClassCastException cast) {
 
 			cast.printStackTrace();
 		}
@@ -378,7 +378,7 @@ public final class LatentTest {
 			fail("How did you get here ._.");
 			return;
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			nullPointer.printStackTrace();
 		}
@@ -389,11 +389,11 @@ public final class LatentTest {
 
 			fail("How did you get here ._.");
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			nullPointer.printStackTrace();
 
-		} catch (final ClassCastException cast) {
+		} catch (@NotNull(exception = NullPointerException.class) final ClassCastException cast) {
 
 			fail("How did you get here ._.");
 			return;
@@ -405,7 +405,7 @@ public final class LatentTest {
 
 			assertNotNull("\"isShadowed()-like\" test failed!", find(shadow, Void.class));
 
-		} catch (final ClassCastException cast) {
+		} catch (@NotNull(exception = NullPointerException.class) final ClassCastException cast) {
 
 			fail("How did you get here ._.");
 			return;
