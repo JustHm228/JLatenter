@@ -68,5 +68,5 @@ public interface Paintable {
 	@Contract() // <-- "pure" is unknown
 	@Shadow()
 	// <-- Just a stub method
-	void paint() throws Error, LatentException;
+	void paint() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
 }

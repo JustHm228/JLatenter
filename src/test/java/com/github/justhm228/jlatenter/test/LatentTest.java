@@ -41,13 +41,13 @@ public final class LatentTest {
 	@AvailableSince(value = "0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
-	public LatentTest() throws Error {
+	public LatentTest() throws @NotNull(exception = NullPointerException.class) Error {
 
 		super();
 	}
 
 	@Test()
-	public void testA() throws Error {
+	public void testA() throws @NotNull(exception = NullPointerException.class) Error {
 
 		out.println("testA(): Before run() test");
 
@@ -61,7 +61,7 @@ public final class LatentTest {
 			@Internal()
 			@NonBlocking()
 			@Contract(pure = true)
-			public RunTest() throws Error {
+			public RunTest() throws @NotNull(exception = NullPointerException.class) Error {
 
 				super();
 			}
@@ -71,7 +71,7 @@ public final class LatentTest {
 			@NonExtendable()
 			@NonBlocking()
 			@Contract()
-			public int run() throws Error {
+			public int run() throws @NotNull(exception = NullPointerException.class) Error {
 
 				out.println("run(): Hello World!");
 				return 0;
@@ -85,7 +85,7 @@ public final class LatentTest {
 	}
 
 	@Test()
-	public void testB() throws Error {
+	public void testB() throws @NotNull(exception = NullPointerException.class) Error {
 
 		out.println("testB(): Before static run() test");
 
@@ -99,7 +99,7 @@ public final class LatentTest {
 			@Internal()
 			@NonBlocking()
 			@Contract(pure = true)
-			public StaticTest() throws Error {
+			public StaticTest() throws @NotNull(exception = NullPointerException.class) Error {
 
 				super();
 			}
@@ -109,7 +109,7 @@ public final class LatentTest {
 			@NonExtendable()
 			@NonBlocking()
 			@Contract()
-			public static int run() throws Error {
+			public static int run() throws @NotNull(exception = NullPointerException.class) Error {
 
 				out.println("static run(): Hello World!");
 				return 0;
@@ -123,7 +123,7 @@ public final class LatentTest {
 	}
 
 	@Test()
-	public void testC() throws Error {
+	public void testC() throws @NotNull(exception = NullPointerException.class) Error {
 
 		out.println("testC(): Before failure test");
 
@@ -137,23 +137,23 @@ public final class LatentTest {
 			@Internal()
 			@NonBlocking()
 			@Contract(pure = true)
-			public FailureTest() throws Error {
+			public FailureTest() throws @NotNull(exception = NullPointerException.class) Error {
 
 				super();
 			}
 
-			public int call() throws Error {
+			public int call() throws @NotNull(exception = NullPointerException.class) Error {
 
 				out.println("call(): Hello World!");
 				return 0;
 			}
 
-			public void append(final CharSequence sequence) throws Error {
+			public void append(final CharSequence sequence) throws @NotNull(exception = NullPointerException.class) Error {
 
 				fail("How did you get here ._.");
 			}
 
-			public Iterator<?> iterator() throws Error, UnsupportedOperationException {
+			public Iterator<?> iterator() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) UnsupportedOperationException {
 
 				throw new UnsupportedOperationException("iterator() is unsupported!");
 			}
@@ -169,7 +169,7 @@ public final class LatentTest {
 
 			as(null, null);
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			thrown = true;
 			nullPointer.printStackTrace();
@@ -184,7 +184,7 @@ public final class LatentTest {
 
 			as(test, null);
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			thrown = true;
 			nullPointer.printStackTrace();
@@ -199,7 +199,7 @@ public final class LatentTest {
 
 			as(null, Runnable.class);
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			thrown = true;
 			nullPointer.printStackTrace();
@@ -214,7 +214,7 @@ public final class LatentTest {
 
 			as(test, Thread.class);
 
-		} catch (final IllegalArgumentException notInterface) {
+		} catch (@NotNull(exception = NullPointerException.class) final IllegalArgumentException notInterface) {
 
 			thrown = true;
 			notInterface.printStackTrace();
@@ -232,7 +232,7 @@ public final class LatentTest {
 
 			as(test, Runnable.class).run();
 
-		} catch (final LatentNotPresentException notFound) {
+		} catch (@NotNull(exception = NullPointerException.class) final LatentNotPresentException notFound) {
 
 			thrown = true;
 			notFound.printStackTrace();
@@ -247,12 +247,12 @@ public final class LatentTest {
 
 			as(test, Appendable.class).append("Hello World!").append("How did you get here ._.");
 
-		} catch (final IncompatibleLatentException incompatible) {
+		} catch (@NotNull(exception = NullPointerException.class) final IncompatibleLatentException incompatible) {
 
 			thrown = true;
 			incompatible.printStackTrace();
 
-		} catch (final Exception impossible) {
+		} catch (@NotNull(exception = NullPointerException.class) final Exception impossible) {
 
 			fail("How did you get here ._.");
 			return;
@@ -281,7 +281,7 @@ public final class LatentTest {
 
 			as(test, Iterable.class).iterator();
 
-		} catch (final LatentTargetException target) {
+		} catch (@NotNull(exception = NullPointerException.class) final LatentTargetException target) {
 
 			thrown = true;
 			target.printStackTrace();
@@ -299,7 +299,7 @@ public final class LatentTest {
 
 				result = as(test, Callable.class).call();
 
-			} catch (final Throwable anything) {
+			} catch (@NotNull(exception = NullPointerException.class) final Throwable anything) {
 
 				anything.printStackTrace();
 				fail("Failure test failed!");
@@ -313,7 +313,7 @@ public final class LatentTest {
 	}
 
 	@Test()
-	public void testD() throws Error {
+	public void testD() throws @NotNull(exception = NullPointerException.class) Error {
 
 		out.println("testD(): Before \"isShadowed()-like\" test");
 
@@ -327,7 +327,7 @@ public final class LatentTest {
 			@Internal()
 			@NonBlocking()
 			@Contract(pure = true)
-			public StaticTest() throws Error {
+			public StaticTest() throws @NotNull(exception = NullPointerException.class) Error {
 
 				super();
 			}
@@ -337,7 +337,7 @@ public final class LatentTest {
 			@NonExtendable()
 			@NonBlocking()
 			@Contract()
-			public static int run() throws Error {
+			public static int run() throws @NotNull(exception = NullPointerException.class) Error {
 
 				out.println("run(): Hello World!");
 				return 0;
@@ -363,7 +363,7 @@ public final class LatentTest {
 			fail("How did you get here ._.");
 			return;
 
-		} catch (final ClassCastException cast) {
+		} catch (@NotNull(exception = NullPointerException.class) final ClassCastException cast) {
 
 			cast.printStackTrace();
 		}
@@ -378,7 +378,7 @@ public final class LatentTest {
 			fail("How did you get here ._.");
 			return;
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			nullPointer.printStackTrace();
 		}
@@ -389,11 +389,11 @@ public final class LatentTest {
 
 			fail("How did you get here ._.");
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			nullPointer.printStackTrace();
 
-		} catch (final ClassCastException cast) {
+		} catch (@NotNull(exception = NullPointerException.class) final ClassCastException cast) {
 
 			fail("How did you get here ._.");
 			return;
@@ -405,7 +405,7 @@ public final class LatentTest {
 
 			assertNotNull("\"isShadowed()-like\" test failed!", find(shadow, Void.class));
 
-		} catch (final ClassCastException cast) {
+		} catch (@NotNull(exception = NullPointerException.class) final ClassCastException cast) {
 
 			fail("How did you get here ._.");
 			return;
@@ -421,7 +421,7 @@ public final class LatentTest {
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public @NotNull(exception = NullPointerException.class) String toString() throws Error {
+	public @NotNull(exception = NullPointerException.class) String toString() throws @NotNull(exception = NullPointerException.class) Error {
 
 		return super.toString();
 	}
@@ -431,7 +431,7 @@ public final class LatentTest {
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	@Override()
-	public boolean equals(@Nullable(value = "Can be null anytime") final Object another) throws Error {
+	public boolean equals(@Nullable(value = "Can be null anytime") final Object another) throws @NotNull(exception = NullPointerException.class) Error {
 
 		return another instanceof LatentTest;
 	}
@@ -441,7 +441,7 @@ public final class LatentTest {
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public int hashCode() throws Error {
+	public int hashCode() throws @NotNull(exception = NullPointerException.class) Error {
 
 		return super.hashCode();
 	}
@@ -453,7 +453,7 @@ public final class LatentTest {
 	@Contract(value = " -> fail", pure = true)
 	@Deprecated(since = "0.1-build.1")
 	@Override()
-	protected LatentTest clone() throws Error, CloneNotSupportedException {
+	protected LatentTest clone() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) CloneNotSupportedException {
 
 		throw new CloneNotSupportedException(getClass().getTypeName());
 	}
@@ -466,7 +466,7 @@ public final class LatentTest {
 	@Deprecated(since = "0.1-build.1", forRemoval = true)
 	@Override()
 	@SuppressWarnings(value = { "removal" })
-	protected void finalize() throws Throwable {
+	protected void finalize() throws @NotNull(exception = NullPointerException.class) Throwable {
 
 		super.finalize();
 	}

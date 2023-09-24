@@ -39,7 +39,7 @@ public final class LatentNotPresentException extends LatentException
 	public LatentNotPresentException(
 			@Nullable(value = "Can be null anytime") final String message,
 			@Nullable(value = "Can be null anytime") final Throwable cause
-	) throws Error {
+	) throws @NotNull(exception = NullPointerException.class) Error {
 
 		super(message, cause);
 	}
@@ -49,7 +49,7 @@ public final class LatentNotPresentException extends LatentException
 	@Contract(pure = true)
 	public LatentNotPresentException(
 			@Nullable(value = "Can be null anytime") final Throwable cause
-	) throws Error {
+	) throws @NotNull(exception = NullPointerException.class) Error {
 
 		super(cause);
 	}
@@ -59,7 +59,7 @@ public final class LatentNotPresentException extends LatentException
 	@Contract(pure = true)
 	public LatentNotPresentException(
 			@Nullable(value = "Can be null anytime") final String message
-	) throws Error {
+	) throws @NotNull(exception = NullPointerException.class) Error {
 
 		super(message);
 	}
@@ -67,107 +67,117 @@ public final class LatentNotPresentException extends LatentException
 	@AvailableSince(value = "0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
-	public LatentNotPresentException() throws Error {
+	public LatentNotPresentException() throws @NotNull(exception = NullPointerException.class) Error {
 
 		super();
 	}
 
 	@AvailableSince(value = "0.1-build.1")
+	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public @UnknownNullability(value = "Can be null anytime") String getLocalizedMessage() throws Error {
+	public @UnknownNullability(value = "Can be null anytime") String getLocalizedMessage() throws @NotNull(exception = NullPointerException.class) Error {
 
 		return super.getLocalizedMessage();
 	}
 
 	@AvailableSince(value = "0.1-build.1")
+	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public @UnknownNullability(value = "Can be null anytime") String getMessage() throws Error {
+	public @UnknownNullability(value = "Can be null anytime") String getMessage() throws @NotNull(exception = NullPointerException.class) Error {
 
 		return super.getMessage();
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract(value = "_ -> this")
 	@Override()
 	public synchronized @NotNull(exception = NullPointerException.class) LatentNotPresentException initCause(
 			@Nullable(value = "Can be null anytime") final Throwable cause
-	) throws Error {
+	) throws @NotNull(exception = NullPointerException.class) Error {
 
 		super.initCause(cause);
 		return this;
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public synchronized @UnknownNullability(value = "Can be null anytime") Throwable getCause() throws Error {
+	public synchronized @UnknownNullability(value = "Can be null anytime") Throwable getCause() throws @NotNull(exception = NullPointerException.class) Error {
 
 		return super.getCause();
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract()
 	@Override()
 	public void setStackTrace(
 			@NotNull(exception = NullPointerException.class) final StackTraceElement @NotNull(exception = NullPointerException.class) [] stacktrace
-	) throws Error, NullPointerException {
+	) throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) NullPointerException {
 
 		super.setStackTrace(stacktrace);
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract(value = " -> this")
 	@Override()
-	public synchronized @NotNull(exception = NullPointerException.class) LatentNotPresentException fillInStackTrace() throws Error {
+	public synchronized @NotNull(exception = NullPointerException.class) LatentNotPresentException fillInStackTrace() throws @NotNull(exception = NullPointerException.class) Error {
 
 		super.fillInStackTrace();
 		return this;
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public @NotNull(exception = NullPointerException.class) StackTraceElement @NotNull(exception = NullPointerException.class) [] getStackTrace() throws Error {
+	public @NotNull(exception = NullPointerException.class) StackTraceElement @NotNull(exception = NullPointerException.class) [] getStackTrace() throws @NotNull(exception = NullPointerException.class) Error {
 
 		return super.getStackTrace();
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract()
 	@Override()
 	public void printStackTrace(
 			@NotNull(exception = NullPointerException.class) final PrintStream out
-	) throws Error, NullPointerException {
+	) throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) NullPointerException {
 
 		super.printStackTrace(out);
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract()
 	@Override()
 	public void printStackTrace(
 			@NotNull(exception = NullPointerException.class) final PrintWriter out
-	) throws Error, NullPointerException {
+	) throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) NullPointerException {
 
 		super.printStackTrace(out);
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract()
 	@Override()
-	public void printStackTrace() throws Error, NullPointerException {
+	public void printStackTrace() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) NullPointerException {
 
 		super.printStackTrace();
 	}
@@ -177,7 +187,7 @@ public final class LatentNotPresentException extends LatentException
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public @NotNull(exception = NullPointerException.class) String toString() throws Error {
+	public @NotNull(exception = NullPointerException.class) String toString() throws @NotNull(exception = NullPointerException.class) Error {
 
 		return super.toString();
 	}
@@ -189,7 +199,7 @@ public final class LatentNotPresentException extends LatentException
 	@Override()
 	public boolean equals(
 			@Nullable(value = "Can be null anytime") final Object another
-	) throws Error {
+	) throws @NotNull(exception = NullPointerException.class) Error {
 
 		return super.equals(another);
 	}
@@ -199,7 +209,7 @@ public final class LatentNotPresentException extends LatentException
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public int hashCode() throws Error {
+	public int hashCode() throws @NotNull(exception = NullPointerException.class) Error {
 
 		return super.hashCode();
 	}
@@ -212,7 +222,7 @@ public final class LatentNotPresentException extends LatentException
 	@Deprecated(since = "0.1-build.1", forRemoval = true)
 	@Override()
 	@SuppressWarnings(value = { "removal" })
-	protected void finalize() throws Throwable {
+	protected void finalize() throws @NotNull(exception = NullPointerException.class) Throwable {
 
 		super.finalize();
 	}
