@@ -22,13 +22,13 @@
 
 package com.github.justhm228.jlatenter.latent;
 
-import static java.lang.Integer.*;
 import static java.lang.System.*;
 import java.lang.reflect.*;
 import static java.lang.reflect.Proxy.*;
 import java.security.*;
 import java.util.*;
 import static java.util.Objects.requireNonNull;
+import static java.util.Objects.toIdentityString;
 import static java.util.Objects.hash;
 import org.jetbrains.annotations.ApiStatus.*;
 import org.jetbrains.annotations.*;
@@ -648,9 +648,7 @@ public final class Latent {
 								); // <-- Invalid arguments!
 							}
 
-							return proxy.getClass().getName() +
-									"@" +
-									toHexString(identityHashCode(proxy)); // <-- Default `Object`'s implementation
+							return toIdentityString(proxy); // <-- Default `Object`'s implementation
 						}
 
 						case "equals" -> { // Built-in `equals()` implementation:
