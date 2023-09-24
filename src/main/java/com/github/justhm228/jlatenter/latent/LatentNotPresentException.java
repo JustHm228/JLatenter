@@ -73,6 +73,7 @@ public final class LatentNotPresentException extends LatentException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
+	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
@@ -82,6 +83,7 @@ public final class LatentNotPresentException extends LatentException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
+	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
@@ -91,7 +93,8 @@ public final class LatentNotPresentException extends LatentException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract(value = "_ -> this")
 	@Override()
 	public synchronized @NotNull(exception = NullPointerException.class) LatentNotPresentException initCause(
@@ -103,7 +106,8 @@ public final class LatentNotPresentException extends LatentException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
 	public synchronized @UnknownNullability(value = "Can be null anytime") Throwable getCause() throws Error {
@@ -112,7 +116,8 @@ public final class LatentNotPresentException extends LatentException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract()
 	@Override()
 	public void setStackTrace(
@@ -123,7 +128,8 @@ public final class LatentNotPresentException extends LatentException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract(value = " -> this")
 	@Override()
 	public synchronized @NotNull(exception = NullPointerException.class) LatentNotPresentException fillInStackTrace() throws Error {
@@ -133,7 +139,8 @@ public final class LatentNotPresentException extends LatentException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
 	public @NotNull(exception = NullPointerException.class) StackTraceElement @NotNull(exception = NullPointerException.class) [] getStackTrace() throws Error {
@@ -142,7 +149,8 @@ public final class LatentNotPresentException extends LatentException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract()
 	@Override()
 	public void printStackTrace(
@@ -153,7 +161,8 @@ public final class LatentNotPresentException extends LatentException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract()
 	@Override()
 	public void printStackTrace(
@@ -164,7 +173,8 @@ public final class LatentNotPresentException extends LatentException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonExtendable()
+	@NonBlocking()
 	@Contract()
 	@Override()
 	public void printStackTrace() throws Error, NullPointerException {

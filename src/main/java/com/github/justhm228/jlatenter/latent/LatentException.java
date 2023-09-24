@@ -96,7 +96,7 @@ public abstract sealed class LatentException extends RuntimeException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonBlocking()
 	@Contract(value = "_ -> this")
 	@Override()
 	public synchronized @NotNull(exception = NullPointerException.class) LatentException initCause(
@@ -108,7 +108,7 @@ public abstract sealed class LatentException extends RuntimeException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
 	public synchronized @UnknownNullability(value = "Can be null anytime") Throwable getCause() throws Error {
@@ -117,7 +117,7 @@ public abstract sealed class LatentException extends RuntimeException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonBlocking()
 	@Contract()
 	@Override()
 	public void setStackTrace(
@@ -128,7 +128,7 @@ public abstract sealed class LatentException extends RuntimeException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonBlocking()
 	@Contract(value = " -> this")
 	@Override()
 	public synchronized @NotNull(exception = NullPointerException.class) LatentException fillInStackTrace() throws Error {
@@ -138,7 +138,7 @@ public abstract sealed class LatentException extends RuntimeException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
 	public @NotNull(exception = NullPointerException.class) StackTraceElement @NotNull(exception = NullPointerException.class) [] getStackTrace() throws Error {
@@ -147,7 +147,7 @@ public abstract sealed class LatentException extends RuntimeException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
 	@Override()
 	public void printStackTrace(
@@ -158,7 +158,7 @@ public abstract sealed class LatentException extends RuntimeException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
 	@Override()
 	public void printStackTrace(
@@ -169,7 +169,7 @@ public abstract sealed class LatentException extends RuntimeException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@Blocking()
+	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
 	public void printStackTrace() throws Error, NullPointerException {
@@ -179,7 +179,6 @@ public abstract sealed class LatentException extends RuntimeException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
@@ -189,7 +188,6 @@ public abstract sealed class LatentException extends RuntimeException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	@Override()
@@ -201,7 +199,6 @@ public abstract sealed class LatentException extends RuntimeException
 	}
 
 	@AvailableSince(value = "0.1-build.1")
-	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
