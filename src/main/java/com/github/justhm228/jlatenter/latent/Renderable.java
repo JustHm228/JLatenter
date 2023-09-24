@@ -68,5 +68,5 @@ public interface Renderable {
 	@Contract() // <-- "pure" is unknown
 	@Shadow()
 	// <-- Just a stub method
-	void render() throws Error, LatentException;
+	void render() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
 }

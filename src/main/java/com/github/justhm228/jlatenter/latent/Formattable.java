@@ -34,7 +34,7 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) SelfPrintable> print() throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) SelfPrintable> print() throws @NotNull(exception = NullPointerException.class) Error {
 
 		return SelfPrintable.class;
 	}
@@ -43,7 +43,7 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) XPrintable> print(final Object ignored) throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) XPrintable> print(final Object ignored) throws @NotNull(exception = NullPointerException.class) Error {
 
 		return XPrintable.class;
 	}
@@ -52,7 +52,7 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) SelfPrintable> println() throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) SelfPrintable> println() throws @NotNull(exception = NullPointerException.class) Error {
 
 		return SelfPrintable.class;
 	}
@@ -61,7 +61,9 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) XPrintable> println(final Object ignored) throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) XPrintable> println(
+			@Nullable(value = "Can be null anytime") final Object ignored
+	) throws @NotNull(exception = NullPointerException.class) Error {
 
 		return XPrintable.class;
 	}
@@ -70,7 +72,9 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) SelfFormattable> format(final Object... ignored) throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) SelfFormattable> format(
+			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
+	) throws @NotNull(exception = NullPointerException.class) Error {
 
 		return SelfFormattable.class;
 	}
@@ -79,7 +83,9 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) SelfFormatted> formatted(final Object... ignored) throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) SelfFormatted> formatted(
+			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
+	) throws @NotNull(exception = NullPointerException.class) Error {
 
 		return SelfFormatted.class;
 	}
@@ -88,7 +94,9 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) SelfPrintableF> printf(final Object... ignored) throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) SelfPrintableF> printf(
+			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
+	) throws @NotNull(exception = NullPointerException.class) Error {
 
 		return SelfPrintableF.class;
 	}
@@ -97,7 +105,10 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) XFormattable> format(final Object sequence, final Object... ignored) throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) XFormattable> format(
+			@Nullable(value = "Can be null anytime") final Object sequence,
+			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
+	) throws @NotNull(exception = NullPointerException.class) Error {
 
 		return XFormattable.class;
 	}
@@ -106,7 +117,10 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) XPrintableF> printf(final Object sequence, final Object... ignored) throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<@NotNull(exception = NullPointerException.class) XPrintableF> printf(
+			@Nullable(value = "Can be null anytime") final Object sequence,
+			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
+	) throws @NotNull(exception = NullPointerException.class) Error {
 
 		return XPrintableF.class;
 	}
@@ -123,7 +137,7 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 		@Blocking()
 		@Contract()
 		@Shadow()
-		void print() throws Error, LatentException;
+		void print() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -138,7 +152,7 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 		@Blocking()
 		@Contract()
 		@Shadow()
-		void print(final Object sequence) throws Error, LatentException;
+		void print(final Object sequence) throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -153,7 +167,7 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 		@Blocking()
 		@Contract()
 		@Shadow()
-		void println() throws Error, LatentException;
+		void println() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -168,7 +182,7 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 		@Blocking()
 		@Contract()
 		@Shadow()
-		void println(final Object sequence) throws Error, LatentException;
+		void println(final Object sequence) throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -183,7 +197,7 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 		@Blocking()
 		@Contract()
 		@Shadow()
-		void format(final Object... args) throws Error, LatentException;
+		void format(final Object... args) throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -198,7 +212,7 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 		@Blocking()
 		@Contract(value = "_ -> _", pure = true)
 		@Shadow()
-		String formatted(final Object... args) throws Error, LatentException;
+		String formatted(final Object... args) throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -213,7 +227,7 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 		@Blocking()
 		@Contract()
 		@Shadow()
-		void printf(final Object... args) throws Error, LatentException;
+		void printf(final Object... args) throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -228,7 +242,7 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 		@Blocking()
 		@Contract()
 		@Shadow()
-		void format(final Object sequence, final Object... args) throws Error, LatentException;
+		void format(final Object sequence, final Object... args) throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -242,6 +256,6 @@ public sealed interface Formattable<T extends Formattable<T>> permits Formattabl
 		@Blocking()
 		@Contract()
 		@Shadow()
-		void printf(final Object sequence, final Object... args) throws Error, LatentException;
+		void printf(final Object sequence, final Object... args) throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
 	}
 }

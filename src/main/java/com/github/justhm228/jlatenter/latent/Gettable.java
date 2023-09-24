@@ -66,5 +66,5 @@ public interface Gettable {
 	@Contract(value = " -> _") // <-- "pure" is unknown
 	@Shadow() // <-- Just a stub method
 	// TODO: 09.09.2023 Expand this interface with other methods (like Formattable, Buildable, Puttable):
-	Object get() throws Error, LatentException;
+	Object get() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
 }

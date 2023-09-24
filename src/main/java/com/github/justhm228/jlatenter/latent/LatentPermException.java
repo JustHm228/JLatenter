@@ -39,7 +39,7 @@ public final class LatentPermException extends LatentException
     public LatentPermException(
             @Nullable(value = "Can be null anytime") final String message,
             @Nullable(value = "Can be null anytime") final Throwable cause
-    ) throws Error {
+    ) throws @NotNull(exception = NullPointerException.class) Error {
 
         super(message, cause);
     }
@@ -49,7 +49,7 @@ public final class LatentPermException extends LatentException
     @Contract(pure = true)
     public LatentPermException(
             @Nullable(value = "Can be null anytime") final Throwable cause
-    ) throws Error {
+    ) throws @NotNull(exception = NullPointerException.class) Error {
 
         super(cause);
     }
@@ -59,7 +59,7 @@ public final class LatentPermException extends LatentException
     @Contract(pure = true)
     public LatentPermException(
             @Nullable(value = "Can be null anytime") final String message
-    ) throws Error {
+    ) throws @NotNull(exception = NullPointerException.class) Error {
 
         super(message);
     }
@@ -67,7 +67,7 @@ public final class LatentPermException extends LatentException
     @AvailableSince(value = "0.1-build.2")
     @NonBlocking()
     @Contract(pure = true)
-    public LatentPermException() throws Error {
+    public LatentPermException() throws @NotNull(exception = NullPointerException.class) Error {
 
         super();
     }
@@ -76,7 +76,7 @@ public final class LatentPermException extends LatentException
     @NonBlocking()
     @Contract(value = " -> _", pure = true)
     @Override()
-    public @UnknownNullability(value = "Can be null anytime") String getLocalizedMessage() throws Error {
+    public @UnknownNullability(value = "Can be null anytime") String getLocalizedMessage() throws @NotNull(exception = NullPointerException.class) Error {
 
         return super.getLocalizedMessage();
     }
@@ -85,7 +85,7 @@ public final class LatentPermException extends LatentException
     @NonBlocking()
     @Contract(value = " -> _", pure = true)
     @Override()
-    public @UnknownNullability(value = "Can be null anytime") String getMessage() throws Error {
+    public @UnknownNullability(value = "Can be null anytime") String getMessage() throws @NotNull(exception = NullPointerException.class) Error {
 
         return super.getMessage();
     }
@@ -96,7 +96,7 @@ public final class LatentPermException extends LatentException
     @Override()
     public synchronized @NotNull(exception = NullPointerException.class) LatentPermException initCause(
             @Nullable(value = "Can be null anytime") final Throwable cause
-    ) throws Error {
+    ) throws @NotNull(exception = NullPointerException.class) Error {
 
         super.initCause(cause);
         return this;
@@ -106,7 +106,7 @@ public final class LatentPermException extends LatentException
     @NonBlocking()
     @Contract(value = " -> _", pure = true)
     @Override()
-    public synchronized @UnknownNullability(value = "Can be null anytime") Throwable getCause() throws Error {
+    public synchronized @UnknownNullability(value = "Can be null anytime") Throwable getCause() throws @NotNull(exception = NullPointerException.class) Error {
 
         return super.getCause();
     }
@@ -117,7 +117,7 @@ public final class LatentPermException extends LatentException
     @Override()
     public void setStackTrace(
             @NotNull(exception = NullPointerException.class) StackTraceElement @NotNull(exception = NullPointerException.class) [] stacktrace
-    ) throws Error, NullPointerException {
+    ) throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) NullPointerException {
 
         super.setStackTrace(stacktrace);
     }
@@ -126,7 +126,7 @@ public final class LatentPermException extends LatentException
     @NonBlocking()
     @Contract(value = " -> this")
     @Override()
-    public synchronized @NotNull(exception = NullPointerException.class) LatentException fillInStackTrace() throws Error {
+    public synchronized @NotNull(exception = NullPointerException.class) LatentException fillInStackTrace() throws @NotNull(exception = NullPointerException.class) Error {
 
         return super.fillInStackTrace();
     }
@@ -135,7 +135,7 @@ public final class LatentPermException extends LatentException
     @NonBlocking()
     @Contract(value = " -> _", pure = true)
     @Override()
-    public @NotNull(exception = NullPointerException.class) StackTraceElement @NotNull(exception = NullPointerException.class) [] getStackTrace() throws Error {
+    public @NotNull(exception = NullPointerException.class) StackTraceElement @NotNull(exception = NullPointerException.class) [] getStackTrace() throws @NotNull(exception = NullPointerException.class) Error {
 
         return super.getStackTrace();
     }
@@ -146,7 +146,7 @@ public final class LatentPermException extends LatentException
     @Override()
     public void printStackTrace(
             @NotNull(exception = NullPointerException.class) final PrintStream out
-    ) throws Error, NullPointerException {
+    ) throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) NullPointerException {
 
         super.printStackTrace(out);
     }
@@ -157,7 +157,7 @@ public final class LatentPermException extends LatentException
     @Override()
     public void printStackTrace(
             @NotNull(exception = NullPointerException.class) final PrintWriter out
-    ) throws Error, NullPointerException {
+    ) throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) NullPointerException {
 
         super.printStackTrace(out);
     }
@@ -166,7 +166,7 @@ public final class LatentPermException extends LatentException
     @NonBlocking()
     @Contract(value = " -> _")
     @Override()
-    public void printStackTrace() throws Error, NullPointerException {
+    public void printStackTrace() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) NullPointerException {
 
         super.printStackTrace();
     }
@@ -176,7 +176,7 @@ public final class LatentPermException extends LatentException
     @NonBlocking()
     @Contract(value = " -> _", pure = true)
     @Override()
-    public @NotNull(exception = NullPointerException.class) String toString() throws Error {
+    public @NotNull(exception = NullPointerException.class) String toString() throws @NotNull(exception = NullPointerException.class) Error {
 
         return super.toString();
     }
@@ -188,7 +188,7 @@ public final class LatentPermException extends LatentException
     @Override()
     public boolean equals(
             @Nullable(value = "Can be null anytime") final Object another
-    ) throws Error {
+    ) throws @NotNull(exception = NullPointerException.class) Error {
 
         return super.equals(another);
     }
@@ -198,7 +198,7 @@ public final class LatentPermException extends LatentException
     @NonBlocking()
     @Contract(value = " -> _", pure = true)
     @Override()
-    public int hashCode() throws Error {
+    public int hashCode() throws @NotNull(exception = NullPointerException.class) Error {
 
         return super.hashCode();
     }
@@ -211,7 +211,7 @@ public final class LatentPermException extends LatentException
     @Deprecated(since = "0.1-build.2", forRemoval = true)
     @Override()
     @SuppressWarnings(value = { "removal" })
-    protected void finalize() throws Throwable {
+    protected void finalize() throws @NotNull(exception = NullPointerException.class) Throwable {
 
         super.finalize();
     }

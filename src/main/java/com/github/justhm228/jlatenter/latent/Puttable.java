@@ -68,5 +68,5 @@ public interface Puttable {
 	@Contract() // <-- "pure" is unknown
 	@Shadow() // <-- Just a stub method
 	// TODO: 09.09.2023 Expand this interface with other methods (like Formattable, Buildable, Gettable):
-	void put() throws Error, LatentException;
+	void put() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
 }

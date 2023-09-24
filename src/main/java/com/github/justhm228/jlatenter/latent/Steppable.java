@@ -68,5 +68,5 @@ public interface Steppable {
 	@Contract() // <-- "pure" is unknown
 	@Shadow()
 	// <-- Just a stub method
-	void step() throws Error, LatentException;
+	void step() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
 }
