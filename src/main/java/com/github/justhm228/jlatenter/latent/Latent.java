@@ -89,6 +89,53 @@ public final class Latent {
 		return as(instance, latents[0]);
 	}
 
+	/**
+	 * "Interprets" the specified {@link Object object} as the specified {@link Class type}.
+	 *
+	 * <p>See the {@link Latent class documentation} for details.</p>
+	 *
+	 * @param instance An {@link Object object} to be "interpreted" as the specified {@link Class type}.
+	 * @param type A {@link Class type} as which the specified {@link Object object} will be "interpreted".
+	 *
+	 * @return A "shadow" of the specified {@link Object object}.
+	 * @param <T> The specified {@link Class type} as a generic.
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws NullPointerException If any specified parameter is <code>null</code>.
+	 * @throws IllegalArgumentException If the specified {@link Class type} isn't an <code>interface</code>.
+	 * @throws SecurityException If the global <code>AccessControlContext</code> isn't
+	 * 							 initialized and the caller doesn't have
+	 * 							 permission <code>{@link SecurityPermission SecurityPermission}("createAccessControlContext")</code>
+	 * 							 to initialize it and doesn't have such permissions:
+	 * 							 <ul>
+	 * 							     <li>
+	 * 							         <code>{@link RuntimePermission RuntimePermission}("getClassLoader")</code> -
+	 * 							         if the specified {@link Class type} is loaded by
+	 * 							         the bootstrap {@link ClassLoader classloader} and
+	 * 							         the caller's {@link ClassLoader classloader} isn't
+	 * 							         the {@link ClassLoader same}
+	 * 							     </li>
+	 * 							     <li>
+	 * 							         <code>{@link RuntimePermission RuntimePermission}("accessClassInPackage." + type.getPackageName())</code> -
+	 * 							         if the specified {@link Class type}'s {@link ClassLoader classloader} isn't
+	 * 							         the {@link ClassLoader same} as or an {@link ClassLoader ancestor} of
+	 * 							         the caller's {@link ClassLoader classloader}
+	 * 							     </li>
+	 * 							     <li>
+	 * 							         <code>{@link RuntimePermission RuntimePermission}("newProxyInPackage." + proxyPkg)</code> -
+	 * 							         if the specified {@link Class type} is non-<code>public</code> and
+	 * 							         the caller isn't in the same <code>{@link Package runtime package}</code> as
+	 * 							         the {@link Class type}
+	 * 							     </li>
+	 * 							 </ul>
+	 * 							 to do an "uncovered" call.
+	 *
+	 * @apiNote _
+	 * @implSpec _
+	 * @implNote _
+	 *
+	 * @since 0.1-build.1
+	 */
 	@AvailableSince(value = "0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
@@ -96,7 +143,7 @@ public final class Latent {
 	public static <T> @NotNull(exception = NullPointerException.class) T as(
 			@NotNull(value = "The specified latent instance is null!", exception = NullPointerException.class) final Object instance,
 			@NotNull(value = "The specified cast type is null!", exception = NullPointerException.class) final Class<T> type
-	) throws Error, NullPointerException, IllegalArgumentException {
+	) throws Error, NullPointerException, IllegalArgumentException, SecurityException {
 
 		requireNonNull(instance, "The specified latent instance is null!");
 		requireNonNull(type, "The specified cast type is null!");
@@ -112,29 +159,68 @@ public final class Latent {
 		}
 
 		@NotNull(exception = NullPointerException.class)
-		@SuppressWarnings(value = { "unchecked" })
-		final T proxy = (T) newProxyInstance(
+		@SuppressWarnings(value = { "removal", "unchecked" })
+		final T proxy = AccessController.doPrivileged(
+
+		   (PrivilegedAction<? extends T>) () -> (T) newProxyInstance(
 
 				type.getClassLoader(),
 				new Class[] { type },
 				new LatentHandler(instance)
+		   ),
+
+		   AccessController.getContext(),
+		   new RuntimePermission("getClassLoader"),
+		   new RuntimePermission("accessClassInPackage." + type.getPackageName()),
+
+		   // TODO: 20.09.2023 Implement here an algorithm to find the package name:
+		   new ReflectPermission("newProxyInPackage.*")
 		);
 
 		return proxy;
 	}
 
+	/**
+	 * Checks if the specified {@link Object object} is a "shadow" {@link Object object} and returns <code>true</code> if it is.
+	 *
+	 * <p>See the {@link Latent class documentation} for details.</p>
+	 *
+	 * @param instance An {@link Object object} to check if it's a "shadow" {@link Object object}.
+	 *
+	 * @return <code>true</code> if the specified object is a "shadow" {@link Object object};
+	 * 		   <code>false</code> - otherwise.
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws SecurityException If the global <code>AccessControlContext</code> isn't
+	 * 							 initialized and the caller doesn't have permission
+	 * 							 <code>{@link SecurityPermission SecurityPermission}("createAccessControlContext")</code>
+	 * 							 to initialize it and also doesn't have permission
+	 * 							 <code>{@link RuntimePermission RuntimePermission}("accessClassInPackage" + instance.getClass().getPackageName())</code>
+	 * 							 to do an "uncovered" call.
+	 *
+	 * @apiNote _
+	 * @implSpec _
+	 * @implNote _
+	 *
+	 * @since 0.1-build.1
+	 */
 	@AvailableSince(value = "0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
-	public static boolean isShadowed(@Nullable(value = "Can be null anytime") final Object instance) throws Error {
+	public static boolean isShadowed(
+			@Nullable(value = "Can be null anytime") final Object instance
+	) throws Error, SecurityException {
 
 		if (instance == null) {
 
 			return false;
 		}
 
-		if (isProxyClass(instance.getClass())) {
+		@NotNull(exception = NullPointerException.class)
+		final Class<?> proxy = instance.getClass();
+
+		if (isProxyClass(proxy)) {
 
 			@NotNull(exception = NullPointerException.class)
 			@SuppressWarnings(value = { "removal" })
@@ -142,7 +228,7 @@ public final class Latent {
 
 					(PrivilegedAction<? extends InvocationHandler>) () -> getInvocationHandler(instance),
 					AccessController.getContext(),
-					new RuntimePermission("accessClassInPackage.*")
+					new RuntimePermission("accessClassInPackage." + proxy.getPackageName())
 			);
 
 			return handler instanceof LatentHandler;
@@ -155,10 +241,11 @@ public final class Latent {
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
+	@Deprecated(since = "0.1-build.2")
 	public static <T> @UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance") T find(
 			@NotNull(value = "The specified proxy instance is null!", exception = NullPointerException.class) final Object proxy,
 			@Nullable(value = "Can be null anytime") @SuppressWarnings(value = { "unused" }) final Class<T> cast
-	) throws Error, NullPointerException, ClassCastException {
+	) throws Error, NullPointerException {
 
 		@UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance")
 		@SuppressWarnings(value = { "unchecked" })
@@ -170,17 +257,45 @@ public final class Latent {
 		return instance;
 	}
 
+	/**
+	 * Returns an {@link Object object} to which refers the specified "shadow" {@link Object object}.
+	 *
+	 * <p>See the {@link Latent class documentation} for details.</p>
+	 *
+	 * @param proxy A "shadow" {@link Object object}.
+	 *
+	 * @return An {@link Object object} "interpreted" by the specified "shadow" {@link Object object}.
+	 * 		   If it isn't a valid "shadow" {@link Object object} - <code>null</code> will be returned.
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws NullPointerException If the specified "shadow" {@link Object object} is <code>null</code>.
+	 * @throws SecurityException If the global <code>AccessControlContext</code> isn't
+	 * 							 initialized and the caller doesn't have permission
+	 * 							 <code>{@link SecurityPermission SecurityPermission}("createAccessControlContext")</code>
+	 * 							 to initialize it and also doesn't have permission
+	 * 							 <code>{@link RuntimePermission RuntimePermission}("accessClassInPackage" + instance.getClass().getPackageName())</code>
+	 * 							 to do an "uncovered" call.
+	 *
+	 * @apiNote _
+	 * @implSpec _
+	 * @implNote _
+	 *
+	 * @since 0.1-build.1
+	 */
 	@AvailableSince(value = "0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
 	public static @UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance") Object find(
 			@NotNull(value = "The specified proxy instance is null!", exception = NullPointerException.class) final Object proxy
-	) throws Error, NullPointerException {
+	) throws Error, NullPointerException, SecurityException {
 
 		requireNonNull(proxy, "The specified proxy instance is null!");
 
-		if (isProxyClass(proxy.getClass())) {
+		@NotNull(exception = NullPointerException.class)
+		final Class<?> impl = proxy.getClass();
+
+		if (isProxyClass(impl)) {
 
 			@NotNull(exception = NullPointerException.class)
 			@SuppressWarnings(value = { "removal" })
@@ -188,7 +303,7 @@ public final class Latent {
 
 					(PrivilegedAction<? extends InvocationHandler>) () -> getInvocationHandler(proxy),
 					AccessController.getContext(),
-					new RuntimePermission("accessClassInPackage.*")
+					new RuntimePermission("accessClassInPackage." + impl.getPackageName())
 			);
 
 			if (handler instanceof
@@ -568,56 +683,6 @@ public final class Latent {
 							}
 
 							return identityHashCode(proxy); // <-- Default `Object`'s implementation
-						}
-
-						case "clone" -> { // Built-in `clone()` implementation:
-
-							if (args != null && args.length != 0) {
-
-								throw new LatentNotPresentException(
-
-										"The proxied method (" +
-												method +
-										") has no compatible latents!"
-
-								); // <-- Invalid arguments!
-							}
-
-							try {
-
-								throw new CloneNotSupportedException(
-
-										proxy.getClass().getTypeName()
-
-								); // <-- Cloning of "shadow" objects isn't supported!
-
-							} catch (@NotNull(exception = NullPointerException.class) final CloneNotSupportedException unsupported) {
-
-								throw new LatentTargetException(
-
-										"The used method (" +
-												method +
-										") thrown an exception!",
-										unsupported
-
-								); // Wrap the thrown exception to a `LatentTargetException`
-							}
-						}
-
-						case "finalize" -> { // Built-in `finalize()` implementation:
-
-							if (args != null && args.length != 0) {
-
-								throw new LatentNotPresentException(
-
-										"The proxied method (" +
-												method +
-												") has no compatible latents!"
-
-								); // <-- Invalid arguments!
-							}
-
-							return null; // Do nothing
 						}
 					}
 				}
