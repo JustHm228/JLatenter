@@ -734,6 +734,17 @@ public final class Latent {
 
 					); // The method has thrown an exception!
 				}
+
+			} catch (@NotNull(exception = NullPointerException.class) final SecurityException permission) {
+
+				throw new LatentPermException(
+
+						"You don't have permission to call the used method (" +
+								method +
+						")!",
+						permission
+
+				); // The caller doesn't have permission to do this call!
 			}
 		}
 

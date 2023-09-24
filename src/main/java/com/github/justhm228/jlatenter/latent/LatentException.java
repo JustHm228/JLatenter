@@ -34,9 +34,9 @@ import static java.lang.System.*;
 @NonBlocking()
 public abstract sealed class LatentException extends RuntimeException
 		implements Serializable
-		permits LatentNotPresentException, IncompatibleLatentException,
-				InaccessibleLatentException, LatentInitException,
-				LatentTargetException {
+		permits LatentPermException, LatentNotPresentException,
+				IncompatibleLatentException, InaccessibleLatentException,
+				LatentInitException, LatentTargetException {
 
 	@AvailableSince(value = "0.1-build.1")
 	@NonBlocking()
