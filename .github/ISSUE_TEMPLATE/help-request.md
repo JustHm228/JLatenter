@@ -2,7 +2,7 @@
 name: Help request
 about: Ask a question if you need help
 title: Help Me!
-labels: question
+labels: help wanted, question
 assignees: JustHm228
 
 ---
