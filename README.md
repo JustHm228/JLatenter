@@ -146,7 +146,7 @@ When an exception is thrown by the method (`InvocationTargetException`), it's al
 invokes successfully, the handler returns the value returned by the method. If the proxied method
 wasn't found, the handler tries to find the same method in the superclasses and call it.
 If no one was found, it throws the final `LatentNotPresentException` _(again a subclass of
-the unchecked `LatentException`)_. If the one is found and its declaring class is specified as `Object`,
+unchecked `LatentException`...)_. If the one is found and its declaring class is specified as `Object`,
 the handler's built-in implementation of `Object` methods comes into force. If this is a method of
 another class, it's called according to the above algorithm.
 
