@@ -32,8 +32,8 @@
 
 	<name>JLatenter</name>
 	<description>
-		A small implementation of latent typing in Java which
-		uses dynamic proxies to redirect method calls from a stub interface to the real object.
+		A small library which allows you to "interpret" any object of any type as
+		an object that implements an interface you specify.
 	</description>
 	<url>https://github.com/JustHm228/JLatenter</url>
 	<licenses>
@@ -58,7 +58,7 @@
 
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/JLatenter/issues</url>
+		<url>https://github.com/JustHm228/JLatenter/issues</url>
 	</issueManagement>
 
 	<dependencies>
