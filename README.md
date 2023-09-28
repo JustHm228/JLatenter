@@ -6,7 +6,10 @@ that object without having to cast it to any generic interface or use something 
 [Reflection API](https://www.oracle.com/technical-resources/articles/java/javareflection.html)
 or
 [Method Handles API](https://docs.oracle.com/javase/8/docs/api/java/lang/invoke/MethodHandles.html).
-This can be very helpful when using design patterns like "Observer" or "Chain of Responsibility".
+This can be very helpful when using design patterns like
+"[Observer](https://www.baeldung.com/java-observer-pattern)"
+or
+"[Chain of Responsibility](https://www.baeldung.com/chain-of-responsibility-pattern)".
 To understand how it can be useful, take a look at this example:
 
 ```java
@@ -26,7 +29,15 @@ public abstract class Handleable {
         }
     }
 
-    public void handle(Object... args) {
+    public void removeHandler(Object handler) {
+
+        if (handler != null) {
+
+            handlers.remove(handler); // Unregister a handler if it is non-`null`
+        }
+    }
+
+    public void update(Object... args) {
 
         // Fire all registered handlers:
         for (final Object handler : handlers) {
@@ -40,25 +51,23 @@ public abstract class Handleable {
             }
         }
     }
-
-    public void removeHandler(Object handler) {
-
-        if (handler != null) {
-
-            handlers.remove(handler); // Unregister a handler if it is non-`null`
-        }
-    }
 }
 ```
 
 This example presents a simple abstract class that implements
-the "Chain of Responsibility" design pattern. The class can register, unregister and fire
-any `BiConsumer`-like handler. But here, the registered handlers aren't required to implement 
-`BiConsumer` in order to be handlers - just have an `accept()` method that takes 2 arguments,
-the first of which is a reference to a `Handleable` object, and the last of which is
-an array of `Object` arguments. This allows you to get rid of the generic interface,
-which in some cases can be very useful. **I don't know how original this thing is**,
-I just came up with this implementation of this idea and decided to do it because why not.
+the
+"[Observer](https://www.baeldung.com/java-observer-pattern)"
+design pattern. The class can register, unregister and fire any `BiConsumer`-like handler.
+But here, the registered handlers aren't required to implement `BiConsumer` in order to be handlers -
+just have an `accept()` method that takes 2 arguments, the first of which is a reference to
+a `Handleable` object, and the last of which is an array of `Object` arguments.
+This allows you to get rid of the generic interface, which in some cases can be very useful.
+
+And something else important... **I don't know how original this thing is**, I just came up with
+this implementation of this idea and decided to do it because why not.
+**The project is open to any ideas that anyone can submit in the
+"[Issues](https://github.com/JustHm228/JLatenter/issues)"
+tab!**
 
 ## How Does It Work?
 
@@ -111,6 +120,40 @@ class Task { // <-- It doesn't implement `Runnable`!
 
 This, of course, isn't particularly similar to Python, but at least it's very short and clear, right?
 
+Well, I think you already guessed how it works. When you pass any object to the `as()` method,
+it instantiates a new dynamic proxy that implements the specified interface, which is passed
+the desired proxy handler. When calling any proxied method, the handler tries to redirect
+the call to the same method, but already belonging to the proxied object. First, it gets the class of
+that object and tries to find a method in it with the same name and arguments. If it finds one
+(even if it is a static method) then it checks the return value for "compatibility".
+Return value compatibility in a given context means that any condition in the following list is true:
+
+- The return value of the called method is `void`.
+- The return value of the called method isn't `void` and the assignment compatibility check of
+  the return values (wrapped in their wrapper types, if at least one of them is primitive) of
+  the called and proxied methods passes successfully.
+
+If none of the above conditions are met, an `IncompatibleLatentException` exception is thrown
+_(which is a subclass of unchecked `LatentException`)_. If at least one of the above conditions is met,
+then the next step is to check whether the proxied method is accessible. If a method is inaccessible,
+the handler tries its best to make it accessible. If it fails, an `InaccessibleLatentException`
+is thrown _(which is also a subclass of the unchecked `LatentException`)_. If successful, the handler
+attempts to call the proxied method, passing it a reference to the object being proxied and
+the passed arguments. If there is an exception in class initialization (`ExceptionInInitializerError`),
+it is wrapped in `LatentInitException` _(which is also a subclass of unchecked `LatentException`)_.
+When an exception is thrown by the method (`InvocationTargetException`), it's also wrapped in
+`LatentTargetException` _(which is also a subclass of unchecked `LatentException`)_.  If the method
+invokes successfully, the handler returns the value returned by the method. If the proxied method
+wasn't found, the handler tries to find the same method in the superclasses and call it.
+If no one was found, it throws the final `LatentNotPresentException` _(again a subclass of
+the unchecked `LatentException`)_. If the one is found and its declaring class is specified as `Object`,
+the handler's built-in implementation of `Object` methods comes into force. If this is a method of
+another class, it's called according to the above algorithm.
+
+So that's how in this relatively simple way,
+any object can be "interpreted" as an object of a completely different type and all method calls to it
+are redirected to the proxied object, in case you were interested in this.
+
 ## How to Use It?
 
 There is nothing complicated here, because... the only class you will have to work with is `Latent`.
@@ -123,11 +166,9 @@ The class contains 3 overloaded methods:
 `as()` takes as the first argument the object whose method you want to call,
 and the second argument in the two overloaded versions is different:
 
- - In the first version it's a reference to the interface as which
-  you want to represent the object
- - ~~In the second version it's an object that implements a single interface,
-  as which an object can be represented
-  _(it's a failed experiment, please forget about its existence)_.~~
+ 1. In the first version it's a reference to the interface as which you want to represent the object
+ 2. ~~In the second version it's an object that implements a single interface, as which an object
+    can be represented _(it's a failed experiment, please forget about its existence)_.~~
 
 but return value is always the same - a "shadow" of the passed object.
 The `isShadowed()` method accepts a single object and returns `true`
@@ -194,19 +235,17 @@ creating a new class with your method (there will be more of them in the future)
  - `Puttable` - contains a `put()` method which accepts no parameters and
                 returns `void`
 
----
-
 And that's all. It's very short, isn't it? Also, if you take into account that you can use
-static import to call the `as()` method (like in the examples), it turns out that you can
+static imports to call the `as()` method (like in the examples), it turns out that you can
 call the method you need in almost one line (possibly even without creating a new interface).
-**But note that the garbage collector won't be able to destroy the original object while
+**But also note that the garbage collector won't be able to destroy the original object while
 its "shadow" exists, because it references original directly, so take that into account
 _(I won't fix this due to other problems which may be caused by such fixes)_.**
 I hope I explained clearly.
 
 ## Future Plans
 
-I really wanted to finish at 0.1-build.1 initially, but then I realized that I could
+I really wanted to finish at `0.1-build.1` initially, but then I realized that I could
 turn this spontaneous idea into something more and add a little more functionality.
 But first, I need to add more stub interfaces. So much more that a potential user
 won't have to write them by yourself - it will be enough to look through the list of built-ins.
@@ -217,15 +256,15 @@ wrappers, etc.) and possibly get rid of `IncompatibleLatentException` caused by 
 default `null` values. And finally... I want to add some meaning to `@Shadow`'s annotation,
 because right now it's just decoration. If anything, I'm not talking about rewriting the code
 so that it only accepts stubs with this annotation. Still, it isn't for nothing that I decided to
-use dynamic proxies to solve the problem of call redirection. I can add some additional,
-optional parameters to the annotation, which, for example, will redirect a call to
-the manually-specified method, change the search algorithm, or even control the built-in profiler
-(yes, I know, it's corny, but why not). The possibilities in this regard are endless!
-That's why I decided not to complete this idea that spontaneously came to me with 0.1-build.1 -
-I want to determine how I can "play" with this implementation, how to expand it,
-what I can basically do with it. So I promise that I will at least try to do something similar.
-
----
+use
+[dynamic proxies](https://docs.oracle.com/javase/8/docs/technotes/guides/reflection/proxy.html)
+to solve the problem of call redirection. I can add some additional, optional parameters to
+the annotation, which, for example, will redirect a call to the manually-specified method,
+change the search algorithm, or even control the built-in profiler (yes, I know, it's corny,
+but why not). The possibilities in this regard are endless! That's why I decided not to complete
+this idea that spontaneously came to me with `0.1-build.1` - I want to understand how I can "play" with
+this implementation, how to expand it, what I can basically do with it. So I promise that I will
+at least try to do something similar.
 
 - [x] Come up with an idea.
 - [x] Implement the idea.
@@ -247,6 +286,4 @@ what I can basically do with it. So I promise that I will at least try to do som
 - [ ] Publish to Maven
 - [ ] Abandon the project?..
 
----
-
-Well, something like this.
+_Well, something like this._
