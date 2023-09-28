@@ -143,11 +143,9 @@ public final class Library {
                                 *
                                 * @since 0.1-build.2
                                 */
-                               DESCRIPTION = "A small implementation of " +
-                                       "latent typing in Java which " +
-                                       "uses dynamic proxies to " +
-                                       "redirect method calls from " +
-                                       "a stub interface to the real object",
+                               DESCRIPTION = "A small library which allows you to \"interpret\"" +
+                                       "any object of any type as an object that implements" +
+                                       "an interface you specify",
 
                                /**
                                 * A {@link String string} version name of the used implementation.
