@@ -6,8 +6,8 @@ that object without having to cast it to any generic interface or use something 
 [Reflection API](https://www.oracle.com/technical-resources/articles/java/javareflection.html)
 or
 [Method Handles API](https://docs.oracle.com/javase/8/docs/api/java/lang/invoke/MethodHandles.html).
-This can be very helpful when using the "Handler" design pattern. To understand how it can be
-useful, take a look at this example:
+This can be very helpful when using design patterns like "Observer" or "Chain of Responsibility".
+To understand how it can be useful, take a look at this example:
 
 ```java
 import java.util.*;
@@ -51,10 +51,10 @@ public abstract class Handleable {
 }
 ```
 
-This example presents a simple abstract class that implements the "Handler" design pattern.
-The class can register, unregister and fire any `BiConsumer`-like handler.
-But here, the registered handlers aren't required to implement the `BiConsumer` interface
-in order to be handlers - just have an `accept()` method that takes 2 arguments,
+This example presents a simple abstract class that implements
+the "Chain of Responsibility" design pattern. The class can register, unregister and fire
+any `BiConsumer`-like handler. But here, the registered handlers aren't required to implement 
+`BiConsumer` in order to be handlers - just have an `accept()` method that takes 2 arguments,
 the first of which is a reference to a `Handleable` object, and the last of which is
 an array of `Object` arguments. This allows you to get rid of the generic interface,
 which in some cases can be very useful. **I don't know how original this thing is**,
