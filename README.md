@@ -103,7 +103,7 @@ and the second argument in the two overloaded versions is different:
   you want to represent the object
 - ~~In the second version it's an object that implements a single interface,
   as which an object can be represented
-  *(it's a failed experiment, please forget about its existence)*.~~
+  _(it's a failed experiment, please forget about its existence)_.~~
 
 but return value is always the same - a "shadow" of the passed object.
 The `isShadowed()` method accepts a single object and returns `true`
