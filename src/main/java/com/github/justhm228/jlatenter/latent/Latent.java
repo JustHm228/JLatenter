@@ -410,79 +410,6 @@ public final class Latent {
 			return new LatentHandler(present);
 		}
 
-		// Built-in `toString()`:
-		@AvailableSince(value = "0.1-build.1")
-		@Internal()
-		@NonExtendable()
-		@NonBlocking()
-		@Contract(value = "_, _, _ -> _", pure = true)
-		private @NotNull(exception = NullPointerException.class) String builtinToString(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
-
-			// Signature check:
-			if (args != null && args.length > 0) { // If the method accepts any parameters...
-
-				throw new LatentNotPresentException(
-
-						"The proxied method (" +
-								method +
-						") has no compatible latents!"
-
-				); // <- Invalid arguments/signature!
-			}
-
-			// Built-in implementation of `toString()`:
-			return toIdentityString(proxy); // <- Default `toString()`
-		}
-
-		// Built-in `equals()`:
-		@AvailableSince(value = "0.1-build.1")
-		@Internal()
-		@NonExtendable()
-		@NonBlocking()
-		@Contract(value = "_, _, _ -> _", pure = true)
-		private boolean builtinEquals(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
-
-			// Signature check:
-			if (args == null || args.length != 1) { // If the method accepts more or less than 1 parameter...
-
-				throw new LatentNotPresentException(
-
-						"The proxied method (" +
-								method +
-						") has no compatible latents!"
-
-				); // <- Invalid arguments/signature!
-			}
-
-			// Built-in implementation of `equals()`:
-			return proxy == args[0] || // <- Default `equals()`
-					present == args[0] || present == find(proxy); // <- Special `equals()`
-		}
-
-		// Built-in `hashCode()`:
-		@AvailableSince(value = "0.1-build.1")
-		@Internal()
-		@NonExtendable()
-		@NonBlocking()
-		@Contract(value = "_, _, _ -> _", pure = true)
-		private int builtinHashCode(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
-
-			// Signature check:
-			if (args != null && args.length > 0) { // If the method accepts any parameters...
-
-				throw new LatentNotPresentException(
-
-						"The proxied method (" +
-								method +
-						") has no compatible latents!"
-
-				); // <- Invalid arguments/signature!
-			}
-
-			// Built-in implementation of `hashCode()`:
-			return identityHashCode(proxy); // <- Default `hashCode()`
-		}
-
 		@AvailableSince(value = "0.1-build.1")
 		@Internal()
 		@NonExtendable()
@@ -825,6 +752,79 @@ public final class Latent {
 		public int hashCode() throws Error {
 
 			return hash(identityHashCode(present));
+		}
+
+		// Built-in `toString()`:
+		@AvailableSince(value = "0.1-build.1")
+		@Internal()
+		@NonExtendable()
+		@NonBlocking()
+		@Contract(value = "_, _, _ -> _", pure = true)
+		private @NotNull(exception = NullPointerException.class) String builtinToString(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
+
+			// Signature check:
+			if (args != null && args.length > 0) { // If the method accepts any parameters...
+
+				throw new LatentNotPresentException(
+
+						"The proxied method (" +
+								method +
+								") has no compatible latents!"
+
+				); // <- Invalid arguments/signature!
+			}
+
+			// Built-in implementation of `toString()`:
+			return toIdentityString(proxy); // <- Default `toString()`
+		}
+
+		// Built-in `equals()`:
+		@AvailableSince(value = "0.1-build.1")
+		@Internal()
+		@NonExtendable()
+		@NonBlocking()
+		@Contract(value = "_, _, _ -> _", pure = true)
+		private boolean builtinEquals(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
+
+			// Signature check:
+			if (args == null || args.length != 1) { // If the method accepts more or less than 1 parameter...
+
+				throw new LatentNotPresentException(
+
+						"The proxied method (" +
+								method +
+								") has no compatible latents!"
+
+				); // <- Invalid arguments/signature!
+			}
+
+			// Built-in implementation of `equals()`:
+			return proxy == args[0] || // <- Default `equals()`
+					present == args[0] || present == find(proxy); // <- Special `equals()`
+		}
+
+		// Built-in `hashCode()`:
+		@AvailableSince(value = "0.1-build.1")
+		@Internal()
+		@NonExtendable()
+		@NonBlocking()
+		@Contract(value = "_, _, _ -> _", pure = true)
+		private int builtinHashCode(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
+
+			// Signature check:
+			if (args != null && args.length > 0) { // If the method accepts any parameters...
+
+				throw new LatentNotPresentException(
+
+						"The proxied method (" +
+								method +
+								") has no compatible latents!"
+
+				); // <- Invalid arguments/signature!
+			}
+
+			// Built-in implementation of `hashCode()`:
+			return identityHashCode(proxy); // <- Default `hashCode()`
 		}
 	}
 }
