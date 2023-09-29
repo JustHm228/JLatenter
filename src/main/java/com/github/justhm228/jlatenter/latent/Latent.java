@@ -414,6 +414,69 @@ public final class Latent {
 		@Internal()
 		@NonExtendable()
 		@NonBlocking()
+		@Contract(value = "_, _, _ -> _", pure = true)
+		private static @NotNull(exception = NullPointerException.class) String builtinToString(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
+
+			if (args != null && args.length > 0) {
+
+				throw new LatentNotPresentException(
+
+						"The proxied method (" +
+								method +
+						") has no compatible latents!"
+
+				); // <-- Invalid arguments!
+			}
+
+			return toIdentityString(proxy); // <-- Default `Object`'s implementation
+		}
+
+		@AvailableSince(value = "0.1-build.1")
+		@Internal()
+		@NonExtendable()
+		@NonBlocking()
+		@Contract(value = "_, _, _ -> _", pure = true)
+		private static boolean builtinEquals(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
+
+			if (args == null || args.length != 1) {
+
+				throw new LatentNotPresentException(
+
+						"The proxied method (" +
+								method +
+						") has no compatible latents!"
+
+				); // <-- Invalid arguments!
+			}
+
+			return proxy == args[0]; // <-- Default `Object`'s implementation
+		}
+
+		@AvailableSince(value = "0.1-build.1")
+		@Internal()
+		@NonExtendable()
+		@NonBlocking()
+		@Contract(value = "_, _, _ -> _", pure = true)
+		private static int builtinHashCode(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
+
+			if (args != null && args.length > 0) {
+
+				throw new LatentNotPresentException(
+
+						"The proxied method (" +
+								method +
+						") has no compatible latents!"
+
+				); // <-- Invalid arguments!
+			}
+
+			return identityHashCode(proxy); // <-- Default `Object`'s implementation
+		}
+
+		@AvailableSince(value = "0.1-build.1")
+		@Internal()
+		@NonExtendable()
+		@NonBlocking()
 		@Contract(value = " -> _", pure = true)
 		@Override()
 		public @NotNull(exception = NullPointerException.class) Object present() {
@@ -636,56 +699,22 @@ public final class Latent {
 				// If the current method is from `Object` class:
 				if (Objects.equals(method.getDeclaringClass(), Object.class)) {
 
-					switch (method.getName()) {
+					return switch (method.getName()) {
 
-						case "toString" -> { // Built-in `toString()` implementation:
+						case "toString" -> builtinToString(proxy, method, args);
 
-							if (args != null && args.length > 0) {
+						case "equals" -> builtinEquals(proxy, method, args);
 
-								throw new LatentNotPresentException(
+						case "hashCode" -> builtinHashCode(proxy, method, args);
 
-										"The proxied method (" +
-												method +
-										") has no compatible latents!"
+						default -> throw new LatentNotPresentException(
 
-								); // <-- Invalid arguments!
-							}
+								"The proxied method (" +
+										method +
+								") has no compatible latents!"
 
-							return toIdentityString(proxy); // <-- Default `Object`'s implementation
-						}
-
-						case "equals" -> { // Built-in `equals()` implementation:
-
-							if (args == null || args.length != 1) {
-
-								throw new LatentNotPresentException(
-
-										"The proxied method (" +
-												method +
-										") has no compatible latents!"
-
-								); // <-- Invalid arguments!
-							}
-
-							return proxy == args[0]; // <-- Default `Object`'s implementation
-						}
-
-						case "hashCode" -> { // Built-in `hashCode()` implementation:
-
-							if (args != null && args.length > 0) {
-
-								throw new LatentNotPresentException(
-
-										"The proxied method (" +
-												method +
-										") has no compatible latents!"
-
-								); // <-- Invalid arguments!
-							}
-
-							return identityHashCode(proxy); // <-- Default `Object`'s implementation
-						}
-					}
+						); // <-- This should never happen!
+					};
 				}
 
 				// If it isn't a method of `Object`:
