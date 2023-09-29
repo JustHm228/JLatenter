@@ -771,7 +771,7 @@ public final class Latent {
 								method +
 								") has no compatible latents!"
 
-				); // <- Invalid arguments/signature!
+				); // Invalid arguments/signature!
 			}
 
 			// Built-in implementation of `toString()`:
@@ -795,7 +795,7 @@ public final class Latent {
 								method +
 								") has no compatible latents!"
 
-				); // <- Invalid arguments/signature!
+				); // Invalid arguments/signature!
 			}
 
 			// Built-in implementation of `equals()`:
@@ -820,7 +820,7 @@ public final class Latent {
 								method +
 								") has no compatible latents!"
 
-				); // <- Invalid arguments/signature!
+				); // Invalid arguments/signature!
 			}
 
 			// Built-in implementation of `hashCode()`:
