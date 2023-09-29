@@ -458,6 +458,8 @@ public final class Latent {
 
 						 proxied = method.getReturnType();
 
+				boolean defEmpty = false;
+
 				if (result.isPrimitive() || proxied.isPrimitive()) {
 
 					if (result == void.class) {
@@ -500,6 +502,7 @@ public final class Latent {
 					if (proxied == void.class) {
 
 						proxied = Void.class;
+						defEmpty = true;
 
 					} else if (proxied == boolean.class) {
 
@@ -535,7 +538,7 @@ public final class Latent {
 					}
 				}
 
-				if (proxied == Void.class || proxied.isAssignableFrom(result)) {
+				if (defEmpty || proxied.isAssignableFrom(result)) {
 
 					if (!called.canAccess(Modifier.isStatic(called.getModifiers()) ? null : present)) {
 
