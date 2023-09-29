@@ -769,7 +769,7 @@ public final class Latent {
 
 						"The proxied method (" +
 								method +
-								") has no compatible latents!"
+						") has no compatible latents!"
 
 				); // Invalid arguments/signature!
 			}
@@ -793,7 +793,7 @@ public final class Latent {
 
 						"The proxied method (" +
 								method +
-								") has no compatible latents!"
+						") has no compatible latents!"
 
 				); // Invalid arguments/signature!
 			}
@@ -818,7 +818,7 @@ public final class Latent {
 
 						"The proxied method (" +
 								method +
-								") has no compatible latents!"
+						") has no compatible latents!"
 
 				); // Invalid arguments/signature!
 			}
