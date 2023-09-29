@@ -772,7 +772,7 @@ public final class Latent {
 		}
 
 		// Built-in `toString()`:
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince(value = "0.1-build.2")
 		@Internal() // <- Internal context
 		@NonExtendable() // <- A non-extendable method
 		@NonBlocking() // <- Non-blocking context
@@ -796,7 +796,7 @@ public final class Latent {
 		}
 
 		// Built-in `equals()`:
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince(value = "0.1-build.2")
 		@Internal() // <- Internal context
 		@NonExtendable() // <- A non-extendable method
 		@NonBlocking() // <- Non-blocking context
@@ -821,7 +821,7 @@ public final class Latent {
 		}
 
 		// Built-in `hashCode()`:
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince(value = "0.1-build.2")
 		@Internal() // <- Internal context
 		@NonExtendable() // <- A non-extendable method
 		@NonBlocking() // <- Non-blocking context
