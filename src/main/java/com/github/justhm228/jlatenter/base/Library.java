@@ -32,41 +32,38 @@ import static java.util.Objects.*;
  *
  * <p>
  *     Currently it contains such constants:
- *     <ul>
- *         <li>
- *             <code>{@link #AUTHOR AUTHOR}</code> -
- *             an author/provider/{@link Package#getSpecificationVendor() vendor}
- *             of the implementation
- *         </li>
- *         <li>
- *             <code>{@link #URL URL}</code> - a link to the project repository
- *         </li>
- *         <li>
- *             <code>{@link #NAME NAME}</code> - a string display name/title of
- *             the implementation
- *         </li>
- *         <li>
- *             <code>{@link #INTERNAL_NAME INTERNAL_NAME}</code> - an internal name of
- *             the implementation
- *         </li>
- *         <li>
- *             <code>{@link #DESCRIPTION DESCRIPTION}</code> -
- *             a short {@link String string} description of the implementation
- *         </li>
- *         <li>
- *             <code>{@link #VERSION VERSION}</code> - a {@link String string} version name of
- *             the used implementation
- *         </li>
- *         <li>
- *             <code>{@link #VERSION_CODE VERSION_CODE}</code> - an integer version identifier of
- *             the used implementation
- *         </li>
- *     </ul>
  * </p>
  *
- * @apiNote _
- * @implSpec _
- * @implNote _
+ * <ul>
+ *     <li>
+ *         <code>{@link #AUTHOR AUTHOR}</code> -
+ *         an author/provider/{@link Package#getSpecificationVendor() vendor}
+ *         of the implementation
+ *     </li>
+ *     <li>
+ *         <code>{@link #URL URL}</code> - a link to the project repository
+ *     </li>
+ *     <li>
+ *         <code>{@link #NAME NAME}</code> - a string display name/title of
+ *         the implementation
+ *     </li>
+ *     <li>
+ *         <code>{@link #INTERNAL_NAME INTERNAL_NAME}</code> - an internal name of
+ *         the implementation
+ *     </li>
+ *     <li>
+ *         <code>{@link #DESCRIPTION DESCRIPTION}</code> -
+ *         a short {@link String string} description of the implementation
+ *     </li>
+ *     <li>
+ *         <code>{@link #VERSION VERSION}</code> - a {@link String string} version name of
+ *         the used implementation
+ *     </li>
+ *     <li>
+ *         <code>{@link #VERSION_CODE VERSION_CODE}</code> - an integer version identifier of
+ *         the used implementation
+ *     </li>
+ * </ul>
  *
  * @author JustHuman228
  * @since 0.1-build.2
@@ -78,10 +75,6 @@ public final class Library {
 
     /**
      * An author/provider/{@link Package#getSpecificationVendor() vendor} of the implementation.
-     *
-     * @apiNote _
-     * @implSpec _
-     * @implNote _
      *
      * @since 0.1-build.2
      */
@@ -98,10 +91,6 @@ public final class Library {
                                /**
                                 * A link to the project repository.
                                 *
-                                * @apiNote _
-                                * @implSpec _
-                                * @implNote _
-                                *
                                 * @since 0.1-build.2
                                 */
                                URL = "https://github.com/JustHm228/JLatenter",
@@ -110,9 +99,6 @@ public final class Library {
                                 * A {@link String string} display name/title of
                                 * the implementation.
                                 *
-                                * @apiNote _
-                                * @implSpec _
-                                * @implNote _
                                 * @since 0.1-build.2
                                 */
                                NAME = requireNonNullElse(
@@ -125,10 +111,6 @@ public final class Library {
                                /**
                                 * An internal name of the implementation.
                                 *
-                                * @apiNote _
-                                * @implSpec _
-                                * @implNote _
-                                *
                                 * @since 0.1-build.2
                                 */
                                INTERNAL_NAME = "jlatenter",
@@ -136,10 +118,6 @@ public final class Library {
                                /**
                                 * A short {@link String string} description
                                 * of the implementation.
-                                *
-                                * @apiNote _
-                                * @implSpec _
-                                * @implNote _
                                 *
                                 * @since 0.1-build.2
                                 */
@@ -149,13 +127,6 @@ public final class Library {
 
                                /**
                                 * A {@link String string} version name of the used implementation.
-                                *
-                                * @apiNote Should be used only as a user-visible string.
-                                *          To determine which version of the implementation is used
-                                *          you should use
-                                *          <code>{@link #VERSION_CODE VERSION_CODE}</code>.
-                                * @implSpec _
-                                * @implNote _
                                 *
                                 * @since 0.1-build.2
                                 */
@@ -168,13 +139,6 @@ public final class Library {
 
     /**
      * An integer version identifier of the used implementation.
-     *
-     * @apiNote Should be used only to determine which version of
-     *          the implementation is used.
-     *          A user-visible equivalent is
-     *          <code>{@link #VERSION VERSION}</code>.
-     * @implSpec _
-     * @implNote _
      *
      * @since 0.1-build.2
      */
@@ -193,10 +157,6 @@ public final class Library {
      *
      * @throws Error If something went wrong in the JVM.
      * @throws UnsupportedOperationException Always.
-     *
-     * @apiNote _
-     * @implSpec _
-     * @implNote _
      *
      * @since 0.1-build.2
      */
@@ -264,10 +224,6 @@ public final class Library {
      * @throws Error If something went wrong in the JVM.
      * @throws CloneNotSupportedException Always.
      *
-     * @apiNote _
-     * @implSpec _
-     * @implNote _
-     *
      * @since 0.1-build.2
      */
     @AvailableSince(value = "0.1-build.2")
@@ -296,11 +252,6 @@ public final class Library {
      *             {@link Override overriding} methods).
      *
      * @throws Throwable If something went wrong while finalization.
-     *
-     * @apiNote _
-     * @implSpec <i>Presence of <code>{@link Object#finalize() finalize}()</code> in
-     *           <code>{@link Object Object}</code>?</i>
-     * @implNote Should be removed in a future version.
      *
      * @since 0.1-build.2
      */

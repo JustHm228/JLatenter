@@ -117,10 +117,6 @@ public final class Latent {
 	 * @throws IllegalArgumentException If the number of interfaces implemented by
 	 *                                  the passed "stub" object is more or less than 1.
 	 *
-	 * @apiNote <b>Please, forget about its existence.</b>
-	 * @implSpec _
-	 * @implNote <i>This method is as easy to implement as it's difficult to understand.</i>
-	 *
 	 * @since 0.1-build.1
 	 *
 	 * @see #as(Object, Class)
@@ -200,10 +196,6 @@ public final class Latent {
 	 * 							 </ul>
 	 * 							 to do an "uncovered" call.
 	 *
-	 * @apiNote _
-	 * @implSpec _
-	 * @implNote _
-	 *
 	 * @since 0.1-build.1
 	 */
 	@AvailableSince(value = "0.1-build.1")
@@ -267,10 +259,6 @@ public final class Latent {
 	 * 							 to initialize it and also doesn't have permission
 	 * 							 <code>{@link RuntimePermission RuntimePermission}("accessClassInPackage" + instance.getClass().getPackageName())</code>
 	 * 							 to do an "uncovered" call.
-	 *
-	 * @apiNote _
-	 * @implSpec _
-	 * @implNote _
 	 *
 	 * @since 0.1-build.1
 	 */
@@ -345,10 +333,6 @@ public final class Latent {
 	 * 							 to initialize it and also doesn't have permission
 	 * 							 <code>{@link RuntimePermission RuntimePermission}("accessClassInPackage" + instance.getClass().getPackageName())</code>
 	 * 							 to do an "uncovered" call.
-	 *
-	 * @apiNote _
-	 * @implSpec _
-	 * @implNote _
 	 *
 	 * @since 0.1-build.1
 	 */

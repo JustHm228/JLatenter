@@ -15,9 +15,8 @@
               <option value="clean" />
               <option value="source:jar" />
               <option value="compile" />
-              <option value="compiler:testCompile" />
               <option value="jar:jar" />
-              <option value="test" />
+              <option value="javadoc:jar" />
             </list>
           </option>
           <option name="pomFileName" />

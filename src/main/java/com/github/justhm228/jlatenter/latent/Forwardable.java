@@ -29,13 +29,10 @@ import java.lang.*;
 /**
  * Just a stub interface with <code>{@link #forward() forward}()</code> method (returns <code>void</code>) which can be used in {@link Latent latent typing}.
  *
- * @apiNote _
- * @implSpec _
- * @implNote _
+ * @since 0.1-build.1
  *
  * @see Shadow
  *
- * @since 0.1-build.1
  * @author JustHuman228
  */
 @AvailableSince(value = "0.1-build.1")
@@ -50,10 +47,6 @@ public interface Forwardable {
 	 *
 	 * @throws Error If something went wrong in the JVM.
 	 * @throws LatentException If something went wrong with {@link Latent latent typing} implementation.
-	 *
-	 * @apiNote _
-	 * @implSpec _
-	 * @implNote _
 	 *
 	 * @since 0.1-build.1
 	 *
