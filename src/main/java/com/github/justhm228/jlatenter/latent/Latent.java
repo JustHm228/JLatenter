@@ -55,11 +55,81 @@ public final class Latent {
 		);
 	}
 
+	/**
+	 * "Interprets" the specified object as an interface implemented by the passed "stub" object.
+	 *
+	 * <p>
+	 *     Yes, it's really a little hard to understand the first time, so if you don't understand,
+	 *     then look at this example:
+	 * </p>
+	 *
+	 * <pre>
+	 *     {@code
+	 *         Object shadowed = ... // <- Place any object which contains a valid `run()` method here
+	 *
+	 *         class TestStub implements Runnable { // <- Just a "stub" class
+	 *
+	 *             @Override
+	 *             public void run() {
+	 *
+	 *                 // Do nothing...
+	 *             }
+	 *         }
+	 *
+	 *         Runnable stub = new TestStub(); // Losing the type of a "stub" object to make it more useful
+	 *
+	 *         Runnable shadow = ((Runnable) as(shadowed, stub)); // Interpret `shadowed` as the interface implemented by `stub`
+	 *
+	 *         shadow.run(); // Do something with `shadow`...
+	 *     }
+	 * </pre>
+	 *
+	 * In this example, the <code>TestStub</code> class is created and implemented
+	 * <code>{@link Runnable Runnable}</code>. It's needed only to be able to instantiate
+	 * an object that can be cast to `Runnable`, which will be a "stub" object.
+	 * The <code>shadowed</code> object and a "stub" object are then passed to
+	 * the <code>{@link #as(Object, Object)}()</code> method, which in turn "interprets"
+	 * <code>shadowed</code> as a <code>{@link Runnable Runnable}</code>, allowing the program
+	 * to further interact with the resulting object as with a <code>{@link Runnable Runnable}</code>.
+	 * At the design stage, this method looked very simple and useful, but in practice
+	 * it turned out to be useless and very hard to understand, which led to its deprecation.
+	 *
+	 * <p>Use {@link #as(Object, Class) this implementation of <code>as}()</code> instead.</p>
+	 *
+	 * @deprecated This method has been created to solve situations in which there's
+	 *             an instance of an interface in the form of which the specified object should be
+	 *             "interpreted". The convenience of its use had to be guaranteed by use of generic types.
+	 *             But, in practice, it turned out that generic types only got in the way, which is why they
+	 *             had to be removed, which made this method even more inconvenient than if
+	 *             the user had solved this "problem" on their own. <b>Or, in short, this method is marked
+	 *             as deprecated because it's useless and hard to understand.</b>
+	 *             Of course, you can still use it safely for now, but this isn't recommended.
+	 *             <b>Please, forget about its existence.</b>
+	 *
+	 * @param instance An object to be "shadowed".
+	 * @param type A "stub" object of class which implements an interface as which
+	 *             the specified object should be "interpreted".
+	 *
+	 * @return A "shadow" of the specified object.
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws NullPointerException If any argument specified is <code>null</code>.
+	 * @throws IllegalArgumentException If the number of interfaces implemented by
+	 *                                  the passed "stub" object is more or less than 1.
+	 *
+	 * @apiNote <b>Please, forget about its existence.</b>
+	 * @implSpec _
+	 * @implNote <i>This method is as easy to implement as it's difficult to understand.</i>
+	 *
+	 * @since 0.1-build.1
+	 *
+	 * @see #as(Object, Class)
+	 */
 	@AvailableSince(value = "0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
-	@Deprecated(since = "0.1-build.2")
+	@Deprecated(since = "0.1-build.2") // <- Deprecated because it's useless and hard to understand. Please, forget about it.
 	public static @NotNull(exception = NullPointerException.class) Object as(
 			@NotNull(value = "The specified latent instance is null!") final Object instance,
 			@NotNull(value = "The specified cast type is null!", exception = NullPointerException.class) final Object type
