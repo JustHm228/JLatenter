@@ -103,30 +103,16 @@
 				<configuration>
 					<detail>true</detail>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>3.3.0</version>
-				<configuration>
-					<detail>true</detail>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.3.0</version>
-				<configuration>
-					<detail>true</detail>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.5.0</version>
-				<configuration>
-					<detail>true</detail>
-				</configuration>
+				<executions>
+					<execution>
+						<id>clean</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+						<inherited>true</inherited>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -135,6 +121,78 @@
 				<configuration>
 					<detail>true</detail>
 				</configuration>
+				<executions>
+					<execution>
+						<id>compile</id>
+						<phase>package</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<inherited>true</inherited>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.3.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<detail>true</detail>
+				</configuration>
+				<executions>
+					<execution>
+						<id>generate-binaries</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<inherited>true</inherited>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<detail>true</detail>
+				</configuration>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<inherited>true</inherited>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.5.0</version>
+				<configuration>
+					<detail>true</detail>
+					<applyJavadocSecurityFix>true</applyJavadocSecurityFix>
+					<detectLinks>true</detectLinks>
+					<detectOfflineLinks>false</detectOfflineLinks>
+				</configuration>
+				<executions>
+					<execution>
+						<id>generate-javadoc</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<inherited>true</inherited>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -154,14 +212,16 @@
 						<include>**/*.java</include>
 					</includes>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.3.0</version>
-				<configuration>
-					<detail>true</detail>
-				</configuration>
+				<executions>
+					<execution>
+						<id>test</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<inherited>true</inherited>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
