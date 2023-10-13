@@ -19,38 +19,38 @@ import static com.github.justhm228.jlatenter.latent.Latent.*;
 
 public abstract class Handleable {
 
-    protected final Set<Object> handlers = new HashSet<>();
+	protected final Set<Object> handlers = new HashSet<>();
 
-    public void addHandler(Object handler) {
+	public void addHandler(Object handler) {
 
-        if (handler != null) {
+		if (handler != null) {
 
-            handlers.add(handler); // Register a handler if it is non-`null`
-        }
-    }
+			handlers.add(handler); // Register a handler if it is non-`null`
+		}
+	}
 
-    public void removeHandler(Object handler) {
+	public void removeHandler(Object handler) {
 
-        if (handler != null) {
+		if (handler != null) {
 
-            handlers.remove(handler); // Unregister a handler if it is non-`null`
-        }
-    }
+			handlers.remove(handler); // Unregister a handler if it is non-`null`
+		}
+	}
 
-    public void update(Object... args) {
+	public void update(Object... args) {
 
-        // Fire all registered handlers:
-        for (final Object handler : handlers) {
+		// Fire all registered handlers:
+		for (final Object handler : handlers) {
 
-            try {
+			try {
 
-                as(handler, BiConsumer.class).accept(this, args); // "Interpret" it as `BiConsumer`!
+				as(handler, BiConsumer.class).accept(this, args); // "Interpret" it as `BiConsumer`!
 
-            } catch (RuntimeException ignored) {
+			} catch (RuntimeException ignored) {
 
-            }
-        }
-    }
+			}
+		}
+	}
 }
 ```
 
@@ -99,22 +99,22 @@ import static com.github.justhm228.jlatenter.latent.Latent.*;
 
 public class Main {
 
-    // Note: `LatentException` is unchecked, so you don't need to handle it always.
-    //       It's just specified to let you know that it exists.
-    public static void main(String[] args) throws LatentException {
+	// Note: `LatentException` is unchecked, so you don't need to handle it always.
+	//       It's just specified to let you know that it exists.
+	public static void main(String[] args) throws LatentException {
 
-        final Object instance = new Task(); // <-- Losing the type...
+		final Object instance = new Task(); // <-- Losing the type...
 
-        as(instance, Runnable.class).run(); // <-- "Interpreting" the object as a `Runnable`!
-    }
+		as(instance, Runnable.class).run(); // <-- "Interpreting" the object as a `Runnable`!
+	}
 }
 
 class Task { // <-- It doesn't implement `Runnable`!
 
-    public void run() {
-		
-        System.out.println("Hello World!");
-    }
+	public void run() {
+
+		System.out.println("Hello World!");
+	}
 }
 ```
 
@@ -142,7 +142,7 @@ attempts to call the proxied method, passing it a reference to the object being 
 the passed arguments. If there is an exception in class initialization (`ExceptionInInitializerError`),
 it is wrapped in `LatentInitException` _(which is also a subclass of unchecked `LatentException`)_.
 When an exception is thrown by the method (`InvocationTargetException`), it's also wrapped in
-`LatentTargetException` _(which is also a subclass of unchecked `LatentException`)_.  If the method
+`LatentTargetException` _(which is also a subclass of unchecked `LatentException`)_. If the method
 invokes successfully, the handler returns the value returned by the method. If the proxied method
 wasn't found, the handler tries to find the same method in the superclasses and call it.
 If no one was found, it throws the final `LatentNotPresentException` _(again a subclass of
@@ -159,16 +159,16 @@ are redirected to the proxied object, in case you were interested in this.
 There is nothing complicated here, because... the only class you will have to work with is `Latent`.
 The class contains 3 overloaded methods:
 
- - `as()`
- - `isShadowed()`
- - `find()`.
+- `as()`
+- `isShadowed()`
+- `find()`.
 
 `as()` takes as the first argument the object whose method you want to call,
 and the second argument in the two overloaded versions is different:
 
- 1. In the first version it's a reference to the interface as which you want to represent the object
- 2. ~~In the second version it's an object that implements a single interface, as which an object
-    can be represented _(it's a failed experiment, please forget about its existence)_.~~
+1. In the first version it's a reference to the interface as which you want to represent the object
+2. ~~In the second version it's an object that implements a single interface, as which an object
+   can be represented _(it's a failed experiment, please forget about its existence)_.~~
 
 but return value is always the same - a "shadow" of the passed object.
 The `isShadowed()` method accepts a single object and returns `true`
@@ -187,53 +187,67 @@ an exception has occurred in the initializer, or the method threw an exception.
 Also, some built-in stub interfaces have been prepared for you that you can use instead of
 creating a new class with your method (there will be more of them in the future):
 
- - `Startable` - contains a `start()` method which accepts no parameters and returns `void`
- - `Stoppable` - contains a `stop()` method which accepts no parameters and returns `void`
- - `Pausable` - contains a `pause()` method which accepts no parameters and returns `void`
- - `Formattable` - a parent for all format/print stubs
- - - `SelfPrintable` - contains a `print()` method which accepts no parameters and
-                       returns `void`
- - - `XPrintable` - contains a `print()` method which accepts `Object` as a parameter and
-                    returns `void`
- - - `SelfPrintableLN` - contains a `println()` method which accepts no parameters and
-                         returns `void`
- - - `XPrintableLN` - contains a `println()` method which
-                      accepts `Object` as a parameter and returns `void`
- - - `SelfFormattable` - contains a `format()` method which
-                         accepts `Object...` as a parameter and returns `void`
- - - `SelfFormatted` - contains a `formatted()` method which
-                       accepts `Object...` as a parameter and returns `String`
- - - `SelfPrintableF` - contains a `printf()` method which
-                        accepts `Object...` as a parameter and returns `void`
- - - `XFormattable` - contains a `format()` method which
-                      accepts `Object` and `Object...` as parameters and returns `void`
- - - `XPrintableF` - contains a `printf()` method which
-                     accepts `Object` and `Object...` as parameters and
- 	                returns `void`
- - `@Shadow` - just an annotation which marks all interface stubs *(it's optional)*
- - `Buildable` - a parent for all build stubs
- - - `XBuildable` - contains a `build()` method which accepts no parameters and
-                    returns `void`
- - - `SelfBuildable` - contains a `build()` method which
-                       accepts no parameters and returns `Object` (`this` reference)
- - - `GenericBuildable` - contains a `build()` method which
-                          accepts no parameters and returns generic `T` (`this` reference)
- - - `SelfBuildableC` - contains a `build()` method which
-                        accepts no parameters and returns `Object` (another object, not `this`)
- - - `GenericBuildableC` - contains a `build()` method which
-                           accepts no parameters and returns generic `T` (another object, not `this`)
- - `Renderable` - contains a `render()` method which accepts no parameters and
-                  returns `void`
- - `Drawable` - contains a `draw()` method which accepts no parameters and
-                returns `void`
- - `Paintable` - contains a `paint()` method which accepts no parameters and
-                 returns `void`
- - `Steppable` - contains a `step()` method which accepts no parameters and
-                 returns `void`
- - `Gettable` - contains a `get()` method which accepts no parameters and
-                returns `Object`
- - `Puttable` - contains a `put()` method which accepts no parameters and
-                returns `void`
+- `Startable` - contains a `start()` method which accepts no parameters and returns `void`
+- `Stoppable` - contains a `stop()` method which accepts no parameters and returns `void`
+- `Pausable` - contains a `pause()` method which accepts no parameters and returns `void`
+- `Formattable` - a parent for all format/print stubs
+-
+	- `SelfPrintable` - contains a `print()` method which accepts no parameters and
+	  returns `void`
+-
+	- `XPrintable` - contains a `print()` method which accepts `Object` as a parameter and
+	  returns `void`
+-
+	- `SelfPrintableLN` - contains a `println()` method which accepts no parameters and
+	  returns `void`
+-
+	- `XPrintableLN` - contains a `println()` method which
+	  accepts `Object` as a parameter and returns `void`
+-
+	- `SelfFormattable` - contains a `format()` method which
+	  accepts `Object...` as a parameter and returns `void`
+-
+	- `SelfFormatted` - contains a `formatted()` method which
+	  accepts `Object...` as a parameter and returns `String`
+-
+	- `SelfPrintableF` - contains a `printf()` method which
+	  accepts `Object...` as a parameter and returns `void`
+-
+	- `XFormattable` - contains a `format()` method which
+	  accepts `Object` and `Object...` as parameters and returns `void`
+-
+	- `XPrintableF` - contains a `printf()` method which
+	  accepts `Object` and `Object...` as parameters and
+	  returns `void`
+- `@Shadow` - just an annotation which marks all interface stubs *(it's optional)*
+- `Buildable` - a parent for all build stubs
+-
+	- `XBuildable` - contains a `build()` method which accepts no parameters and
+	  returns `void`
+-
+	- `SelfBuildable` - contains a `build()` method which
+	  accepts no parameters and returns `Object` (`this` reference)
+-
+	- `GenericBuildable` - contains a `build()` method which
+	  accepts no parameters and returns generic `T` (`this` reference)
+-
+	- `SelfBuildableC` - contains a `build()` method which
+	  accepts no parameters and returns `Object` (another object, not `this`)
+-
+	- `GenericBuildableC` - contains a `build()` method which
+	  accepts no parameters and returns generic `T` (another object, not `this`)
+- `Renderable` - contains a `render()` method which accepts no parameters and
+  returns `void`
+- `Drawable` - contains a `draw()` method which accepts no parameters and
+  returns `void`
+- `Paintable` - contains a `paint()` method which accepts no parameters and
+  returns `void`
+- `Steppable` - contains a `step()` method which accepts no parameters and
+  returns `void`
+- `Gettable` - contains a `get()` method which accepts no parameters and
+  returns `Object`
+- `Puttable` - contains a `put()` method which accepts no parameters and
+  returns `void`
 
 And that's all. It's very short, isn't it? Also, if you take into account that you can use
 static imports to call the `as()` method (like in the examples), it turns out that you can
@@ -270,18 +284,23 @@ at least try to do something similar.
 - [x] Implement the idea.
 - [ ] Add more stub interfaces.
 - [ ] Improve/optimize the current implementation.
-- - [x] Refactor the code.
-- - [ ] Migrate from Reflection API to Method Handles API.
+-
+	- [x] Refactor the code.
+-
+	- [ ] Migrate from Reflection API to Method Handles API.
 - [ ] Improve parameter checking system (for better redirecting).
-- - [ ] Take into account varargs
-        (to allow such redirections: `example() -> example(Object...) // <-- 0 elements`).
-- - [ ] Take into account wrapper types
-        (to allow such redirections:
-        `example(int) -> example(Integer) // <-- if there's no other methods`
-        or `example(Integer) -> example(int) // <-- if there's no other methods`).
-- - [ ] And etc.
+-
+	- [ ] Take into account varargs
+	  (to allow such redirections: `example() -> example(Object...) // <-- 0 elements`).
+-
+	- [ ] Take into account wrapper types
+	  (to allow such redirections:
+	  `example(int) -> example(Integer) // <-- if there's no other methods`
+	  or `example(Integer) -> example(int) // <-- if there's no other methods`).
+-
+	- [ ] And etc.
 - [ ] Possibly get rid of `IncompatibleLatentException` caused by `void`
-      (just return `null`-like values in cases of conflict - it will take very much space)
+  (just return `null`-like values in cases of conflict - it will take very much space)
 - [ ] Do something with `@Shadow`
 - [ ] Publish to Maven
 - [ ] Abandon the project?..

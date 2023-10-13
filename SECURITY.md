@@ -9,7 +9,7 @@ Yeah, that's very few... but it's more than nothing so just wait until
 I publish a new version.
 
 | Version     | Supported          |
-| ----------- | ------------------ |
+|-------------|--------------------|
 | 0.1.build.1 | :white_check_mark: |
 
 ## Reporting a Vulnerability

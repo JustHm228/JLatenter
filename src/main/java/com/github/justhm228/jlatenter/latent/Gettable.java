@@ -29,13 +29,12 @@ import org.jetbrains.annotations.*;
 import java.lang.*;
 
 /**
- * Just a stub interface with <code>{@link #get() get}()</code> method (returns <code>void</code>) which can be used in {@link Latent latent typing}.
- *
- * @since 0.1-build.1
- *
- * @see Shadow
+ * Just a stub interface with <code>{@link #get() get}()</code> method (returns <code>void</code>) which can be used in
+ * {@link Latent latent typing}.
  *
  * @author JustHuman228
+ * @see Shadow
+ * @since 0.1-build.1
  */
 @AvailableSince(value = "0.1-build.1")
 @NonExtendable() // <-- Shouldn't be implemented!
@@ -49,17 +48,17 @@ public interface Gettable {
 	 *
 	 * @throws Error If something went wrong in the JVM.
 	 * @throws LatentException If something went wrong with {@link Latent latent typing} implementation.
-	 *
-	 * @since 0.1-build.1
-	 *
 	 * @see Gettable
 	 * @see Shadow
+	 * @since 0.1-build.1
 	 */
 	@AvailableSince(value = "0.1-build.1")
 	@NonExtendable() // <-- Shouldn't be implemented!
 	@Blocking() // <-- Potentially blocking context!
 	@Contract(value = " -> _") // <-- "pure" is unknown
-	@Shadow() // <-- Just a stub method
+	@Shadow()
+	// It's just a stub method:
 	// TODO: 09.09.2023 Expand this interface with other methods (like Formattable, Buildable, Puttable):
-	Object get() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
+	Object get() throws @NotNull(exception = NullPointerException.class) Error,
+	                    @NotNull(exception = NullPointerException.class) LatentException;
 }

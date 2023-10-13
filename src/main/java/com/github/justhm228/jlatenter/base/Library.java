@@ -33,7 +33,7 @@ import static java.util.Objects.*;
  * Contains version information and other constants.
  *
  * <p>
- *     Currently it contains such constants:
+ * Currently it contains such constants:
  * </p>
  *
  * <ul>
@@ -75,198 +75,181 @@ import static java.util.Objects.*;
 @NonBlocking()
 public final class Library {
 
-    /**
-     * An author/provider/{@link Package#getSpecificationVendor() vendor} of the implementation.
-     *
-     * @since 0.1-build.2
-     */
-    @AvailableSince(value = "0.1-build.2")
-    @NotNull(exception = NullPointerException.class)
-    @SuppressWarnings(value = { "unused" }) // <-- These constants WILL BE used
-    public static final String AUTHOR = requireNonNullElse(
+	/**
+	 * An author/provider/{@link Package#getSpecificationVendor() vendor} of the implementation.
+	 *
+	 * @since 0.1-build.2
+	 */
+	@AvailableSince(value = "0.1-build.2")
+	@NotNull(exception = NullPointerException.class)
+	@SuppressWarnings(value = { "unused" }) // <-- These constants WILL BE used
+	public static final String AUTHOR = requireNonNullElse(
+			Library.class.getPackage().getSpecificationVendor(),
+			"JustHuman228"
+	                                                      ), // <-- Obtain the author name from `MANIFEST.MF`
 
-            Library.class.getPackage().getSpecificationVendor(),
-            "JustHuman228"
+	/**
+	 * A link to the project repository.
+	 *
+	 * @since 0.1-build.2
+	 */
+	URL = "https://github.com/JustHm228/JLatenter",
 
-    ), // <-- Obtain the author name from `MANIFEST.MF`
+	/**
+	 * A {@link String string} display name/title of the implementation.
+	 *
+	 * @since 0.1-build.2
+	 */
+	NAME = requireNonNullElse(
+			Library.class.getPackage().getSpecificationTitle(),
+			"JLatenter"
+	                         ), // <-- Obtain the project name from `MANIFEST.MF`
 
-                               /**
-                                * A link to the project repository.
-                                *
-                                * @since 0.1-build.2
-                                */
-                               URL = "https://github.com/JustHm228/JLatenter",
+	/**
+	 * An internal name of the implementation.
+	 *
+	 * @since 0.1-build.2
+	 */
+	INTERNAL_NAME = "jlatenter",
 
-                               /**
-                                * A {@link String string} display name/title of
-                                * the implementation.
-                                *
-                                * @since 0.1-build.2
-                                */
-                               NAME = requireNonNullElse(
+	/**
+	 * A short {@link String string} description of the implementation.
+	 *
+	 * @since 0.1-build.2
+	 */
+	DESCRIPTION =
+			"A small library which allows you to \"interpret\" any object of any type as " +
+			"an object that implements an interface you specify",
 
-                                       Library.class.getPackage().getSpecificationTitle(),
-                                       "JLatenter"
+	/**
+	 * A {@link String string} version name of the used implementation.
+	 *
+	 * @since 0.1-build.2
+	 */
+	VERSION = requireNonNullElse(
+			Library.class.getPackage().getSpecificationVersion(),
+			"0.1-build.2"
+	                            ); // <-- Obtain the project version's display name from `MANIFEST.MF`
 
-                               ), // <-- Obtain the project name from `MANIFEST.MF`
+	/**
+	 * An integer version identifier of the used implementation.
+	 *
+	 * @since 0.1-build.2
+	 */
+	@AvailableSince(value = "0.1-build.2")
+	@SuppressWarnings(value = { "unused" }) // This constant WILL BE used
+	public static final int VERSION_CODE = 1;
 
-                               /**
-                                * An internal name of the implementation.
-                                *
-                                * @since 0.1-build.2
-                                */
-                               INTERNAL_NAME = "jlatenter",
+	/**
+	 * Prevents instantiation of an instance.
+	 *
+	 * <p>Yeah, it just throws an {@link UnsupportedOperationException exception}.</p>
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws UnsupportedOperationException Always.
+	 * @since 0.1-build.2
+	 * @deprecated This constructor shouldn't be used to instantiate an {@link Library object} - its main goal is to
+	 * prevent this!
+	 */
+	@AvailableSince(value = "0.1-build.2")
+	@Internal()
+	@NonBlocking()
+	@Contract(value = " -> fail", pure = true)
+	@Deprecated(since = "0.1-build.2")
+	private Library() throws @NotNull(exception = NullPointerException.class) Error,
+	                         @NotNull(exception = NullPointerException.class) UnsupportedOperationException {
 
-                               /**
-                                * A short {@link String string} description
-                                * of the implementation.
-                                *
-                                * @since 0.1-build.2
-                                */
-                               DESCRIPTION = "A small library which allows you to \"interpret\"" +
-                                       "any object of any type as an object that implements" +
-                                       "an interface you specify",
+		super();
 
-                               /**
-                                * A {@link String string} version name of the used implementation.
-                                *
-                                * @since 0.1-build.2
-                                */
-                               VERSION = requireNonNullElse(
+		throw new UnsupportedOperationException(
+				"You can't instantiate an instance of this type (" + getClass().getTypeName() + ") with a constructor!"
+		); // Prevent instantiation
+	}
 
-                                       Library.class.getPackage().getSpecificationVersion(),
-                                       "0.1-build.2"
+	@AvailableSince(value = "0.1-build.2")
+	@NonExtendable()
+	@NonBlocking()
+	@Contract(value = " -> _", pure = true)
+	@Override()
+	public @NotNull(exception = NullPointerException.class) String toString()
+			throws @NotNull(exception = NullPointerException.class) Error {
 
-                               ); // <-- Obtain the project version's display name from `MANIFEST.MF`
+		return super.toString();
+	}
 
-    /**
-     * An integer version identifier of the used implementation.
-     *
-     * @since 0.1-build.2
-     */
-    @AvailableSince(value = "0.1-build.2")
-    @SuppressWarnings(value = { "unused" }) // This constant WILL BE used
-    public static final int VERSION_CODE = 1;
+	@AvailableSince(value = "0.1-build.2")
+	@NonExtendable()
+	@NonBlocking()
+	@Contract(value = "null -> false; !null -> _", pure = true)
+	@Override()
+	public boolean equals(
+			@Nullable(value = "Can be null anytime") final Object another
+	                     ) throws @NotNull(exception = NullPointerException.class) Error {
 
-    /**
-     * Prevents instantiation of an instance.
-     *
-     * <p>Yeah, it just throws an {@link UnsupportedOperationException exception}.</p>
-     *
-     * @deprecated This constructor shouldn't be used to instantiate
-     *             an {@link Library object} - its main goal is
-     *             to prevent this!
-     *
-     * @throws Error If something went wrong in the JVM.
-     * @throws UnsupportedOperationException Always.
-     *
-     * @since 0.1-build.2
-     */
-    @AvailableSince(value = "0.1-build.2")
-    @Internal()
-    @NonBlocking()
-    @Contract(value = " -> fail", pure = true)
-    @Deprecated(since = "0.1-build.2")
-    private Library() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) UnsupportedOperationException {
+		// `Library` can't contain any data so if the passed object is an instance of `Library` -
+		// it's already equal to the current object:
+		return another instanceof Library;
+	}
 
-        super();
+	@AvailableSince(value = "0.1-build.2")
+	@NonExtendable()
+	@NonBlocking()
+	@Contract(value = " -> _", pure = true)
+	@Override()
+	public int hashCode() throws @NotNull(exception = NullPointerException.class) Error {
 
-        throw new UnsupportedOperationException(
+		// `Library` can't contain any data, so we'll use hash of the class:
+		return hash(getClass());
+	}
 
-                "You can't instantiate an instance of this type (" +
-                        getClass().getTypeName() +
-                ") with a constructor!"
+	/**
+	 * Prevents cloning.
+	 *
+	 * <p>Yeah, it just throws an {@link CloneNotSupportedException exception}.</p>
+	 *
+	 * @return Never returns.
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws CloneNotSupportedException Always.
+	 * @since 0.1-build.2
+	 */
+	@AvailableSince(value = "0.1-build.2")
+	@Internal()
+	@NonExtendable()
+	@NonBlocking()
+	@Contract(value = " -> fail", pure = true)
+	@Deprecated(since = "0.1-build.2")
+	@Override()
+	protected Library clone() throws @NotNull(exception = NullPointerException.class) Error,
+	                                 @NotNull(exception = NullPointerException.class) CloneNotSupportedException {
 
-        ); // Prevent instantiation
-    }
+		// Always prevent cloning (even if `Library` will implement `Cloneable`) -
+		// no instances should be instantiated!
+		throw new CloneNotSupportedException(getClass().getTypeName());
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonExtendable()
-    @NonBlocking()
-    @Contract(value = " -> _", pure = true)
-    @Override()
-    public @NotNull(exception = NullPointerException.class) String toString() throws @NotNull(exception = NullPointerException.class) Error {
+	// FIXME: 16.09.2023 Remove finalize() - it's marked for removal in the JDK,
+	//  so its use may lead to compile/runtime errors in the future!
 
-        return super.toString();
-    }
+	/**
+	 * Just finalizes the {@link Library object}.
+	 *
+	 * @throws Throwable If something went wrong while finalization.
+	 * @since 0.1-build.2
+	 * @deprecated <code>{@link Object#finalize() finalize}()</code> is marked for removal
+	 * in the JDK, so its future use may lead to compile/runtime {@link Error errors} in the newer versions of Java.
+	 * It'll be removed in a future version (including all other {@link Override overriding} methods).
+	 */
+	@AvailableSince(value = "0.1-build.2")
+	@Internal()
+	@NonExtendable()
+	@NonBlocking()
+	@Contract()
+	@Deprecated(since = "0.1-build.2", forRemoval = true)
+	@Override()
+	@SuppressWarnings(value = { "removal" })
+	protected void finalize() throws @NotNull(exception = NullPointerException.class) Throwable {
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonExtendable()
-    @NonBlocking()
-    @Contract(value = "null -> false; !null -> _", pure = true)
-    @Override()
-    public boolean equals(
-            @Nullable(value = "Can be null anytime") final Object another
-    ) throws @NotNull(exception = NullPointerException.class) Error {
-
-        // `Library` can't contain any data so
-        // if the passed object is an instance of `Library` -
-        // it's already equal to the current object:
-        return another instanceof Library;
-    }
-
-    @AvailableSince(value = "0.1-build.2")
-    @NonExtendable()
-    @NonBlocking()
-    @Contract(value = " -> _", pure = true)
-    @Override()
-    public int hashCode() throws @NotNull(exception = NullPointerException.class) Error {
-
-        // `Library` can't contain any data, so we'll use hash of the class:
-        return hash(getClass());
-    }
-
-    /**
-     * Prevents cloning.
-     *
-     * <p>Yeah, it just throws an {@link CloneNotSupportedException exception}.</p>
-     *
-     * @return Never returns.
-     *
-     * @throws Error If something went wrong in the JVM.
-     * @throws CloneNotSupportedException Always.
-     *
-     * @since 0.1-build.2
-     */
-    @AvailableSince(value = "0.1-build.2")
-    @Internal()
-    @NonExtendable()
-    @NonBlocking()
-    @Contract(value = " -> fail", pure = true)
-    @Deprecated(since = "0.1-build.2")
-    @Override()
-    protected Library clone() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) CloneNotSupportedException {
-
-        // Always prevent cloning (even if `Library` will implement `Cloneable`) -
-        // no instances should be instantiated!
-        throw new CloneNotSupportedException(getClass().getTypeName());
-    }
-
-    // FIXME: 16.09.2023 Remove finalize() - it's marked for removal in the JDK, so
-    //  its use may lead to compile/runtime errors in the future!
-    /**
-     * Just finalizes the {@link Library object}.
-     *
-     * @deprecated <code>{@link Object#finalize() finalize}()</code> is marked for removal
-     *             in the JDK, so its future use may lead to
-     *             compile/runtime {@link Error errors} in the newer versions of Java.
-     *             It'll be removed in a future version (including all other
-     *             {@link Override overriding} methods).
-     *
-     * @throws Throwable If something went wrong while finalization.
-     *
-     * @since 0.1-build.2
-     */
-    @AvailableSince(value = "0.1-build.2")
-    @Internal()
-    @NonExtendable()
-    @NonBlocking()
-    @Contract()
-    @Deprecated(since = "0.1-build.2", forRemoval = true)
-    @Override()
-    @SuppressWarnings(value = { "removal" })
-    protected void finalize() throws @NotNull(exception = NullPointerException.class) Throwable {
-
-        super.finalize();
-    }
+		super.finalize();
+	}
 }
