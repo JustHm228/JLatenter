@@ -33,191 +33,193 @@ import java.lang.*;
 @NonExtendable()
 @NonBlocking()
 public final class LatentPermException extends LatentException
-        implements Serializable {
+		implements Serializable {
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonBlocking()
-    @Contract(pure = true)
-    public LatentPermException(
-            @Nullable(value = "Can be null anytime") final String message,
-            @Nullable(value = "Can be null anytime") final Throwable cause
-                              ) throws Error {
+	@AvailableSince(value = "0.1-build.2")
+	@NonBlocking()
+	@Contract(pure = true)
+	public LatentPermException(
+			@Nullable(value = "Can be null anytime") final String message,
+			@Nullable(value = "Can be null anytime") final Throwable cause
+	                          ) throws Error {
 
-        super(message, cause);
-    }
+		super(message, cause);
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonBlocking()
-    @Contract(pure = true)
-    public LatentPermException(
-            @Nullable(value = "Can be null anytime") final Throwable cause
-                              ) throws Error {
+	@AvailableSince(value = "0.1-build.2")
+	@NonBlocking()
+	@Contract(pure = true)
+	public LatentPermException(
+			@Nullable(value = "Can be null anytime") final Throwable cause
+	                          ) throws Error {
 
-        super(cause);
-    }
+		super(cause);
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonBlocking()
-    @Contract(pure = true)
-    public LatentPermException(
-            @Nullable(value = "Can be null anytime") final String message
-                              ) throws Error {
+	@AvailableSince(value = "0.1-build.2")
+	@NonBlocking()
+	@Contract(pure = true)
+	public LatentPermException(
+			@Nullable(value = "Can be null anytime") final String message
+	                          ) throws Error {
 
-        super(message);
-    }
+		super(message);
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonBlocking()
-    @Contract(pure = true)
-    public LatentPermException() throws Error {
+	@AvailableSince(value = "0.1-build.2")
+	@NonBlocking()
+	@Contract(pure = true)
+	public LatentPermException() throws Error {
 
-        super();
-    }
+		super();
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonBlocking()
-    @Contract(value = " -> _", pure = true)
-    @Override()
-    public @UnknownNullability(value = "Can be null anytime") String getLocalizedMessage() throws Error {
+	@AvailableSince(value = "0.1-build.2")
+	@NonBlocking()
+	@Contract(value = " -> _", pure = true)
+	@Override()
+	public @UnknownNullability(value = "Can be null anytime") String getLocalizedMessage() throws Error {
 
-        return super.getLocalizedMessage();
-    }
+		return super.getLocalizedMessage();
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonBlocking()
-    @Contract(value = " -> _", pure = true)
-    @Override()
-    public @UnknownNullability(value = "Can be null anytime") String getMessage() throws Error {
+	@AvailableSince(value = "0.1-build.2")
+	@NonBlocking()
+	@Contract(value = " -> _", pure = true)
+	@Override()
+	public @UnknownNullability(value = "Can be null anytime") String getMessage() throws Error {
 
-        return super.getMessage();
-    }
+		return super.getMessage();
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonBlocking()
-    @Contract(value = "_ -> this")
-    @Override()
-    public synchronized @NotNull(exception = NullPointerException.class) LatentPermException initCause(
-            @Nullable(value = "Can be null anytime") final Throwable cause
-                                                                                                      ) throws Error {
+	@AvailableSince(value = "0.1-build.2")
+	@NonBlocking()
+	@Contract(value = "_ -> this")
+	@Override()
+	public synchronized @NotNull(exception = NullPointerException.class) LatentPermException initCause(
+			@Nullable(value = "Can be null anytime") final Throwable cause
+	                                                                                                  ) throws Error {
 
-        super.initCause(cause);
-        return this;
-    }
+		super.initCause(cause);
+		return this;
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonBlocking()
-    @Contract(value = " -> _", pure = true)
-    @Override()
-    public synchronized @UnknownNullability(value = "Can be null anytime") Throwable getCause() throws Error {
+	@AvailableSince(value = "0.1-build.2")
+	@NonBlocking()
+	@Contract(value = " -> _", pure = true)
+	@Override()
+	public synchronized @UnknownNullability(value = "Can be null anytime") Throwable getCause() throws Error {
 
-        return super.getCause();
-    }
+		return super.getCause();
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonBlocking()
-    @Contract()
-    @Override()
-    public void setStackTrace(
-            @NotNull(exception = NullPointerException.class) StackTraceElement @NotNull(exception = NullPointerException.class) [] stacktrace
-                             ) throws Error, NullPointerException {
+	@AvailableSince(value = "0.1-build.2")
+	@NonBlocking()
+	@Contract()
+	@Override()
+	public void setStackTrace(
+			@NotNull(exception = NullPointerException.class) StackTraceElement @NotNull(
+					exception = NullPointerException.class
+			) [] stacktrace
+	                         ) throws Error, NullPointerException {
 
-        super.setStackTrace(stacktrace);
-    }
+		super.setStackTrace(stacktrace);
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonBlocking()
-    @Contract(value = " -> this")
-    @Override()
-    public synchronized @NotNull(exception = NullPointerException.class) LatentException fillInStackTrace()
-            throws Error {
+	@AvailableSince(value = "0.1-build.2")
+	@NonBlocking()
+	@Contract(value = " -> this")
+	@Override()
+	public synchronized @NotNull(exception = NullPointerException.class) LatentException fillInStackTrace()
+			throws Error {
 
-        return super.fillInStackTrace();
-    }
+		return super.fillInStackTrace();
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonBlocking()
-    @Contract(value = " -> _", pure = true)
-    @Override()
-    public @NotNull(exception = NullPointerException.class) StackTraceElement @NotNull(
-            exception = NullPointerException.class
-    ) [] getStackTrace() throws Error {
+	@AvailableSince(value = "0.1-build.2")
+	@NonBlocking()
+	@Contract(value = " -> _", pure = true)
+	@Override()
+	public @NotNull(exception = NullPointerException.class) StackTraceElement @NotNull(
+			exception = NullPointerException.class
+	) [] getStackTrace() throws Error {
 
-        return super.getStackTrace();
-    }
+		return super.getStackTrace();
+	}
 
-    @AvailableSince(value = "0.1-build.2")
+	@AvailableSince(value = "0.1-build.2")
 	@NonBlocking()
 	@Contract(value = "_ -> _")
-    @Override()
-    public void printStackTrace(
-            @NotNull(exception = NullPointerException.class) final PrintStream out
-                               ) throws Error, NullPointerException {
+	@Override()
+	public void printStackTrace(
+			@NotNull(exception = NullPointerException.class) final PrintStream out
+	                           ) throws Error, NullPointerException {
 
-        super.printStackTrace(out);
-    }
+		super.printStackTrace(out);
+	}
 
-    @AvailableSince(value = "0.1-build.2")
+	@AvailableSince(value = "0.1-build.2")
 	@NonBlocking()
 	@Contract(value = "_ -> _")
-    @Override()
-    public void printStackTrace(
-            @NotNull(exception = NullPointerException.class) final PrintWriter out
-                               ) throws Error, NullPointerException {
+	@Override()
+	public void printStackTrace(
+			@NotNull(exception = NullPointerException.class) final PrintWriter out
+	                           ) throws Error, NullPointerException {
 
-        super.printStackTrace(out);
-    }
+		super.printStackTrace(out);
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonBlocking()
-    @Contract(value = " -> _")
-    @Override()
-    public void printStackTrace() throws Error, NullPointerException {
+	@AvailableSince(value = "0.1-build.2")
+	@NonBlocking()
+	@Contract(value = " -> _")
+	@Override()
+	public void printStackTrace() throws Error, NullPointerException {
 
-        super.printStackTrace();
-    }
+		super.printStackTrace();
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonExtendable()
-    @NonBlocking()
-    @Contract(value = " -> _", pure = true)
-    @Override()
-    public @NotNull(exception = NullPointerException.class) String toString() throws Error {
+	@AvailableSince(value = "0.1-build.2")
+	@NonExtendable()
+	@NonBlocking()
+	@Contract(value = " -> _", pure = true)
+	@Override()
+	public @NotNull(exception = NullPointerException.class) String toString() throws Error {
 
-        return super.toString();
-    }
+		return super.toString();
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonExtendable()
-    @NonBlocking()
-    @Contract(value = "null -> false; !null -> _", pure = true)
-    @Override()
-    public boolean equals(
-            @Nullable(value = "Can be null anytime") final Object another
-                         ) throws Error {
+	@AvailableSince(value = "0.1-build.2")
+	@NonExtendable()
+	@NonBlocking()
+	@Contract(value = "null -> false; !null -> _", pure = true)
+	@Override()
+	public boolean equals(
+			@Nullable(value = "Can be null anytime") final Object another
+	                     ) throws Error {
 
-        return super.equals(another);
-    }
+		return super.equals(another);
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @NonExtendable()
-    @NonBlocking()
-    @Contract(value = " -> _", pure = true)
-    @Override()
-    public int hashCode() throws Error {
+	@AvailableSince(value = "0.1-build.2")
+	@NonExtendable()
+	@NonBlocking()
+	@Contract(value = " -> _", pure = true)
+	@Override()
+	public int hashCode() throws Error {
 
-        return super.hashCode();
-    }
+		return super.hashCode();
+	}
 
-    @AvailableSince(value = "0.1-build.2")
-    @Internal()
-    @NonExtendable()
-    @NonBlocking()
-    @Contract()
-    @Deprecated(since = "0.1-build.2", forRemoval = true)
-    @Override()
-    @SuppressWarnings(value = { "removal" })
-    protected void finalize() throws Throwable {
+	@AvailableSince(value = "0.1-build.2")
+	@Internal()
+	@NonExtendable()
+	@NonBlocking()
+	@Contract()
+	@Deprecated(since = "0.1-build.2", forRemoval = true)
+	@Override()
+	@SuppressWarnings(value = { "removal" })
+	protected void finalize() throws Throwable {
 
-        super.finalize();
-    }
+		super.finalize();
+	}
 }

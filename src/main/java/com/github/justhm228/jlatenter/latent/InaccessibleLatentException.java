@@ -124,7 +124,9 @@ public final class InaccessibleLatentException extends LatentException
 	@Contract()
 	@Override()
 	public void setStackTrace(
-			@NotNull(exception = NullPointerException.class) final StackTraceElement @NotNull(exception = NullPointerException.class) [] stacktrace
+			@NotNull(exception = NullPointerException.class) final StackTraceElement @NotNull(
+					exception = NullPointerException.class
+			) [] stacktrace
 	                         ) throws Error, NullPointerException {
 
 		super.setStackTrace(stacktrace);

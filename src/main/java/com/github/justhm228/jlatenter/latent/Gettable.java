@@ -43,6 +43,8 @@ import java.lang.*;
 @Shadow() // <-- Just a stub interface
 public interface Gettable {
 
+	// TODO: 09.09.2023 Expand this interface with other methods (like Formattable, Buildable, Puttable):
+
 	/**
 	 * A stub method which can be called with {@link Latent latent typing}.
 	 *
@@ -58,6 +60,5 @@ public interface Gettable {
 	@Contract(value = " -> _") // <-- "pure" is unknown
 	@Shadow()
 	// It's just a stub method:
-	// TODO: 09.09.2023 Expand this interface with other methods (like Formattable, Buildable, Puttable):
 	Object get() throws Error, LatentException;
 }

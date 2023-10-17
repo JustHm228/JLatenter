@@ -31,11 +31,10 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;
 
 /**
- * Just a decorative annotation which should be used to mark all
- * stub interfaces/methods used in {@link Latent latent typing}.
+ * Just a decorative annotation which should be used to mark all stub interfaces/methods used in
+ * {@link Latent latent typing}.
  *
- * @since 0.1-build.1
- *
+ * @author JustHuman228
  * @see Startable
  * @see Stoppable
  * @see Pausable
@@ -61,8 +60,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  * @see Steppable
  * @see Gettable
  * @see Puttable
- *
- * @author JustHuman228
+ * @since 0.1-build.1
  */
 @AvailableSince(value = "0.1-build.1")
 @NonExtendable()

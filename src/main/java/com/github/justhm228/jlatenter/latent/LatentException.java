@@ -37,8 +37,8 @@ import static java.lang.System.*;
 public abstract sealed class LatentException extends RuntimeException
 		implements Serializable
 		permits LatentPermException, LatentNotPresentException,
-				IncompatibleLatentException, InaccessibleLatentException,
-				LatentInitException, LatentTargetException {
+		        IncompatibleLatentException, InaccessibleLatentException,
+		        LatentInitException, LatentTargetException {
 
 	@AvailableSince(value = "0.1-build.1")
 	@NonBlocking()
@@ -123,7 +123,9 @@ public abstract sealed class LatentException extends RuntimeException
 	@Contract()
 	@Override()
 	public void setStackTrace(
-			@NotNull(exception = NullPointerException.class) final StackTraceElement @NotNull(exception = NullPointerException.class) [] stacktrace
+			@NotNull(exception = NullPointerException.class) final StackTraceElement @NotNull(
+					exception = NullPointerException.class
+			) [] stacktrace
 	                         ) throws Error, NullPointerException {
 
 		super.setStackTrace(requireNonNull(stacktrace));

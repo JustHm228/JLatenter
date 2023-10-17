@@ -29,14 +29,12 @@ import org.jetbrains.annotations.*;
 import java.lang.*;
 
 /**
- * Just a stub interface with <code>{@link #render() render}()</code> method
- * (returns <code>void</code>) which can be used in {@link Latent latent typing}.
- *
- * @since 0.1-build.1
- *
- * @see Shadow
+ * Just a stub interface with <code>{@link #render() render}()</code> method (returns <code>void</code>) which can be
+ * used in {@link Latent latent typing}.
  *
  * @author JustHuman228
+ * @see Shadow
+ * @since 0.1-build.1
  */
 @AvailableSince(value = "0.1-build.1")
 @NonExtendable() // <-- Shouldn't be implemented!
@@ -49,19 +47,16 @@ public interface Renderable {
 	 * A stub method which can be called with {@link Latent latent typing}.
 	 *
 	 * @throws Error If something went wrong in the JVM.
-	 * @throws LatentException If something went wrong with
-	 * 						   {@link Latent latent typing} implementation.
-	 *
-	 * @since 0.1-build.1
-	 *
+	 * @throws LatentException If something went wrong with {@link Latent latent typing} implementation.
 	 * @see Renderable
 	 * @see Shadow
+	 * @since 0.1-build.1
 	 */
 	@AvailableSince(value = "0.1-build.1")
 	@NonExtendable() // <-- Shouldn't be implemented!
 	@Blocking() // <-- Potentially blocking context!
 	@Contract() // <-- "pure" is unknown
 	@Shadow()
-	// <-- Just a stub method
+	// It's just a stub method:
 	void render() throws Error, LatentException;
 }
