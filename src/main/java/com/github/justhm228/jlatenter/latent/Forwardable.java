@@ -58,6 +58,5 @@ public interface Forwardable {
 	@Contract() // <-- "pure" is unknown
 	@Shadow()
 	// It's just a stub method:
-	void forward() throws @NotNull(exception = NullPointerException.class) Error,
-	                      @NotNull(exception = NullPointerException.class) LatentException;
+	void forward() throws Error, LatentException;
 }

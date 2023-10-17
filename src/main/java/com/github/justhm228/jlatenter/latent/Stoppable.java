@@ -63,5 +63,5 @@ public interface Stoppable {
 	@Contract() // <-- "pure" is unknown
 	@Shadow()
 	// <-- Just a stub method
-	void stop() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
+	void stop() throws Error, LatentException;
 }

@@ -63,5 +63,5 @@ public interface Pausable {
 	@Contract() // <-- "pure" is unknown
 	@Shadow()
 	// <-- Just a stub method
-	void pause() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
+	void pause() throws Error, LatentException;
 }

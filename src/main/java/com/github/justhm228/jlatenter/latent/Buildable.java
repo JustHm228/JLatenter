@@ -38,8 +38,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
-	static @NotNull(exception = NullPointerException.class) Class<XBuildable> buildX()
-			throws @NotNull(exception = NullPointerException.class) Error {
+	static @NotNull(exception = NullPointerException.class) Class<XBuildable> buildX() throws Error {
 
 		return XBuildable.class;
 	}
@@ -48,8 +47,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
-	static @NotNull(exception = NullPointerException.class) Class<SelfBuildable> buildSelf()
-			throws @NotNull(exception = NullPointerException.class) Error {
+	static @NotNull(exception = NullPointerException.class) Class<SelfBuildable> buildSelf() throws Error {
 
 		return SelfBuildable.class;
 	}
@@ -58,8 +56,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
-	static @NotNull(exception = NullPointerException.class) Class<GenericBuildable> buildGeneric()
-			throws @NotNull(exception = NullPointerException.class) Error {
+	static @NotNull(exception = NullPointerException.class) Class<GenericBuildable> buildGeneric() throws Error {
 
 		return GenericBuildable.class;
 	}
@@ -68,8 +65,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
-	static @NotNull(exception = NullPointerException.class) Class<SelfBuildableC> buildSelfC()
-			throws @NotNull(exception = NullPointerException.class) Error {
+	static @NotNull(exception = NullPointerException.class) Class<SelfBuildableC> buildSelfC() throws Error {
 
 		return SelfBuildableC.class;
 	}
@@ -78,8 +74,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
-	static @NotNull(exception = NullPointerException.class) Class<GenericBuildableC> buildGenericC()
-			throws @NotNull(exception = NullPointerException.class) Error {
+	static @NotNull(exception = NullPointerException.class) Class<GenericBuildableC> buildGenericC() throws Error {
 
 		return GenericBuildableC.class;
 	}
@@ -96,8 +91,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 		@Blocking()
 		@Contract()
 		@Shadow()
-		void build() throws @NotNull(exception = NullPointerException.class) Error,
-		                    @NotNull(exception = NullPointerException.class) LatentException;
+		void build() throws Error, LatentException;
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -112,8 +106,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 		@Blocking()
 		@Contract(value = " -> this")
 		@Shadow()
-		Object build() throws @NotNull(exception = NullPointerException.class) Error,
-		                      @NotNull(exception = NullPointerException.class) LatentException;
+		Object build() throws Error, LatentException;
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -128,8 +121,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 		@Blocking()
 		@Contract(value = " -> this")
 		@Shadow()
-		<T> T build() throws @NotNull(exception = NullPointerException.class) Error,
-		                     @NotNull(exception = NullPointerException.class) LatentException;
+		<T> T build() throws Error, LatentException;
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -144,8 +136,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 		@Blocking()
 		@Contract(value = " -> _", pure = true)
 		@Shadow()
-		Object build() throws @NotNull(exception = NullPointerException.class) Error,
-		                      @NotNull(exception = NullPointerException.class) LatentException;
+		Object build() throws Error, LatentException;
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -160,7 +151,6 @@ public sealed interface Buildable<T extends Buildable<T>>
 		@Blocking()
 		@Contract(value = " -> _", pure = true)
 		@Shadow()
-		<T> T build() throws @NotNull(exception = NullPointerException.class) Error,
-		                     @NotNull(exception = NullPointerException.class) LatentException;
+		<T> T build() throws Error, LatentException;
 	}
 }

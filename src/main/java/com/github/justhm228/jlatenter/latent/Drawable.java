@@ -58,6 +58,5 @@ public interface Drawable {
 	@Contract() // <-- "pure" is unknown
 	@Shadow()
 	// It's just a stub method:
-	void draw() throws @NotNull(exception = NullPointerException.class) Error,
-	                   @NotNull(exception = NullPointerException.class) LatentException;
+	void draw() throws Error, LatentException;
 }

@@ -156,8 +156,7 @@ public final class Library {
 	@NonBlocking()
 	@Contract(value = " -> fail", pure = true)
 	@Deprecated(since = "0.1-build.2")
-	private Library() throws @NotNull(exception = NullPointerException.class) Error,
-	                         @NotNull(exception = NullPointerException.class) UnsupportedOperationException {
+	private Library() throws Error, UnsupportedOperationException {
 
 		super();
 
@@ -171,8 +170,7 @@ public final class Library {
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public @NotNull(exception = NullPointerException.class) String toString()
-			throws @NotNull(exception = NullPointerException.class) Error {
+	public @NotNull(exception = NullPointerException.class) String toString() throws Error {
 
 		return super.toString();
 	}
@@ -182,9 +180,7 @@ public final class Library {
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	@Override()
-	public boolean equals(
-			@Nullable(value = "Can be null anytime") final Object another
-	                     ) throws @NotNull(exception = NullPointerException.class) Error {
+	public boolean equals(@Nullable(value = "Can be null anytime") final Object another) throws Error {
 
 		// `Library` can't contain any data so if the passed object is an instance of `Library` -
 		// it's already equal to the current object:
@@ -196,7 +192,7 @@ public final class Library {
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public int hashCode() throws @NotNull(exception = NullPointerException.class) Error {
+	public int hashCode() throws Error {
 
 		// `Library` can't contain any data, so we'll use hash of the class:
 		return hash(getClass());
@@ -220,8 +216,7 @@ public final class Library {
 	@Contract(value = " -> fail", pure = true)
 	@Deprecated(since = "0.1-build.2")
 	@Override()
-	protected Library clone() throws @NotNull(exception = NullPointerException.class) Error,
-	                                 @NotNull(exception = NullPointerException.class) CloneNotSupportedException {
+	protected Library clone() throws Error, CloneNotSupportedException {
 
 		// Always prevent cloning (even if `Library` will implement `Cloneable`) -
 		// no instances should be instantiated!
@@ -248,7 +243,7 @@ public final class Library {
 	@Deprecated(since = "0.1-build.2", forRemoval = true)
 	@Override()
 	@SuppressWarnings(value = { "removal" })
-	protected void finalize() throws @NotNull(exception = NullPointerException.class) Throwable {
+	protected void finalize() throws Throwable {
 
 		super.finalize();
 	}
