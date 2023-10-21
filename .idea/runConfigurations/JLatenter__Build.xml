@@ -12,7 +12,13 @@
           </option>
           <option name="goals">
             <list>
-              <option value="package" />
+              <option value="clean" />
+              <option value="source:jar" />
+              <option value="javadoc:jar" />
+              <option value="compile" />
+              <option value="compiler:testCompile" />
+              <option value="jar:jar" />
+              <option value="test" />
             </list>
           </option>
           <option name="pomFileName" />
