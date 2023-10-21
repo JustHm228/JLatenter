@@ -222,29 +222,4 @@ public final class Library {
 		// no instances should be instantiated!
 		throw new CloneNotSupportedException(getClass().getTypeName());
 	}
-
-	// FIXME: 16.09.2023 Remove finalize() - it's marked for removal in the JDK,
-	//  so its use may lead to compile/runtime errors in the future!
-
-	/**
-	 * Just finalizes the {@link Library object}.
-	 *
-	 * @throws Throwable If something went wrong while finalization.
-	 * @since 0.1-build.2
-	 * @deprecated <code>{@link Object#finalize() finalize}()</code> is marked for removal
-	 * in the JDK, so its future use may lead to compile/runtime {@link Error errors} in the newer versions of Java.
-	 * It'll be removed in a future version (including all other {@link Override overriding} methods).
-	 */
-	@AvailableSince(value = "0.1-build.2")
-	@Internal()
-	@NonExtendable()
-	@NonBlocking()
-	@Contract()
-	@Deprecated(since = "0.1-build.2", forRemoval = true)
-	@Override()
-	@SuppressWarnings(value = { "removal" })
-	protected void finalize() throws Throwable {
-
-		super.finalize();
-	}
 }
