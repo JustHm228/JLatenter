@@ -489,7 +489,8 @@ public final class Latent {
 		public @Nullable(value = "Can be null anytime") Object invoke(
 				@NotNull(exception = NullPointerException.class) final Object shadow, // <- A "shadow" object
 				@NotNull(exception = NullPointerException.class) final Method method, // <- The called method
-				@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") [] args // <- The passed arguments
+				@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args
+				// <- The passed arguments
 		) throws Error, LatentException {
 
 			@NotNull(exception = NullPointerException.class)
