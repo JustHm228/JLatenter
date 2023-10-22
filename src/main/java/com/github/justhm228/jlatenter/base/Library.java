@@ -28,6 +28,9 @@ import org.jetbrains.annotations.ApiStatus.*;
 import org.jetbrains.annotations.*;
 import java.lang.*;
 import static java.util.Objects.*;
+import java.util.*;
+import java.lang.StackWalker.*;
+import static java.util.Optional.*;
 
 /**
  * Contains version information and other constants.
@@ -140,6 +143,31 @@ public final class Library {
 	@SuppressWarnings(value = { "unused" }) // This constant WILL BE used
 	public static final int VERSION_CODE = 1;
 
+	@AvailableSince(value = "0.1-build.2")
+	@Internal()
+	@Experimental()
+	@NotNull(exception = NullPointerException.class)
+	public static final String CONST_EMSG_UTILCLASS =
+			"An instance of this type (%s) can't be instantiated with a constructor!";
+
+	@AvailableSince(value = "0.1-build.2")
+	@Internal()
+	@Experimental()
+	@NotNull(exception = NullPointerException.class)
+	public static final String CONST_EMSG_IMMUTABLE = "%s";
+
+	@AvailableSince(value = "0.1-build.2")
+	@Internal()
+	@Experimental()
+	@NotNull(exception = NullPointerException.class)
+	public static final String CONST_EMSG_NULL = "%s is null!";
+
+	@AvailableSince(value = "0.1-build.2")
+	@Internal()
+	@Experimental()
+	@UnknownNullability()
+	private static volatile StackWalker stack = null;
+
 	/**
 	 * Prevents instantiation of an instance.
 	 *
@@ -160,9 +188,79 @@ public final class Library {
 
 		super();
 
+		// throw new UnsupportedOperationException(
+		// 		"An instance of this type (" + getClass().getTypeName() + ") with a constructor!"
+		// ); // Prevent instantiation
+
+		preventInstantiation(); // Prevent instantiation
+	}
+
+	@AvailableSince(value = "0.1-build.2")
+	@Internal()
+	@Experimental()
+	@NonExtendable()
+	@NonBlocking()
+	@Contract(value = " -> fail", pure = true)
+	public static void preventInstantiation() throws Error, UnsupportedOperationException {
+
+		final Optional<? extends StackFrame> caller = getCaller();
+
 		throw new UnsupportedOperationException(
-				"You can't instantiate an instance of this type (" + getClass().getTypeName() + ") with a constructor!"
-		); // Prevent instantiation
+				CONST_EMSG_UTILCLASS.formatted(caller.isPresent() ? caller.get().getClassName() : "null"));
+	}
+
+	@AvailableSince(value = "0.1-build.2")
+	@Internal()
+	@Experimental()
+	@NonExtendable()
+	@NonBlocking()
+	@Contract(value = " -> fail", pure = true)
+	public static <T> T preventClone() throws Error, CloneNotSupportedException {
+
+		final Optional<? extends StackFrame> caller = getCaller();
+
+		throw new CloneNotSupportedException(
+				CONST_EMSG_IMMUTABLE.formatted(caller.isPresent() ? caller.get().getClassName() : "null"));
+	}
+
+	@AvailableSince(value = "0.1-build.2")
+	@Internal()
+	@Experimental()
+	@NonExtendable()
+	@NonBlocking()
+	@Contract(value = "_, null -> fail; _, !null -> param2")
+	public static <V> V checkForNull(final String name, final V value) throws Error, NullPointerException {
+
+		return name == null ? requireNonNull(value) : requireNonNull(value, CONST_EMSG_NULL.formatted(name));
+	}
+
+	@AvailableSince(value = "0.1-build.2")
+	@Internal()
+	@Experimental()
+	@NonExtendable()
+	@NonBlocking()
+	@Contract(value = " -> _", pure = true)
+	private static @NotNull(exception = NullPointerException.class) Optional<? extends StackFrame> getCaller()
+			throws Error {
+
+		if (stack == null) {
+
+			stack = StackWalker.getInstance();
+		}
+
+		{
+
+			final StackWalker stack = Library.stack;
+
+			try {
+
+				return stack.walk((context) -> context.skip(3L).findFirst());
+
+			} catch (final NullPointerException notFound) {
+
+				return empty();
+			}
+		}
 	}
 
 	@AvailableSince(value = "0.1-build.2")
@@ -218,8 +316,12 @@ public final class Library {
 	@Override()
 	protected Library clone() throws Error, CloneNotSupportedException {
 
+		// // Always prevent cloning (even if `Library` will implement `Cloneable`) -
+		// // no instances should be instantiated!
+		// throw new CloneNotSupportedException(getClass().getTypeName());
+
 		// Always prevent cloning (even if `Library` will implement `Cloneable`) -
 		// no instances should be instantiated!
-		throw new CloneNotSupportedException(getClass().getTypeName());
+		return preventClone();
 	}
 }

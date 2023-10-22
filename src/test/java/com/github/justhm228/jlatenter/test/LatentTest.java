@@ -25,6 +25,7 @@
 package com.github.justhm228.jlatenter.test;
 
 import com.github.justhm228.jlatenter.latent.*;
+import static com.github.justhm228.jlatenter.base.Library.*;
 import static com.github.justhm228.jlatenter.latent.Latent.*;
 import static java.lang.System.*;
 import java.util.*;
@@ -457,7 +458,9 @@ public final class LatentTest {
 	@Override()
 	protected LatentTest clone() throws Error, CloneNotSupportedException {
 
-		throw new CloneNotSupportedException(getClass().getTypeName());
+		// throw new CloneNotSupportedException(getClass().getTypeName());
+
+		return preventClone();
 	}
 
 	@AvailableSince(value = "0.1-build.1")

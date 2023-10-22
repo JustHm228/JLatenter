@@ -30,6 +30,7 @@ import org.jetbrains.annotations.ApiStatus.*;
 import org.jetbrains.annotations.*;
 import static java.util.Objects.*;
 import static java.lang.System.*;
+import static com.github.justhm228.jlatenter.base.Library.*;
 
 @AvailableSince(value = "0.1-build.1")
 @NonExtendable()
@@ -223,7 +224,9 @@ public abstract sealed class LatentException extends RuntimeException
 	@Override()
 	protected final LatentException clone() throws Error, CloneNotSupportedException {
 
-		throw new CloneNotSupportedException(getClass().getTypeName());
+		// throw new CloneNotSupportedException(getClass().getTypeName());
+
+		return preventClone();
 	}
 
 	@AvailableSince(value = "0.1-build.1")

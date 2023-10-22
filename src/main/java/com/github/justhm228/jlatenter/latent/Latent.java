@@ -24,12 +24,12 @@
 
 package com.github.justhm228.jlatenter.latent;
 
+import static com.github.justhm228.jlatenter.base.Library.*;
 import static java.lang.System.*;
 import java.lang.reflect.*;
 import static java.lang.reflect.Proxy.*;
 import java.security.*;
 import java.util.*;
-import static java.util.Objects.requireNonNull;
 import static java.util.Objects.toIdentityString;
 import static java.util.Objects.hash;
 import org.jetbrains.annotations.ApiStatus.*;
@@ -49,12 +49,14 @@ public final class Latent {
 
 		super();
 
-		throw new UnsupportedOperationException(
+		// throw new UnsupportedOperationException(
+		//
+		// 		"An instance of this type (" +
+		// 				getClass().getTypeName() +
+		// 		") can't be instantiated with a constructor!"
+		// );
 
-				"An instance of this type (" +
-						getClass().getTypeName() +
-				") can't be instantiated with a constructor!"
-		);
+		preventInstantiation();
 	}
 
 	/**
@@ -133,8 +135,11 @@ public final class Latent {
 			@NotNull(value = "The specified cast type is null!", exception = NullPointerException.class) final Object type
 	) throws Error, NullPointerException, IllegalArgumentException {
 
-		requireNonNull(instance, "The specified latent instance is null!");
-		requireNonNull(type, "The specified cast type is null!");
+		// requireNonNull(instance, "The specified latent instance is null!");
+		// requireNonNull(type, "The specified cast type is null!");
+
+		checkForNull("The specified latent instance", instance);
+		checkForNull("The specified cast type", type);
 
 		@NotNull(exception = NullPointerException.class)
 		final Class<?> @NotNull(exception = NullPointerException.class) [] latents =
@@ -209,8 +214,11 @@ public final class Latent {
 			@NotNull(value = "The specified cast type is null!", exception = NullPointerException.class) final Class<T> type
 	) throws Error, NullPointerException, IllegalArgumentException, SecurityException {
 
-		requireNonNull(instance, "The specified latent instance is null!");
-		requireNonNull(type, "The specified cast type is null!");
+		// requireNonNull(instance, "The specified latent instance is null!");
+		// requireNonNull(type, "The specified cast type is null!");
+
+		checkForNull("The specified latent instance", instance);
+		checkForNull("The specified cast type", type);
 
 		if (!type.isInterface()) {
 
@@ -311,7 +319,9 @@ public final class Latent {
 		@SuppressWarnings(value = { "unchecked" })
 		final T instance = (T) find(
 
-				requireNonNull(proxy, "The specified proxy instance is null!")
+				// requireNonNull(proxy, "The specified proxy instance is null!")
+
+				checkForNull("The specified proxy instance", proxy)
 		);
 
 		return instance;
@@ -346,7 +356,9 @@ public final class Latent {
 			@NotNull(value = "The specified proxy instance is null!", exception = NullPointerException.class) final Object proxy
 	) throws Error, NullPointerException, SecurityException {
 
-		requireNonNull(proxy, "The specified proxy instance is null!");
+		// requireNonNull(proxy, "The specified proxy instance is null!");
+
+		checkForNull("The specified proxy instance", proxy);
 
 		@NotNull(exception = NullPointerException.class)
 		final Class<?> impl = proxy.getClass();
@@ -413,7 +425,9 @@ public final class Latent {
 	@Override()
 	protected Latent clone() throws Error, CloneNotSupportedException {
 
-		throw new CloneNotSupportedException(getClass().getTypeName());
+		// throw new CloneNotSupportedException(getClass().getTypeName());
+
+		return preventClone();
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -448,12 +462,15 @@ public final class Latent {
 				@NotNull(value = "The specified shadowed object is null!", exception = NullPointerException.class) final Object shadowed
 		) {
 
-			this.shadowed = requireNonNull(
+			// this.shadowed = requireNonNull(
+			//
+			// 		shadowed,
+			// 		"The specified shadowed object is null!"
+			//
+			// ); // "Shadowed" objects can't be `null`!
 
-					shadowed,
-					"The specified shadowed object is null!"
-
-			); // "Shadowed" objects can't be `null`!
+			this.shadowed = checkForNull(
+					"The specified shadowed object", shadowed); // "Shadowed" objects can't be `null`!
 		}
 
 		// A static method to instantiate a new instance of `LatentHandler` not by using the constructor:
