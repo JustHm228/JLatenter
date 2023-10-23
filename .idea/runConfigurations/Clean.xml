@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="JLatenter: Build" type="MavenRunConfiguration" factoryName="Maven" editBeforeRun="true" focusToolWindowBeforeRun="true">
+  <configuration default="false" name="Clean" type="MavenRunConfiguration" factoryName="Maven" editBeforeRun="true" focusToolWindowBeforeRun="true">
     <output_file path="logs/latest.log" is_save="true" />
     <MavenSettings>
       <option name="myGeneralSettings" />
@@ -13,12 +13,6 @@
           <option name="goals">
             <list>
               <option value="clean" />
-              <option value="source:jar" />
-              <option value="javadoc:jar" />
-              <option value="compile" />
-              <option value="compiler:testCompile" />
-              <option value="jar:jar" />
-              <option value="test" />
             </list>
           </option>
           <option name="pomFileName" />
