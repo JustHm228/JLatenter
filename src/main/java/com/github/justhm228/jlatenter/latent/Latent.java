@@ -511,7 +511,7 @@ public final class Latent {
 		) throws Error, LatentException {
 
 			@NotNull(exception = NullPointerException.class)
-			final Class<?> shadowClass = shadow.getClass(); // <- The class of the "shadowed" object
+			final Class<?> shadowClass = shadowed.getClass(); // <- The class of the "shadowed" object
 
 			try {
 
@@ -739,55 +739,64 @@ public final class Latent {
 					};
 				}
 
-				// Call the method if it isn't a method of `Object`:
-				try {
+				throw new LatentNotPresentException(
 
-					return method.invoke(shadow, args); // Just try call it
+						"The proxied method (" +
+						method +
+						") has no compatible latents!",
+						notFound.getException()
 
-				} catch (@NotNull(exception = NullPointerException.class) final IllegalArgumentException incompatible) {
+				); // Incompatible parameters/signatures
 
-					throw new LatentNotPresentException(
-
-							"The proxied method (" +
-									method +
-							") has no compatible latents!",
-							incompatible
-
-					); // Incompatible parameters/signatures
-
-				} catch (@NotNull(exception = NullPointerException.class) final IllegalAccessException inaccessible) {
-
-					throw new InaccessibleLatentException(
-
-							"The proxied method (" +
-									method +
-							") is inaccessible!",
-							inaccessible
-
-					); // If the method is inaccessible at all
-
-				} catch (@NotNull(exception = NullPointerException.class) final ExceptionInInitializerError init) {
-
-					throw new LatentInitException(
-
-							"The proxied method (" +
-									method +
-							") thrown an exception in initializer!",
-							init.getException()
-
-					); // If the class initializer thrown an exception
-
-				} catch (@NotNull(exception = NullPointerException.class) final InvocationTargetException invocation) {
-
-					throw new LatentTargetException(
-
-							"The proxied method (" +
-									method +
-							") thrown an exception!",
-							invocation.getTargetException()
-
-					); // If the method thrown an exception
-				}
+				// // Call the method if it isn't a method of `Object`:
+				// try {
+				//
+				// 	return method.invoke(shadow, args); // Just try call it
+				//
+				// } catch (@NotNull(exception = NullPointerException.class) final IllegalArgumentException incompatible) {
+				//
+				// 	throw new LatentNotPresentException(
+				//
+				// 			"The proxied method (" +
+				// 					method +
+				// 			") has no compatible latents!",
+				// 			incompatible
+				//
+				// 	); // Incompatible parameters/signatures
+				//
+				// } catch (@NotNull(exception = NullPointerException.class) final IllegalAccessException inaccessible) {
+				//
+				// 	throw new InaccessibleLatentException(
+				//
+				// 			"The proxied method (" +
+				// 					method +
+				// 			") is inaccessible!",
+				// 			inaccessible
+				//
+				// 	); // If the method is inaccessible at all
+				//
+				// } catch (@NotNull(exception = NullPointerException.class) final ExceptionInInitializerError init) {
+				//
+				// 	throw new LatentInitException(
+				//
+				// 			"The proxied method (" +
+				// 					method +
+				// 			") thrown an exception in initializer!",
+				// 			init.getException()
+				//
+				// 	); // If the class initializer thrown an exception
+				//
+				// } catch (@NotNull(exception = NullPointerException.class) final InvocationTargetException invocation) {
+				//
+				// 	throw new LatentTargetException(
+				//
+				// 			"The proxied method (" +
+				// 					method +
+				// 			") thrown an exception!",
+				// 			invocation.getTargetException()
+				//
+				// 	); // If the method thrown an exception
+				// }
 
 			} catch (@NotNull(exception = NullPointerException.class) final SecurityException permission) {
 
