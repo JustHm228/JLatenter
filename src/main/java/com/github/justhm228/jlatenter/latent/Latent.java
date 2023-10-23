@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2023 JustHuman228
+ * The MIT License
+ *
+ * Copyright (c) 2023 Chirkunov Egor
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,12 +24,12 @@
 
 package com.github.justhm228.jlatenter.latent;
 
+import static com.github.justhm228.jlatenter.base.Library.*;
 import static java.lang.System.*;
 import java.lang.reflect.*;
 import static java.lang.reflect.Proxy.*;
 import java.security.*;
 import java.util.*;
-import static java.util.Objects.requireNonNull;
 import static java.util.Objects.toIdentityString;
 import static java.util.Objects.hash;
 import org.jetbrains.annotations.ApiStatus.*;
@@ -47,26 +49,97 @@ public final class Latent {
 
 		super();
 
-		throw new UnsupportedOperationException(
+		// throw new UnsupportedOperationException(
+		//
+		// 		"An instance of this type (" +
+		// 				getClass().getTypeName() +
+		// 		") can't be instantiated with a constructor!"
+		// );
 
-				"An instance of this type (" +
-						getClass().getTypeName() +
-				") can't be instantiated with a constructor!"
-		);
+		preventInstantiation();
 	}
 
+	/**
+	 * "Interprets" the specified object as an interface implemented by the passed "stub" object.
+	 *
+	 * <p>
+	 *     Yes, it's really a little hard to understand the first time, so if you don't understand,
+	 *     then look at this example:
+	 * </p>
+	 *
+	 * <pre>
+	 *     {@code
+	 *         Object shadowed = ... // <- Place any object which contains a valid `run()` method here
+	 *
+	 *         class TestStub implements Runnable { // <- Just a "stub" class
+	 *
+	 *             @Override
+	 *             public void run() {
+	 *
+	 *                 // Do nothing...
+	 *             }
+	 *         }
+	 *
+	 *         Runnable stub = new TestStub(); // Losing the type of a "stub" object to make it more useful
+	 *
+	 *         Runnable shadow = ((Runnable) as(shadowed, stub)); // Interpret `shadowed` as the interface implemented by `stub`
+	 *
+	 *         shadow.run(); // Do something with `shadow`...
+	 *     }
+	 * </pre>
+	 *
+	 * In this example, the <code>TestStub</code> class is created and implemented
+	 * <code>{@link Runnable Runnable}</code>. It's needed only to be able to instantiate
+	 * an object that can be cast to `Runnable`, which will be a "stub" object.
+	 * The <code>shadowed</code> object and a "stub" object are then passed to
+	 * the <code>{@link #as(Object, Object)}()</code> method, which in turn "interprets"
+	 * <code>shadowed</code> as a <code>{@link Runnable Runnable}</code>, allowing the program
+	 * to further interact with the resulting object as with a <code>{@link Runnable Runnable}</code>.
+	 * At the design stage, this method looked very simple and useful, but in practice
+	 * it turned out to be useless and very hard to understand, which led to its deprecation.
+	 *
+	 * <p>Use {@link #as(Object, Class) this implementation of <code>as}()</code> instead.</p>
+	 *
+	 * @deprecated This method has been created to solve situations in which there's
+	 *             an instance of an interface in the form of which the specified object should be
+	 *             "interpreted". The convenience of its use had to be guaranteed by use of generic types.
+	 *             But, in practice, it turned out that generic types only got in the way, which is why they
+	 *             had to be removed, which made this method even more inconvenient than if
+	 *             the user had solved this "problem" on their own. <b>Or, in short, this method is marked
+	 *             as deprecated because it's useless and hard to understand.</b>
+	 *             Of course, you can still use it safely for now, but this isn't recommended.
+	 *             <b>Please, forget about its existence.</b>
+	 *
+	 * @param instance An object to be "shadowed".
+	 * @param type A "stub" object of class which implements an interface as which
+	 *             the specified object should be "interpreted".
+	 *
+	 * @return A "shadow" of the specified object.
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws NullPointerException If any argument specified is <code>null</code>.
+	 * @throws IllegalArgumentException If the number of interfaces implemented by
+	 *                                  the passed "stub" object is more or less than 1.
+	 *
+	 * @since 0.1-build.1
+	 *
+	 * @see #as(Object, Class)
+	 */
 	@AvailableSince(value = "0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
-	@Deprecated(since = "0.1-build.2")
+	@Deprecated(since = "0.1-build.2") // <- Deprecated because it's useless and hard to understand. Please, forget about it.
 	public static @NotNull(exception = NullPointerException.class) Object as(
 			@NotNull(value = "The specified latent instance is null!") final Object instance,
 			@NotNull(value = "The specified cast type is null!", exception = NullPointerException.class) final Object type
 	) throws Error, NullPointerException, IllegalArgumentException {
 
-		requireNonNull(instance, "The specified latent instance is null!");
-		requireNonNull(type, "The specified cast type is null!");
+		// requireNonNull(instance, "The specified latent instance is null!");
+		// requireNonNull(type, "The specified cast type is null!");
+
+		checkForNull("The specified latent instance", instance);
+		checkForNull("The specified cast type", type);
 
 		@NotNull(exception = NullPointerException.class)
 		final Class<?> @NotNull(exception = NullPointerException.class) [] latents =
@@ -130,10 +203,6 @@ public final class Latent {
 	 * 							 </ul>
 	 * 							 to do an "uncovered" call.
 	 *
-	 * @apiNote _
-	 * @implSpec _
-	 * @implNote _
-	 *
 	 * @since 0.1-build.1
 	 */
 	@AvailableSince(value = "0.1-build.1")
@@ -145,8 +214,11 @@ public final class Latent {
 			@NotNull(value = "The specified cast type is null!", exception = NullPointerException.class) final Class<T> type
 	) throws Error, NullPointerException, IllegalArgumentException, SecurityException {
 
-		requireNonNull(instance, "The specified latent instance is null!");
-		requireNonNull(type, "The specified cast type is null!");
+		// requireNonNull(instance, "The specified latent instance is null!");
+		// requireNonNull(type, "The specified cast type is null!");
+
+		checkForNull("The specified latent instance", instance);
+		checkForNull("The specified cast type", type);
 
 		if (!type.isInterface()) {
 
@@ -198,10 +270,6 @@ public final class Latent {
 	 * 							 <code>{@link RuntimePermission RuntimePermission}("accessClassInPackage" + instance.getClass().getPackageName())</code>
 	 * 							 to do an "uncovered" call.
 	 *
-	 * @apiNote _
-	 * @implSpec _
-	 * @implNote _
-	 *
 	 * @since 0.1-build.1
 	 */
 	@AvailableSince(value = "0.1-build.1")
@@ -251,7 +319,9 @@ public final class Latent {
 		@SuppressWarnings(value = { "unchecked" })
 		final T instance = (T) find(
 
-				requireNonNull(proxy, "The specified proxy instance is null!")
+				// requireNonNull(proxy, "The specified proxy instance is null!")
+
+				checkForNull("The specified proxy instance", proxy)
 		);
 
 		return instance;
@@ -276,10 +346,6 @@ public final class Latent {
 	 * 							 <code>{@link RuntimePermission RuntimePermission}("accessClassInPackage" + instance.getClass().getPackageName())</code>
 	 * 							 to do an "uncovered" call.
 	 *
-	 * @apiNote _
-	 * @implSpec _
-	 * @implNote _
-	 *
 	 * @since 0.1-build.1
 	 */
 	@AvailableSince(value = "0.1-build.1")
@@ -290,7 +356,9 @@ public final class Latent {
 			@NotNull(value = "The specified proxy instance is null!", exception = NullPointerException.class) final Object proxy
 	) throws Error, NullPointerException, SecurityException {
 
-		requireNonNull(proxy, "The specified proxy instance is null!");
+		// requireNonNull(proxy, "The specified proxy instance is null!");
+
+		checkForNull("The specified proxy instance", proxy);
 
 		@NotNull(exception = NullPointerException.class)
 		final Class<?> impl = proxy.getClass();
@@ -309,7 +377,7 @@ public final class Latent {
 			if (handler instanceof
 					@NotNull(exception = NullPointerException.class) final LatentHandler latent) {
 
-				return latent.present();
+				return latent.shadowed();
 			}
 		}
 
@@ -357,7 +425,9 @@ public final class Latent {
 	@Override()
 	protected Latent clone() throws Error, CloneNotSupportedException {
 
-		throw new CloneNotSupportedException(getClass().getTypeName());
+		// throw new CloneNotSupportedException(getClass().getTypeName());
+
+		return preventClone();
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -379,70 +449,76 @@ public final class Latent {
 	@NonBlocking()
 	private record LatentHandler(
 
-			@NotNull(exception = NullPointerException.class) Object present
+			@NotNull(exception = NullPointerException.class) Object shadowed // <- A "shadowed" object
 
 	) implements InvocationHandler {
 
+		// Constructor:
 		@AvailableSince(value = "0.1-build.1")
-		@Internal()
-		@NonBlocking()
+		@Internal() // <- Internal context
+		@NonBlocking() // <- Non-blocking context
 		@Contract(pure = true)
 		private LatentHandler(
-				@NotNull(value = "The specified latent instance is null!", exception = NullPointerException.class) final Object present
+				@NotNull(value = "The specified shadowed object is null!", exception = NullPointerException.class) final Object shadowed
 		) {
 
-			this.present = requireNonNull(
+			// this.shadowed = requireNonNull(
+			//
+			// 		shadowed,
+			// 		"The specified shadowed object is null!"
+			//
+			// ); // "Shadowed" objects can't be `null`!
 
-					present,
-					"The specified latent instance is null!"
-			);
+			this.shadowed = checkForNull(
+					"The specified shadowed object", shadowed); // "Shadowed" objects can't be `null`!
 		}
 
+		// A static method to instantiate a new instance of `LatentHandler` not by using the constructor:
 		@AvailableSince(value = "0.1-build.1")
-		@Internal()
-		@NonExtendable()
-		@NonBlocking()
+		@Internal() // <- Internal context
+		@NonExtendable() // <- A non-extendable method
+		@NonBlocking() // <- Non-blocking context
 		@Contract(value = "_ -> new", pure = true)
 		public static @NotNull(exception = NullPointerException.class) LatentHandler getInstance(
-				@NotNull(value = "The specified latent instance is null!", exception = NullPointerException.class) final Object present
+				@NotNull(value = "The specified shadowed object is null!", exception = NullPointerException.class) final Object shadowed
 		) throws Error, NullPointerException {
 
-			return new LatentHandler(present);
+			return new LatentHandler(shadowed); // Instantiate a new `LatentHandler`
 		}
 
 		@AvailableSince(value = "0.1-build.1")
-		@Internal()
-		@NonExtendable()
-		@NonBlocking()
+		@Internal() // <- Internal context
+		@NonExtendable() // <- A non-extendable method
+		@NonBlocking() // <- Non-blocking context
 		@Contract(value = " -> _", pure = true)
 		@Override()
-		public @NotNull(exception = NullPointerException.class) Object present() {
+		public @NotNull(exception = NullPointerException.class) Object shadowed() {
 
-			return present;
+			return shadowed;
 		}
 
 		@AvailableSince(value = "0.1-build.1")
-		@Internal()
-		@NonExtendable()
-		@NonBlocking()
+		@Internal() // <- Internal context
+		@NonExtendable() // <- A non-extendable method
+		@NonBlocking() // <- Non-blocking context
 		@Contract(value = "_, _, _ -> _")
 		@Override()
 		public @Nullable(value = "Can be null anytime") Object invoke(
-				@NotNull(exception = NullPointerException.class) final Object proxy,
-				@NotNull(exception = NullPointerException.class) final Method method,
-				@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") [] args
-		) throws Error, LatentNotPresentException, IncompatibleLatentException,
-				InaccessibleLatentException, LatentInitException, LatentTargetException {
+				@NotNull(exception = NullPointerException.class) final Object shadow, // <- A "shadow" object
+				@NotNull(exception = NullPointerException.class) final Method method, // <- The called method
+				@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args
+				// <- The passed arguments
+		) throws Error, LatentException {
 
 			@NotNull(exception = NullPointerException.class)
-			Class<?> cast = present.getClass();
+			final Class<?> shadowClass = shadowed.getClass(); // <- The class of the "shadowed" object
 
 			try {
 
 				@SuppressWarnings(value = { "removal" })
-				final Method called = AccessController.doPrivileged(
+				final Method proxied = AccessController.doPrivileged(
 
-						(PrivilegedExceptionAction<Method>) () -> cast.getDeclaredMethod(
+						(PrivilegedExceptionAction<Method>) () -> shadowClass.getDeclaredMethod(
 
 								method.getName(),
 								method.getParameterTypes()
@@ -450,100 +526,106 @@ public final class Latent {
 
 						AccessController.getContext(),
 						new RuntimePermission("accessDeclaredMembers"),
-						new RuntimePermission("accessClassInPackage." + cast.getPackageName())
-				);
+						new RuntimePermission("accessClassInPackage." + shadowClass.getPackageName())
+
+				); // <- The proxied method
 
 				@NotNull(exception = NullPointerException.class)
-				Class<?> result = called.getReturnType(),
+				Class<?> obtained = proxied.getReturnType(), // <- The return value of the proxied method
 
-						 proxied = method.getReturnType();
+						 casted = method.getReturnType(); // <- The return value of the called method
 
-				if (result.isPrimitive() || proxied.isPrimitive()) {
+				boolean defVoid = false; // <- If the current method returns primitive `void`
 
-					if (result == void.class) {
+				// Wrap all primitive return values in their wrappers:
+				if (obtained.isPrimitive() || casted.isPrimitive()) { // If any of return values is primitive...
 
-						result = Void.class;
+					if (obtained == void.class) { // <- If it's primitive `void`...
 
-					} else if (result == boolean.class) {
+						obtained = Void.class; // Wrap it in wrapper `Void`
 
-						result = Boolean.class;
+					} else if (obtained == boolean.class) { // <- If it's primitive `boolean`...
 
-					} else if (result == byte.class) {
+						obtained = Boolean.class; // Wrap it in wrapper `Boolean`
 
-						result = Byte.class;
+					} else if (obtained == byte.class) { // <- If it's primitive `byte`...
 
-					} else if (result == short.class) {
+						obtained = Byte.class; // Wrap it in wrapper `Byte`
 
-						result = Short.class;
+					} else if (obtained == short.class) { // <- If it's primitive `short`...
 
-					} else if (result == int.class) {
+						obtained = Short.class; // Wrap it in wrapper `Short`
 
-						result = Integer.class;
+					} else if (obtained == int.class) { // <- If it's primitive `int`...
 
-					} else if (result == long.class) {
+						obtained = Integer.class; // Wrap it in wrapper `Integer`
 
-						result = Long.class;
+					} else if (obtained == long.class) { // <- If it's primitive `long`...
 
-					} else if (result == float.class) {
+						obtained = Long.class; // Wrap it in wrapper `Long`
 
-						result = Float.class;
+					} else if (obtained == float.class) { // <- If it's primitive `float`...
 
-					} else if (result == double.class) {
+						obtained = Float.class; // Wrap it in wrapper `Float`
 
-						result = Double.class;
+					} else if (obtained == double.class) { // <- If it's primitive `double`...
 
-					} else if (result == char.class) {
+						obtained = Double.class; // Wrap it in wrapper `Double`
 
-						result = Character.class;
+					} else if (obtained == char.class) { // <- If it's primitive `char`...
+
+						obtained = Character.class; // Wrap it in wrapper `Character`
 					}
 
-					if (proxied == void.class) {
+					if (casted == void.class) { // <- If it's primitive `void`...
 
-						proxied = Void.class;
+						casted = Void.class; // Wrap it in wrapper `Void`
+						defVoid = true; // Mark that the called method returns primitive `void`
 
-					} else if (proxied == boolean.class) {
+					} else if (casted == boolean.class) { // <- If it's primitive `boolean`...
 
-						proxied = Boolean.class;
+						casted = Boolean.class; // Wrap it in wrapper `Boolean`
 
-					} else if (proxied == byte.class) {
+					} else if (casted == byte.class) { // <- If it's primitive `byte`...
 
-						proxied = Byte.class;
+						casted = Byte.class; // Wrap it in wrapper `Byte`
 
-					} else if (proxied == short.class) {
+					} else if (casted == short.class) { // <- If it's primitive `short`...
 
-						proxied = Short.class;
+						casted = Short.class; // Wrap it in wrapper `Short`
 
-					} else if (proxied == int.class) {
+					} else if (casted == int.class) { // <- If it's primitive `int`...
 
-						proxied = Integer.class;
+						casted = Integer.class; // Wrap it in wrapper `Integer`
 
-					} else if (proxied == long.class) {
+					} else if (casted == long.class) { // <- If it's primitive `long`...
 
-						proxied = Long.class;
+						casted = Long.class; // Wrap it in wrapper `Long`
 
-					} else if (proxied == float.class) {
+					} else if (casted == float.class) { // <- If it's primitive `float`...
 
-						proxied = Float.class;
+						casted = Float.class; // Wrap it in wrapper `Float`
 
-					} else if (proxied == double.class) {
+					} else if (casted == double.class) { // <- If it's primitive `double`...
 
-						proxied = Double.class;
+						casted = Double.class; // Wrap it in wrapper `Double`
 
-					} else if (proxied == char.class) {
+					} else if (casted == char.class) { // <- If it's primitive `char`...
 
-						proxied = Character.class;
+						casted = Character.class; // Wrap it in wrapper `Character`
 					}
 				}
 
-				if (proxied == Void.class || proxied.isAssignableFrom(result)) {
+				if (defVoid || casted.isAssignableFrom(obtained)) { // If the return values are compatible:
 
-					if (!called.canAccess(Modifier.isStatic(called.getModifiers()) ? null : present)) {
+					// Try set the method to be accessible:
+					if (!proxied.canAccess(Modifier.isStatic(proxied.getModifiers()) ? null : shadowed)) {
 
 						@NotNull(exception = NullPointerException.class)
 						@SuppressWarnings(value = { "removal" })
 						final Boolean accessible = AccessController.doPrivileged(
 
-								(PrivilegedAction<Boolean>) called::trySetAccessible,
+								(PrivilegedAction<Boolean>) proxied::trySetAccessible,
 								AccessController.getContext(),
 								new ReflectPermission("suppressAccessChecks")
 						);
@@ -552,62 +634,68 @@ public final class Latent {
 
 							throw new InaccessibleLatentException(
 
-									"The used method (" +
-											called +
+									"The proxied method (" +
+											proxied +
 									") is inaccessible!"
-							);
+
+							); // If the method is inaccessible at all
 						}
 					}
 
+					// Call the method:
 					try {
 
-						return called.invoke(present, args);
+						return proxied.invoke(shadowed, args); // Try call it
 
 					} catch (@NotNull(exception = NullPointerException.class) final IllegalAccessException inaccessible) {
 
 						throw new InaccessibleLatentException(
 
-								"The used method (" +
-										called +
+								"The proxied method (" +
+										proxied +
 								") is inaccessible!",
 								inaccessible
-						);
+
+						); // If the method is inaccessible at all
 
 					} catch (@NotNull(exception = NullPointerException.class) final ExceptionInInitializerError init) {
 
 						throw new LatentInitException(
 
-								"The used method (" +
-										called +
+								"The proxied method (" +
+										proxied +
 								") thrown an exception in initializer!",
 								init.getException()
-						);
+
+						); // If the class initializer thrown an exception
 
 					} catch (@NotNull(exception = NullPointerException.class) final InvocationTargetException invocation) {
 
 						throw new LatentTargetException(
 
-								"The used method (" +
-										called +
+								"The proxied method (" +
+										proxied +
 								") thrown an exception!",
 								invocation.getTargetException()
-						);
+
+						); // If the method thrown an exception
 					}
 				}
 
 				throw new IncompatibleLatentException(
 
-						"The proxied method (" +
+						"The called method (" +
 								method +
-						") is incompatible with found (" +
-								called +
+						") is incompatible with the proxied one (" +
+								proxied +
 						")!"
-				);
+
+				); // Incompatible signature (return value)
 
 			} catch (@NotNull(exception = NullPointerException.class) final PrivilegedActionException notFound) {
 
 				// Try set the method to be accessible:
-				if (!method.canAccess(Modifier.isStatic(method.getModifiers()) ? null : present)) {
+				if (!method.canAccess(Modifier.isStatic(method.getModifiers()) ? null : shadow)) {
 
 					@NotNull(exception = NullPointerException.class)
 					@SuppressWarnings(value = { "removal" })
@@ -622,7 +710,7 @@ public final class Latent {
 
 						throw new InaccessibleLatentException(
 
-								"The used method (" +
+								"The proxied method (" +
 										method +
 								") is inaccessible!"
 
@@ -633,137 +721,112 @@ public final class Latent {
 				// If the current method is from `Object` class:
 				if (Objects.equals(method.getDeclaringClass(), Object.class)) {
 
-					switch (method.getName()) {
+					return switch (method.getName()) {
 
-						case "toString" -> { // Built-in `toString()` implementation:
+						case "toString" -> builtinToString(shadow, method, args); // <- Built-in `toString()`
 
-							if (args != null && args.length > 0) {
+						case "equals" -> builtinEquals(shadow, method, args); // <- Built-in `equals()`
 
-								throw new LatentNotPresentException(
+						case "hashCode" -> builtinHashCode(shadow, method, args); // <- Built-in `hashCode()`
 
-										"The proxied method (" +
-												method +
-										") has no compatible latents!"
+						default -> throw new LatentNotPresentException(
 
-								); // <-- Invalid arguments!
-							}
+								"The proxied method (" +
+										method +
+								") has no compatible latents!"
 
-							return toIdentityString(proxy); // <-- Default `Object`'s implementation
-						}
-
-						case "equals" -> { // Built-in `equals()` implementation:
-
-							if (args == null || args.length != 1) {
-
-								throw new LatentNotPresentException(
-
-										"The proxied method (" +
-												method +
-										") has no compatible latents!"
-
-								); // <-- Invalid arguments!
-							}
-
-							return proxy == args[0]; // <-- Default `Object`'s implementation
-						}
-
-						case "hashCode" -> { // Built-in `hashCode()` implementation:
-
-							if (args != null && args.length > 0) {
-
-								throw new LatentNotPresentException(
-
-										"The proxied method (" +
-												method +
-										") has no compatible latents!"
-
-								); // <-- Invalid arguments!
-							}
-
-							return identityHashCode(proxy); // <-- Default `Object`'s implementation
-						}
-					}
+						); // <- This should never happen!
+					};
 				}
 
-				// If it isn't a method of `Object`:
-				try {
+				throw new LatentNotPresentException(
 
-					return method.invoke(present, args); // Just try to call it
+						"The proxied method (" +
+						method +
+						") has no compatible latents!",
+						notFound.getException()
 
-				} catch (@NotNull(exception = NullPointerException.class) final IllegalArgumentException incompatible) {
+				); // Incompatible parameters/signatures
 
-					throw new LatentNotPresentException(
-
-							"The proxied method (" +
-									method +
-							") has no compatible latents!",
-							incompatible
-
-					); // Incompatible signatures!
-
-				} catch (@NotNull(exception = NullPointerException.class) final IllegalAccessException inaccessible) {
-
-					throw new InaccessibleLatentException(
-
-							"The used method (" +
-									method +
-							") is inaccessible!",
-							inaccessible
-
-					); // Method is inaccessible!
-
-				} catch (@NotNull(exception = NullPointerException.class) final ExceptionInInitializerError init) {
-
-					throw new LatentInitException(
-
-							"The used method (" +
-									method +
-							") thrown an exception in initializer!",
-							init.getException()
-
-					); // Exception in initializer!
-
-				} catch (@NotNull(exception = NullPointerException.class) final InvocationTargetException invocation) {
-
-					throw new LatentTargetException(
-
-							"The used method (" +
-									method +
-							") thrown an exception!",
-							invocation.getTargetException()
-
-					); // The method has thrown an exception!
-				}
+				// // Call the method if it isn't a method of `Object`:
+				// try {
+				//
+				// 	return method.invoke(shadow, args); // Just try call it
+				//
+				// } catch (@NotNull(exception = NullPointerException.class) final IllegalArgumentException incompatible) {
+				//
+				// 	throw new LatentNotPresentException(
+				//
+				// 			"The proxied method (" +
+				// 					method +
+				// 			") has no compatible latents!",
+				// 			incompatible
+				//
+				// 	); // Incompatible parameters/signatures
+				//
+				// } catch (@NotNull(exception = NullPointerException.class) final IllegalAccessException inaccessible) {
+				//
+				// 	throw new InaccessibleLatentException(
+				//
+				// 			"The proxied method (" +
+				// 					method +
+				// 			") is inaccessible!",
+				// 			inaccessible
+				//
+				// 	); // If the method is inaccessible at all
+				//
+				// } catch (@NotNull(exception = NullPointerException.class) final ExceptionInInitializerError init) {
+				//
+				// 	throw new LatentInitException(
+				//
+				// 			"The proxied method (" +
+				// 					method +
+				// 			") thrown an exception in initializer!",
+				// 			init.getException()
+				//
+				// 	); // If the class initializer thrown an exception
+				//
+				// } catch (@NotNull(exception = NullPointerException.class) final InvocationTargetException invocation) {
+				//
+				// 	throw new LatentTargetException(
+				//
+				// 			"The proxied method (" +
+				// 					method +
+				// 			") thrown an exception!",
+				// 			invocation.getTargetException()
+				//
+				// 	); // If the method thrown an exception
+				// }
 
 			} catch (@NotNull(exception = NullPointerException.class) final SecurityException permission) {
 
 				throw new LatentPermException(
 
-						"You don't have permission to call the used method (" +
+						"You don't have permission to call the proxied method (" +
 								method +
 						")!",
 						permission
 
-				); // The caller doesn't have permission to do this call!
+				); // The caller doesn't have permission to do this call
 			}
 		}
 
 		@AvailableSince(value = "0.1-build.1")
-		@NonExtendable()
-		@NonBlocking()
+		@NonExtendable() // <- A non-extendable method
+		@NonBlocking() // <- Non-blocking context
 		@Contract(value = " -> _", pure = true)
 		@Override()
 		public @NotNull(exception = NullPointerException.class) String toString() throws Error {
 
 			return getClass().getTypeName() +
 					"[present = " +
-					present +
+					shadowed + // <- Pass the "shadowed" object to the resulting string
 					"]";
 		}
 
 		@AvailableSince(value = "0.1-build.1")
-		@NonExtendable()
-		@NonBlocking()
+		@NonExtendable() // <- A non-extendable method
+		@NonBlocking() // <- Non-blocking context
 		@Contract(value = "null -> false; !null -> _", pure = true)
 		@Override()
 		public boolean equals(
@@ -771,18 +834,96 @@ public final class Latent {
 		) throws Error {
 
 			return another instanceof
-					final LatentHandler other &&
-					present == other.present;
+					final LatentHandler other && // <- Check if the another object is an instance of `Latent`
+					shadowed == other.shadowed; // <- Check if the "shadowed" objects are the same object
 		}
 
 		@AvailableSince(value = "0.1-build.1")
-		@NonExtendable()
-		@NonBlocking()
+		@NonExtendable() // <- A non-extendable method
+		@NonBlocking() // <- Non-blocking context
 		@Contract(value = " -> _", pure = true)
 		@Override()
 		public int hashCode() throws Error {
 
-			return hash(identityHashCode(present));
+			// Note: The `hash()` method of the `Objects` class is used
+			//       because even if the only argument is passed to it,
+			//       the hash code is still counted according to
+			//       the hash code formula, so the code will be valid, short and clear.
+			//       This is exactly what is required in this implementation!
+			return hash(identityHashCode(shadowed)); // Calculate the hash code
+		}
+
+		// Built-in `toString()`:
+		@AvailableSince(value = "0.1-build.2")
+		@Internal() // <- Internal context
+		@NonExtendable() // <- A non-extendable method
+		@NonBlocking() // <- Non-blocking context
+		@Contract(value = "_, _, _ -> _", pure = true)
+		private @NotNull(exception = NullPointerException.class) String builtinToString(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
+
+			// Signature check:
+			if (args != null && args.length > 0) { // If the method accepts any parameters...
+
+				throw new LatentNotPresentException(
+
+						"The proxied method (" +
+								method +
+						") has no compatible latents!"
+
+				); // Invalid arguments/signature!
+			}
+
+			// Built-in implementation of `toString()`:
+			return toIdentityString(proxy); // <- Default `toString()`
+		}
+
+		// Built-in `equals()`:
+		@AvailableSince(value = "0.1-build.2")
+		@Internal() // <- Internal context
+		@NonExtendable() // <- A non-extendable method
+		@NonBlocking() // <- Non-blocking context
+		@Contract(value = "_, _, _ -> _", pure = true)
+		private boolean builtinEquals(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
+
+			// Signature check:
+			if (args == null || args.length != 1) { // If the method accepts more or less than 1 parameter...
+
+				throw new LatentNotPresentException(
+
+						"The proxied method (" +
+								method +
+						") has no compatible latents!"
+
+				); // Invalid arguments/signature!
+			}
+
+			// Built-in implementation of `equals()`:
+			return proxy == args[0] || // <- Default `equals()`
+					shadowed == args[0] || shadowed == find(proxy); // <- Special `equals()`
+		}
+
+		// Built-in `hashCode()`:
+		@AvailableSince(value = "0.1-build.2")
+		@Internal() // <- Internal context
+		@NonExtendable() // <- A non-extendable method
+		@NonBlocking() // <- Non-blocking context
+		@Contract(value = "_, _, _ -> _", pure = true)
+		private int builtinHashCode(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
+
+			// Signature check:
+			if (args != null && args.length > 0) { // If the method accepts any parameters...
+
+				throw new LatentNotPresentException(
+
+						"The proxied method (" +
+								method +
+						") has no compatible latents!"
+
+				); // Invalid arguments/signature!
+			}
+
+			// Built-in implementation of `hashCode()`:
+			return identityHashCode(proxy); // <- Default `hashCode()`
 		}
 	}
 }

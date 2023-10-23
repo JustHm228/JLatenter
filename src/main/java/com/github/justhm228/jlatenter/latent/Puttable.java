@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2023 JustHuman228
+ * The MIT License
+ *
+ * Copyright (c) 2023 Chirkunov Egor
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,17 +29,12 @@ import org.jetbrains.annotations.*;
 import java.lang.*;
 
 /**
- * Just a stub interface with <code>{@link #put() put}()</code> method
- * (returns <code>void</code>) which can be used in {@link Latent latent typing}.
+ * Just a stub interface with <code>{@link #put() put}()</code> method (returns <code>void</code>) which can be used in
+ * {@link Latent latent typing}.
  *
- * @apiNote _
- * @implSpec _
- * @implNote _
- *
- * @see Shadow
- *
- * @since 0.1-build.1
  * @author JustHuman228
+ * @see Shadow
+ * @since 0.1-build.1
  */
 @AvailableSince(value = "0.1-build.1")
 @NonExtendable() // <-- Shouldn't be implemented!
@@ -46,27 +43,22 @@ import java.lang.*;
 @Shadow() // <-- Just a stub interface
 public interface Puttable {
 
+	// TODO: 09.09.2023 Expand this interface with other methods (like Formattable, Buildable, Gettable):
+
 	/**
 	 * A stub method which can be called with {@link Latent latent typing}.
 	 *
 	 * @throws Error If something went wrong in the JVM.
-	 * @throws LatentException If something went wrong with
-	 * 						   {@link Latent latent typing} implementation.
-	 *
-	 * @apiNote _
-	 * @implSpec _
-	 * @implNote _
-	 *
-	 * @since 0.1-build.1
-	 *
+	 * @throws LatentException If something went wrong with {@link Latent latent typing} implementation.
 	 * @see Puttable
 	 * @see Shadow
+	 * @since 0.1-build.1
 	 */
 	@AvailableSince(value = "0.1-build.1")
 	@NonExtendable() // <-- Shouldn't be implemented!
 	@Blocking() // <-- Potentially blocking context!
 	@Contract() // <-- "pure" is unknown
-	@Shadow() // <-- Just a stub method
-	// TODO: 09.09.2023 Expand this interface with other methods (like Formattable, Buildable, Gettable):
-	void put() throws @NotNull(exception = NullPointerException.class) Error, @NotNull(exception = NullPointerException.class) LatentException;
+	@Shadow()
+	// It's just a stub method:
+	void put() throws Error, LatentException;
 }

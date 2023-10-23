@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2023 JustHuman228
+ * The MIT License
+ *
+ * Copyright (c) 2023 Chirkunov Egor
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,13 +31,10 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;
 
 /**
- * Just a decorative annotation which should be used to mark all
- * stub interfaces/methods used in {@link Latent latent typing}.
+ * Just a decorative annotation which should be used to mark all stub interfaces/methods used in
+ * {@link Latent latent typing}.
  *
  * @author JustHuman228
- * @apiNote _
- * @implSpec _
- * @implNote _
  * @see Startable
  * @see Stoppable
  * @see Pausable

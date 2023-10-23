@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2023 JustHuman228
+ * The MIT License
+ *
+ * Copyright (c) 2023 Chirkunov Egor
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,12 +23,8 @@
  */
 
 /**
- * Contains basic utilities of the implementation
- * (for example, {@link com.github.justhm228.jlatenter.base.Library version information}}).
- *
- * @apiNote _
- * @implSpec _
- * @implNote _
+ * Contains basic utilities of the implementation (for example,
+ * {@link com.github.justhm228.jlatenter.base.Library version information}}).
  *
  * @since 0.1-build.1
  */
