@@ -38,7 +38,7 @@ public final class LatentPermException extends LatentException
 	// @AvailableSince(value = "0.1-build.2")
 	// @Internal()
 	// @Serial()
-	// private static final long serialVersionUID = 0L;
+	// private static final long serialVersionUID = 0L; // TODO: 24.10.2023 Uncomment this later
 
 	@AvailableSince(value = "0.1-build.2")
 	@NonBlocking()
