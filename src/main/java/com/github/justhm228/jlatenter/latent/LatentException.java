@@ -41,6 +41,11 @@ public abstract sealed class LatentException extends RuntimeException
 		        IncompatibleLatentException, InaccessibleLatentException,
 		        LatentInitException, LatentTargetException {
 
+	// @AvailableSince(value = "0.1-build.2")
+	// @Internal()
+	// @Serial()
+	// private static final long serialVersionUID = 0L; // TODO: 24.10.2023 Uncomment this later
+
 	@AvailableSince(value = "0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
