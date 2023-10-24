@@ -98,7 +98,7 @@ public final class Latent {
 	 * At the design stage, this method looked very simple and useful, but in practice
 	 * it turned out to be useless and very hard to understand, which led to its deprecation.
 	 *
-	 * <p>Use {@link #as(Object, Class) this implementation of <code>as}()</code> instead.</p>
+	 * <p>Use {@link #as(Object, Class) this implementation} of <code>as()</code> instead.</p>
 	 *
 	 * @deprecated This method has been created to solve situations in which there's
 	 *             an instance of an interface in the form of which the specified object should be
@@ -237,7 +237,7 @@ public final class Latent {
 		   (PrivilegedAction<? extends T>) () -> (T) newProxyInstance(
 
 				type.getClassLoader(),
-				new Class[] { type },
+				new Class<?>[] { type },
 				new LatentHandler(instance)
 		   ),
 
@@ -506,7 +506,7 @@ public final class Latent {
 		public @Nullable(value = "Can be null anytime") Object invoke(
 				@NotNull(exception = NullPointerException.class) final Object shadow, // <- A "shadow" object
 				@NotNull(exception = NullPointerException.class) final Method method, // <- The called method
-				@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args
+				@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") [] args
 				// <- The passed arguments
 		) throws Error, LatentException {
 

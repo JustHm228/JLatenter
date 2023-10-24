@@ -35,6 +35,11 @@ import java.lang.*;
 public final class LatentPermException extends LatentException
 		implements Serializable {
 
+	// @AvailableSince(value = "0.1-build.2")
+	// @Internal()
+	// @Serial()
+	// private static final long serialVersionUID = 0L;
+
 	@AvailableSince(value = "0.1-build.2")
 	@NonBlocking()
 	@Contract(pure = true)

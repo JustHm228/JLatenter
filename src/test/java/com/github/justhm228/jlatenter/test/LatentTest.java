@@ -38,7 +38,6 @@ import static org.junit.Assert.*;
 
 @AvailableSince(value = "0.1-build.1")
 @NonExtendable()
-@NonBlocking()
 public final class LatentTest {
 
 	@AvailableSince(value = "0.1-build.1")
@@ -49,6 +48,10 @@ public final class LatentTest {
 		super();
 	}
 
+	@AvailableSince(value = "0.1-build.1")
+	@NonExtendable()
+	@NonBlocking()
+	@Contract()
 	@Test()
 	public void testA() throws Error {
 
@@ -87,6 +90,10 @@ public final class LatentTest {
 		out.println("testA(): After run() test");
 	}
 
+	@AvailableSince(value = "0.1-build.1")
+	@NonExtendable()
+	@NonBlocking()
+	@Contract()
 	@Test()
 	public void testB() throws Error {
 
@@ -125,6 +132,10 @@ public final class LatentTest {
 		out.println("testB(): After static run() test");
 	}
 
+	@AvailableSince(value = "0.1-build.1")
+	@NonExtendable()
+	@Blocking()
+	@Contract()
 	@Test()
 	public void testC() throws Error {
 
@@ -315,7 +326,12 @@ public final class LatentTest {
 		out.println("testC(): After failure test");
 	}
 
+	@AvailableSince(value = "0.1-build.1")
+	@NonExtendable()
+	@NonBlocking()
+	@Contract()
 	@Test()
+	@SuppressWarnings(value = { "deprecation" })
 	public void testD() throws Error {
 
 		out.println("testD(): Before \"isShadowed()-like\" test");
