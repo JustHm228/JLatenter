@@ -470,7 +470,6 @@ public final class LatentTest {
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> fail", pure = true)
-	@Deprecated(since = "0.1-build.1")
 	@Override()
 	protected LatentTest clone() throws Error, CloneNotSupportedException {
 
