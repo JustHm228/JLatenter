@@ -36,13 +36,16 @@ import java.lang.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-@AvailableSince(value = "0.1-build.1")
+@AvailableSince("0.1-build.1")
 @NonExtendable()
 public final class LatentTest {
 
+	@AvailableSince("0.1-build.1")
+	@Internal()
+	@NotNull(exception = NullPointerException.class)
 	private static final String TEST_NAME = LatentTest.class.getSimpleName();
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
 	public LatentTest() throws Error {
@@ -50,20 +53,20 @@ public final class LatentTest {
 		super();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract()
 	@Test()
 	public void testA() throws Error {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@Internal()
 		@NonExtendable()
 		@NonBlocking()
 		final class RunTest {
 
-			@AvailableSince(value = "0.1-build.1")
+			@AvailableSince("0.1-build.1")
 			@Internal()
 			@NonBlocking()
 			@Contract(pure = true)
@@ -72,11 +75,12 @@ public final class LatentTest {
 				super();
 			}
 
-			@AvailableSince(value = "0.1-build.1")
+			@AvailableSince("0.1-build.1")
 			@Internal()
 			@NonExtendable()
 			@NonBlocking()
-			@Contract()
+			@Contract(" -> _")
+			@SuppressWarnings("unused")
 			public int run() throws Error {
 
 				out.println(TEST_NAME + ".$.run(): Hello World!");
@@ -89,20 +93,20 @@ public final class LatentTest {
 		out.println(TEST_NAME + ".testA(): After non-static run()");
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract()
 	@Test()
 	public void testB() throws Error {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@Internal()
 		@NonExtendable()
 		@NonBlocking()
 		final class StaticTest {
 
-			@AvailableSince(value = "0.1-build.1")
+			@AvailableSince("0.1-build.1")
 			@Internal()
 			@NonBlocking()
 			@Contract(pure = true)
@@ -111,11 +115,12 @@ public final class LatentTest {
 				super();
 			}
 
-			@AvailableSince(value = "0.1-build.1")
+			@AvailableSince("0.1-build.1")
 			@Internal()
 			@NonExtendable()
 			@NonBlocking()
-			@Contract()
+			@Contract(" -> _")
+			@SuppressWarnings("unused")
 			public static int run() throws Error {
 
 				out.println(TEST_NAME + ".$.static run(): Hello World!");
@@ -128,7 +133,7 @@ public final class LatentTest {
 		out.println(TEST_NAME + ".testB(): After static run()");
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@Contract()
@@ -137,13 +142,13 @@ public final class LatentTest {
 
 		out.println(TEST_NAME + ".testC(): Before failure test");
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@Internal()
 		@NonExtendable()
 		@NonBlocking()
 		final class FailureTest {
 
-			@AvailableSince(value = "0.1-build.1")
+			@AvailableSince("0.1-build.1")
 			@Internal()
 			@NonBlocking()
 			@Contract(pure = true)
@@ -152,23 +157,42 @@ public final class LatentTest {
 				super();
 			}
 
+			@AvailableSince("0.1-build.1")
+			@Internal()
+			@NonExtendable()
+			@NonBlocking()
+			@Contract(" -> _")
+			@SuppressWarnings("unused")
 			public int call() throws Error {
 
 				out.println(TEST_NAME + ".$.call(): Hello World!");
 				return 0;
 			}
 
+			@AvailableSince("0.1-build.1")
+			@Internal()
+			@NonExtendable()
+			@NonBlocking()
+			@Contract(value = "_ -> fail", pure = true)
+			@SuppressWarnings("unused")
 			public void append(final CharSequence sequence) throws Error {
 
 				fail("How did you get here ._.");
 			}
 
+			@AvailableSince("0.1-build.1")
+			@Internal()
+			@NonExtendable()
+			@NonBlocking()
+			@Contract(value = " -> fail", pure = true)
+			@SuppressWarnings("unused")
 			public Iterator<?> iterator() throws Error, UnsupportedOperationException {
 
 				throw new UnsupportedOperationException("iterator() is unsupported!");
 			}
 		}
 
+		@NotNull(exception = NullPointerException.class)
 		final FailureTest test = new FailureTest();
 
 		boolean thrown = false;
@@ -323,23 +347,23 @@ public final class LatentTest {
 		out.println(TEST_NAME + ".testC(): After failure test");
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract()
 	@Test()
-	@SuppressWarnings(value = { "deprecation" })
+	@SuppressWarnings("deprecation")
 	public void testD() throws Error {
 
 		out.println(TEST_NAME + ".testD(): Before \"isShadowed()-like\" test");
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@Internal()
 		@NonExtendable()
 		@NonBlocking()
 		final class StaticTest {
 
-			@AvailableSince(value = "0.1-build.1")
+			@AvailableSince("0.1-build.1")
 			@Internal()
 			@NonBlocking()
 			@Contract(pure = true)
@@ -348,11 +372,12 @@ public final class LatentTest {
 				super();
 			}
 
-			@AvailableSince(value = "0.1-build.1")
+			@AvailableSince("0.1-build.1")
 			@Internal()
 			@NonExtendable()
 			@NonBlocking()
-			@Contract()
+			@Contract(" -> _")
+			@SuppressWarnings("unused")
 			public static int run() throws Error {
 
 				out.println(TEST_NAME + ".$.run(): Hello World!");
@@ -432,7 +457,7 @@ public final class LatentTest {
 		out.println(TEST_NAME + ".testD(): After \"isShadowed()-like\" test");
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -442,17 +467,17 @@ public final class LatentTest {
 		return super.toString();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	@Override()
-	public boolean equals(@Nullable(value = "Can be null anytime") final Object another) throws Error {
+	public boolean equals(@Nullable("Can be null anytime") final Object another) throws Error {
 
 		return another instanceof LatentTest;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -462,8 +487,7 @@ public final class LatentTest {
 		return super.hashCode();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
-	@Internal()
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> fail", pure = true)
@@ -475,7 +499,7 @@ public final class LatentTest {
 		return preventClone();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@Internal()
 	@NonExtendable()
 	@NonBlocking()
