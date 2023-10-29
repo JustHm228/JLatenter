@@ -342,7 +342,7 @@ public final class LatentTest {
 
 			assertNotNull("How did you get here ._.", result);
 			assertEquals("How did you get here ._.", 0L, ((Integer) result).longValue());
-			out.println(TEST_NAME + ".testC(): \"Failure\" #11 has been checked: An exception hasn't been occurred!");
+			out.println(TEST_NAME + ".testC(): \"Failure\" #11 has been checked: No exception has occurred!");
 		}
 
 		out.println(TEST_NAME + ".testC(): After failure test");
@@ -355,8 +355,6 @@ public final class LatentTest {
 	@Test()
 	@SuppressWarnings("deprecation")
 	public void testD() throws Error {
-
-		out.println(TEST_NAME + ".testD(): Before \"isShadowed()-like\" test");
 
 		@AvailableSince("0.1-build.1")
 		@Internal()
@@ -455,7 +453,6 @@ public final class LatentTest {
 
 		assertNotNull("\"isShadowed()-like\" test failed!", find(shadow));
 		out.println(TEST_NAME + ".testD(): After \"isShadowed()-like\"");
-		out.println(TEST_NAME + ".testD(): After \"isShadowed()-like\" test");
 	}
 
 	@AvailableSince("0.1-build.1")
