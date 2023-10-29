@@ -299,7 +299,6 @@ public final class LatentTest {
 
 		out.println(TEST_NAME + ".testC(): Failure #10 has been checked!");
 		assertTrue("Failure #10 hasn't been occurred!", thrown);
-		thrown = false;
 		out.println(TEST_NAME + ".testC(): Checking \"failure\" #11...");
 
 		{
