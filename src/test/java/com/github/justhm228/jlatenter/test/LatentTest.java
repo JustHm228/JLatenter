@@ -504,7 +504,7 @@ public final class LatentTest {
 	@Contract()
 	@Deprecated(since = "0.1-build.1", forRemoval = true)
 	@Override()
-	@SuppressWarnings(value = { "removal" })
+	@SuppressWarnings("removal")
 	protected void finalize() throws Throwable {
 
 		super.finalize();
