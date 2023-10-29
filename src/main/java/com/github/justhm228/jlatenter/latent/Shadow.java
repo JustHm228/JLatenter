@@ -62,11 +62,11 @@ import static java.lang.annotation.RetentionPolicy.*;
  * @see Puttable
  * @since 0.1-build.1
  */
-@AvailableSince(value = "0.1-build.1")
+@AvailableSince("0.1-build.1")
 @NonExtendable()
 @NonBlocking()
-@Target(value = { TYPE, METHOD })
-@Retention(value = RUNTIME)
+@Target({ TYPE, METHOD })
+@Retention(RUNTIME)
 @Documented()
 public @interface Shadow {
 

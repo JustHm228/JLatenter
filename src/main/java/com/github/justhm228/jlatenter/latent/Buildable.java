@@ -28,14 +28,14 @@ import org.jetbrains.annotations.ApiStatus.*;
 import org.jetbrains.annotations.*;
 import java.lang.*;
 
-@AvailableSince(value = "0.1-build.1")
+@AvailableSince("0.1-build.1")
 @NonExtendable()
 @SuppressWarnings({ "suppress", "warningToken" })
 public sealed interface Buildable<T extends Buildable<T>>
 		permits Buildable.XBuildable, Buildable.SelfBuildable, Buildable.GenericBuildable, Buildable.SelfBuildableC,
 		        Buildable.GenericBuildableC {
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -45,7 +45,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 		return XBuildable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -55,7 +55,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 		return SelfBuildable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -65,7 +65,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 		return GenericBuildable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -75,7 +75,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 		return SelfBuildableC.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -85,14 +85,14 @@ public sealed interface Buildable<T extends Buildable<T>>
 		return GenericBuildableC.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface XBuildable extends Buildable<XBuildable> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
@@ -101,46 +101,46 @@ public sealed interface Buildable<T extends Buildable<T>>
 		void build() throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface SelfBuildable extends Buildable<SelfBuildable> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
-		@Contract(value = " -> this")
+		@Contract(" -> this")
 		@Shadow()
 		@SuppressWarnings("unused")
 		Object build() throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface GenericBuildable extends Buildable<GenericBuildable> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
-		@Contract(value = " -> this")
+		@Contract(" -> this")
 		@Shadow()
 		@SuppressWarnings("unused")
 		<T> T build() throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface SelfBuildableC extends Buildable<SelfBuildableC> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract(value = " -> _", pure = true)
@@ -156,7 +156,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@Shadow()
 	non-sealed interface GenericBuildableC extends Buildable<GenericBuildableC> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract(value = " -> _", pure = true)

@@ -36,13 +36,13 @@ import org.jetbrains.annotations.ApiStatus.*;
 import org.jetbrains.annotations.*;
 import java.lang.*;
 
-@AvailableSince(value = "0.1-build.1")
+@AvailableSince("0.1-build.1")
 @NonExtendable()
 @NonBlocking()
 @SuppressWarnings({ "suppress", "warningToken" })
 public final class Latent {
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@Internal()
 	@NonBlocking()
 	@Contract(value = " -> fail", pure = true)
@@ -127,7 +127,7 @@ public final class Latent {
 	 *
 	 * @see #as(Object, Class)
 	 */
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
@@ -208,7 +208,7 @@ public final class Latent {
 	 *
 	 * @since 0.1-build.1
 	 */
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
@@ -235,7 +235,7 @@ public final class Latent {
 		}
 
 		@NotNull(exception = NullPointerException.class)
-		@SuppressWarnings(value = { "removal", "unchecked" })
+		@SuppressWarnings({ "removal", "unchecked" })
 		final T proxy = AccessController.doPrivileged(
 
 		   (PrivilegedAction<? extends T>) () -> (T) newProxyInstance(
@@ -276,12 +276,12 @@ public final class Latent {
 	 *
 	 * @since 0.1-build.1
 	 */
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	public static boolean isShadowed(
-			@Nullable(value = "Can be null anytime") final Object instance
+			@Nullable("Can be null anytime") final Object instance
 	) throws Error, SecurityException {
 
 		if (instance == null) {
@@ -295,7 +295,7 @@ public final class Latent {
 		if (isProxyClass(proxy)) {
 
 			@NotNull(exception = NullPointerException.class)
-			@SuppressWarnings(value = { "removal" })
+			@SuppressWarnings("removal")
 			final InvocationHandler handler = AccessController.doPrivileged(
 
 					(PrivilegedAction<? extends InvocationHandler>) () -> getInvocationHandler(instance),
@@ -309,19 +309,21 @@ public final class Latent {
 		return false;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
 	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
-	public static <T> @UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance") T find(
+	public static <T> @UnknownNullability(
+			"Will be null if the specified proxy instance isn't a shadowed latent instance"
+	) T find(
 			@NotNull(value = "The specified proxy instance is null!", exception = NullPointerException.class) final Object proxy,
 			@Nullable(value = "Can be null anytime") @SuppressWarnings(value = { "unused" }) final Class<T> cast
 	) throws Error, NullPointerException {
 
-		@UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance")
-		@SuppressWarnings(value = { "unchecked" })
+		@UnknownNullability("Will be null if the specified proxy instance isn't a shadowed latent instance")
+		@SuppressWarnings("unchecked")
 		final T instance = (T) find(
 
 				// requireNonNull(proxy, "The specified proxy instance is null!")
@@ -353,11 +355,13 @@ public final class Latent {
 	 *
 	 * @since 0.1-build.1
 	 */
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
-	public static @UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance") Object find(
+	public static @UnknownNullability(
+			"Will be null if the specified proxy instance isn't a shadowed latent instance"
+	) Object find(
 			@NotNull(value = "The specified proxy instance is null!", exception = NullPointerException.class) final Object proxy
 	) throws Error, NullPointerException, SecurityException {
 
@@ -371,7 +375,7 @@ public final class Latent {
 		if (isProxyClass(impl)) {
 
 			@NotNull(exception = NullPointerException.class)
-			@SuppressWarnings(value = { "removal" })
+			@SuppressWarnings("removal")
 			final InvocationHandler handler = AccessController.doPrivileged(
 
 					(PrivilegedAction<? extends InvocationHandler>) () -> getInvocationHandler(proxy),
@@ -389,7 +393,7 @@ public final class Latent {
 		return null;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -399,19 +403,19 @@ public final class Latent {
 		return getClass().getTypeName();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	@Override()
 	public boolean equals(
-			@Nullable(value = "Can be null anytime") final Object another
+			@Nullable("Can be null anytime") final Object another
 	) throws Error {
 
 		return another instanceof Latent;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -421,7 +425,7 @@ public final class Latent {
 		return hash(getClass());
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@Internal()
 	@NonExtendable()
 	@NonBlocking()
@@ -436,20 +440,20 @@ public final class Latent {
 		return preventClone();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@Internal()
 	@NonExtendable()
 	@NonBlocking()
 	@Contract()
 	@Deprecated(since = "0.1-build.1", forRemoval = true)
 	@Override()
-	@SuppressWarnings(value = { "removal" })
+	@SuppressWarnings("removal")
 	protected void finalize() throws Throwable {
 
 		super.finalize();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@Internal()
 	@NonExtendable()
 	@NonBlocking()
@@ -460,7 +464,7 @@ public final class Latent {
 	) implements InvocationHandler {
 
 		// Constructor:
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@Internal() // <- Internal context
 		@NonBlocking() // <- Non-blocking context
 		@Contract(pure = true)
@@ -493,7 +497,7 @@ public final class Latent {
 			return new LatentHandler(shadowed); // Instantiate a new `LatentHandler`
 		}
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@Internal() // <- Internal context
 		@NonExtendable() // <- A non-extendable method
 		@NonBlocking() // <- Non-blocking context
@@ -504,16 +508,16 @@ public final class Latent {
 			return shadowed;
 		}
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@Internal() // <- Internal context
 		@NonExtendable() // <- A non-extendable method
 		@NonBlocking() // <- Non-blocking context
-		@Contract(value = "_, _, _ -> _")
+		@Contract("_, _, _ -> _")
 		@Override()
-		public @Nullable(value = "Can be null anytime") Object invoke(
+		public @Nullable("Can be null anytime") Object invoke(
 				@NotNull(exception = NullPointerException.class) final Object shadow, // <- A "shadow" object
 				@NotNull(exception = NullPointerException.class) final Method method, // <- The called method
-				@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") [] args
+				@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") [] args
 				// <- The passed arguments
 		) throws Error, LatentException {
 
@@ -523,7 +527,7 @@ public final class Latent {
 			try {
 
 				@NotNull(exception = NullPointerException.class)
-				@SuppressWarnings(value = { "removal" })
+				@SuppressWarnings("removal")
 				final Method proxied = AccessController.doPrivileged(
 
 						(PrivilegedExceptionAction<Method>) () -> shadowClass.getDeclaredMethod(
@@ -630,7 +634,7 @@ public final class Latent {
 					if (!proxied.canAccess(Modifier.isStatic(proxied.getModifiers()) ? null : shadowed)) {
 
 						@NotNull(exception = NullPointerException.class)
-						@SuppressWarnings(value = { "removal" })
+						@SuppressWarnings("removal")
 						final Boolean accessible = AccessController.doPrivileged(
 
 								(PrivilegedAction<Boolean>) proxied::trySetAccessible,
@@ -706,7 +710,7 @@ public final class Latent {
 				if (!method.canAccess(Modifier.isStatic(method.getModifiers()) ? null : shadow)) {
 
 					@NotNull(exception = NullPointerException.class)
-					@SuppressWarnings(value = { "removal" })
+					@SuppressWarnings("removal")
 					final Boolean accessible = AccessController.doPrivileged(
 
 							(PrivilegedAction<Boolean>) method::trySetAccessible,
@@ -819,7 +823,7 @@ public final class Latent {
 			}
 		}
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable() // <- A non-extendable method
 		@NonBlocking() // <- Non-blocking context
 		@Contract(value = " -> _", pure = true)
@@ -832,13 +836,13 @@ public final class Latent {
 					"]";
 		}
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable() // <- A non-extendable method
 		@NonBlocking() // <- Non-blocking context
 		@Contract(value = "null -> false; !null -> _", pure = true)
 		@Override()
 		public boolean equals(
-				@Nullable(value = "Can be null anytime") final Object another
+				@Nullable("Can be null anytime") final Object another
 		) throws Error {
 
 			return another instanceof
@@ -846,7 +850,7 @@ public final class Latent {
 					shadowed == other.shadowed; // <- Check if the "shadowed" objects are the same object
 		}
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable() // <- A non-extendable method
 		@NonBlocking() // <- Non-blocking context
 		@Contract(value = " -> _", pure = true)
@@ -862,12 +866,16 @@ public final class Latent {
 		}
 
 		// Built-in `toString()`:
-		@AvailableSince(value = "0.1-build.2")
+		@AvailableSince("0.1-build.2")
 		@Internal() // <- Internal context
 		@NonExtendable() // <- A non-extendable method
 		@NonBlocking() // <- Non-blocking context
 		@Contract(value = "_, _, _ -> _", pure = true)
-		private @NotNull(exception = NullPointerException.class) String builtinToString(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
+		private @NotNull(exception = NullPointerException.class) String builtinToString(
+				@NotNull(exception = NullPointerException.class) final Object proxy,
+				@NotNull(exception = NullPointerException.class) final Method method,
+				@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... args
+		                                                                               ) throws Error, LatentException {
 
 			// Signature check:
 			if (args != null && args.length > 0) { // If the method accepts any parameters...
@@ -886,12 +894,18 @@ public final class Latent {
 		}
 
 		// Built-in `equals()`:
-		@AvailableSince(value = "0.1-build.2")
+		@AvailableSince("0.1-build.2")
 		@Internal() // <- Internal context
 		@NonExtendable() // <- A non-extendable method
 		@NonBlocking() // <- Non-blocking context
 		@Contract(value = "_, _, _ -> _", pure = true)
-		private boolean builtinEquals(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
+		private boolean builtinEquals(
+				@NotNull(exception = NullPointerException.class) final Object proxy,
+				@NotNull(exception = NullPointerException.class) final Method method,
+				@Nullable("Can be null anytime") final Object @Nullable(
+						"Can be null anytime"
+				) ... args
+		                             ) throws Error, LatentException {
 
 			// Signature check:
 			if (args == null || args.length != 1) { // If the method accepts more or less than 1 parameter...
@@ -916,7 +930,13 @@ public final class Latent {
 		@NonExtendable() // <- A non-extendable method
 		@NonBlocking() // <- Non-blocking context
 		@Contract(value = "_, _, _ -> _", pure = true)
-		private int builtinHashCode(@NotNull(exception = NullPointerException.class) final Object proxy, @NotNull(exception = NullPointerException.class) final Method method, @Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... args) throws Error, LatentException {
+		private int builtinHashCode(
+				@NotNull(exception = NullPointerException.class) final Object proxy,
+				@NotNull(exception = NullPointerException.class) final Method method,
+				@Nullable("Can be null anytime") final Object @Nullable(
+						"Can be null anytime"
+				) ... args
+		                           ) throws Error, LatentException {
 
 			// Signature check:
 			if (args != null && args.length > 0) { // If the method accepts any parameters...

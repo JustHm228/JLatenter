@@ -28,7 +28,7 @@ import org.jetbrains.annotations.ApiStatus.*;
 import org.jetbrains.annotations.*;
 import java.lang.*;
 
-@AvailableSince(value = "0.1-build.1")
+@AvailableSince("0.1-build.1")
 @NonExtendable()
 @SuppressWarnings({ "suppress", "warningToken" })
 public sealed interface Formattable<T extends Formattable<T>>
@@ -36,7 +36,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		        Formattable.XPrintableLN, Formattable.SelfFormattable, Formattable.SelfFormatted,
 		        Formattable.SelfPrintableF, Formattable.XFormattable, Formattable.XPrintableF {
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -48,7 +48,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		return SelfPrintable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
@@ -60,7 +60,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		return XPrintable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -72,7 +72,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		return SelfPrintable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
@@ -86,7 +86,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		return XPrintable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
@@ -100,7 +100,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		return SelfFormattable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
@@ -114,7 +114,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		return SelfFormatted.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
@@ -128,7 +128,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		return SelfPrintableF.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
@@ -143,7 +143,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		return XFormattable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
@@ -158,14 +158,14 @@ public sealed interface Formattable<T extends Formattable<T>>
 		return XPrintableF.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface SelfPrintable extends Formattable<SelfPrintable> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
@@ -174,14 +174,14 @@ public sealed interface Formattable<T extends Formattable<T>>
 		void print() throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface XPrintable extends Formattable<XPrintable> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
@@ -190,14 +190,14 @@ public sealed interface Formattable<T extends Formattable<T>>
 		void print(final Object sequence) throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface SelfPrintableLN extends Formattable<SelfPrintableLN> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
@@ -206,14 +206,14 @@ public sealed interface Formattable<T extends Formattable<T>>
 		void println() throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface XPrintableLN extends Formattable<XPrintableLN> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
@@ -222,14 +222,14 @@ public sealed interface Formattable<T extends Formattable<T>>
 		void println(final Object sequence) throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface SelfFormattable extends Formattable<SelfFormattable> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
@@ -238,14 +238,14 @@ public sealed interface Formattable<T extends Formattable<T>>
 		void format(final Object... args) throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface SelfFormatted extends Formattable<SelfFormatted> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract(value = "_ -> _", pure = true)
@@ -254,14 +254,14 @@ public sealed interface Formattable<T extends Formattable<T>>
 		String formatted(final Object... args) throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface SelfPrintableF extends Formattable<SelfPrintableF> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
@@ -270,14 +270,14 @@ public sealed interface Formattable<T extends Formattable<T>>
 		void printf(final Object... args) throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface XFormattable extends Formattable<XFormattable> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
@@ -286,13 +286,13 @@ public sealed interface Formattable<T extends Formattable<T>>
 		void format(final Object sequence, final Object... args) throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface XPrintableF extends Formattable<XPrintableF> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()

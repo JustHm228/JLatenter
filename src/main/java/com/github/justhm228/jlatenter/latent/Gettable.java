@@ -36,7 +36,7 @@ import java.lang.*;
  * @see Shadow
  * @since 0.1-build.1
  */
-@AvailableSince(value = "0.1-build.1")
+@AvailableSince("0.1-build.1")
 @NonExtendable() // <-- Shouldn't be implemented!
 @Blocking() // <-- Potentially blocking context!
 @FunctionalInterface()
@@ -55,10 +55,10 @@ public interface Gettable {
 	 * @see Shadow
 	 * @since 0.1-build.1
 	 */
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable() // <-- Shouldn't be implemented!
 	@Blocking() // <-- Potentially blocking context!
-	@Contract(value = " -> _") // <-- "pure" is unknown
+	@Contract(" -> _") // <-- "pure" is unknown
 	@Shadow() // <-- It's just a stub method
 	@SuppressWarnings("unused")
 	Object get() throws Error, LatentException;

@@ -29,50 +29,50 @@ import org.jetbrains.annotations.ApiStatus.*;
 import org.jetbrains.annotations.*;
 import java.lang.*;
 
-@AvailableSince(value = "0.1-build.1")
+@AvailableSince("0.1-build.1")
 @NonExtendable()
 @NonBlocking()
 @SuppressWarnings({ "suppress", "warningToken" })
 public final class IncompatibleLatentException extends LatentException
 		implements Serializable {
 
-	// @AvailableSince(value = "0.1-build.2")
+	// @AvailableSince("0.1-build.2")
 	// @Internal()
 	// @Serial()
 	// private static final long serialVersionUID = 0L; // TODO: 24.10.2023 Uncomment this later
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
 	public IncompatibleLatentException(
-			@Nullable(value = "Can be null anytime") final String message,
-			@Nullable(value = "Can be null anytime") final Throwable cause
+			@Nullable("Can be null anytime") final String message,
+			@Nullable("Can be null anytime") final Throwable cause
 	                                  ) throws Error {
 
 		super(message, cause);
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
 	public IncompatibleLatentException(
-			@Nullable(value = "Can be null anytime") final Throwable cause
+			@Nullable("Can be null anytime") final Throwable cause
 	                                  ) throws Error {
 
 		super(cause);
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
 	public IncompatibleLatentException(
-			@Nullable(value = "Can be null anytime") final String message
+			@Nullable("Can be null anytime") final String message
 	                                  ) throws Error {
 
 		super(message);
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
 	@SuppressWarnings("unused")
@@ -81,33 +81,33 @@ public final class IncompatibleLatentException extends LatentException
 		super();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public @UnknownNullability(value = "Can be null anytime") String getLocalizedMessage() throws Error {
+	public @UnknownNullability("Can be null anytime") String getLocalizedMessage() throws Error {
 
 		return super.getLocalizedMessage();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public @UnknownNullability(value = "Can be null anytime") String getMessage() throws Error {
+	public @UnknownNullability("Can be null anytime") String getMessage() throws Error {
 
 		return super.getMessage();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
-	@Contract(value = "_ -> this")
+	@Contract("_ -> this")
 	@Override()
 	public synchronized @NotNull(exception = NullPointerException.class) IncompatibleLatentException initCause(
-			@Nullable(value = "Can be null anytime") final Throwable cause
+			@Nullable("Can be null anytime") final Throwable cause
 	                                                                                                          )
 			throws Error {
 
@@ -115,17 +115,17 @@ public final class IncompatibleLatentException extends LatentException
 		return this;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public synchronized @UnknownNullability(value = "Can be null anytime") Throwable getCause() throws Error {
+	public synchronized @UnknownNullability("Can be null anytime") Throwable getCause() throws Error {
 
 		return super.getCause();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract()
@@ -139,10 +139,10 @@ public final class IncompatibleLatentException extends LatentException
 		super.setStackTrace(stacktrace);
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
-	@Contract(value = " -> this")
+	@Contract(" -> this")
 	@Override()
 	public synchronized @NotNull(exception = NullPointerException.class) IncompatibleLatentException fillInStackTrace()
 			throws Error {
@@ -151,7 +151,7 @@ public final class IncompatibleLatentException extends LatentException
 		return this;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -163,7 +163,7 @@ public final class IncompatibleLatentException extends LatentException
 		return super.getStackTrace();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract()
@@ -175,7 +175,7 @@ public final class IncompatibleLatentException extends LatentException
 		super.printStackTrace(out);
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract()
@@ -187,7 +187,7 @@ public final class IncompatibleLatentException extends LatentException
 		super.printStackTrace(out);
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract()
@@ -198,7 +198,7 @@ public final class IncompatibleLatentException extends LatentException
 		super.printStackTrace();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -208,19 +208,19 @@ public final class IncompatibleLatentException extends LatentException
 		return super.toString();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	@Override()
 	public boolean equals(
-			@Nullable(value = "Can be null anytime") final Object another
+			@Nullable("Can be null anytime") final Object another
 	                     ) throws Error {
 
 		return super.equals(another);
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -230,7 +230,7 @@ public final class IncompatibleLatentException extends LatentException
 		return super.hashCode();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@Internal()
 	@NonExtendable()
 	@NonBlocking()

@@ -73,7 +73,7 @@ import static java.util.Optional.*;
  * @author JustHuman228
  * @since 0.1-build.2
  */
-@AvailableSince(value = "0.1-build.2")
+@AvailableSince("0.1-build.2")
 @NonExtendable()
 @NonBlocking()
 @SuppressWarnings({ "suppress", "warningToken" })
@@ -84,9 +84,9 @@ public final class Library {
 	 *
 	 * @since 0.1-build.2
 	 */
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@NotNull(exception = NullPointerException.class)
-	@SuppressWarnings(value = { "unused" }) // <-- These constants WILL BE used
+	@SuppressWarnings("unused") // <-- These constants WILL BE used
 	public static final String AUTHOR = requireNonNullElse(
 			Library.class.getPackage().getSpecificationVendor(),
 			"JustHuman228"
@@ -140,33 +140,33 @@ public final class Library {
 	 *
 	 * @since 0.1-build.2
 	 */
-	@AvailableSince(value = "0.1-build.2")
-	@SuppressWarnings(value = { "unused" }) // This constant WILL BE used
+	@AvailableSince("0.1-build.2")
+	@SuppressWarnings("unused") // This constant WILL BE used
 	public static final int VERSION_CODE = 1;
 
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@Internal()
 	@Experimental()
 	@NotNull(exception = NullPointerException.class)
 	public static final String CONST_EMSG_UTILCLASS =
 			"An instance of this type (%s) can't be instantiated with a constructor!";
 
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@Internal()
 	@Experimental()
 	@NotNull(exception = NullPointerException.class)
 	public static final String CONST_EMSG_IMMUTABLE = "%s";
 
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@Internal()
 	@Experimental()
 	@NotNull(exception = NullPointerException.class)
 	public static final String CONST_EMSG_NULL = "%s is null!";
 
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@Internal()
 	@Experimental()
-	@UnknownNullability()
+	@UnknownNullability("Will be null before the first caller search")
 	private static volatile StackWalker stack = null;
 
 	/**
@@ -180,7 +180,7 @@ public final class Library {
 	 * @deprecated This constructor shouldn't be used to instantiate an {@link Library object} - its main goal is to
 	 * prevent this!
 	 */
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@Internal()
 	@NonBlocking()
 	@Contract(value = " -> fail", pure = true)
@@ -196,7 +196,7 @@ public final class Library {
 		preventInstantiation(); // Prevent instantiation
 	}
 
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@Internal()
 	@Experimental()
 	@NonExtendable()
@@ -204,13 +204,14 @@ public final class Library {
 	@Contract(value = " -> fail", pure = true)
 	public static void preventInstantiation() throws Error, UnsupportedOperationException {
 
+		@NotNull(exception = NullPointerException.class)
 		final Optional<? extends StackFrame> caller = getCaller();
 
 		throw new UnsupportedOperationException(
 				CONST_EMSG_UTILCLASS.formatted(caller.isPresent() ? caller.get().getClassName() : "null"));
 	}
 
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@Internal()
 	@Experimental()
 	@NonExtendable()
@@ -218,6 +219,7 @@ public final class Library {
 	@Contract(value = " -> fail", pure = true)
 	public static <T> T preventClone() throws Error, CloneNotSupportedException {
 
+		@NotNull(exception = NullPointerException.class)
 		final Optional<? extends StackFrame> caller = getCaller();
 
 		throw new CloneNotSupportedException(
@@ -230,7 +232,9 @@ public final class Library {
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, null -> fail; _, !null -> param2")
-	public static <V> V checkForNull(final String name, final V value) throws Error, NullPointerException {
+	public static <V> V checkForNull(
+			@UnknownNullability("Can be null anytime") final String name, @Nullable("Can be null anytime") final V value
+	                                ) throws Error, NullPointerException {
 
 		return name == null ? requireNonNull(value) : requireNonNull(value, CONST_EMSG_NULL.formatted(name));
 	}
@@ -251,20 +255,21 @@ public final class Library {
 
 		{
 
+			@NotNull(exception = NullPointerException.class)
 			final StackWalker stack = Library.stack;
 
 			try {
 
 				return stack.walk((context) -> context.skip(2L).findFirst());
 
-			} catch (final NullPointerException notFound) {
+			} catch (@NotNull(exception = NullPointerException.class) final NullPointerException notFound) {
 
 				return empty();
 			}
 		}
 	}
 
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -274,19 +279,19 @@ public final class Library {
 		return super.toString();
 	}
 
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	@Override()
-	public boolean equals(@Nullable(value = "Can be null anytime") final Object another) throws Error {
+	public boolean equals(@Nullable("Can be null anytime") final Object another) throws Error {
 
 		// `Library` can't contain any data so if the passed object is an instance of `Library` -
 		// it's already equal to the current object:
 		return another instanceof Library;
 	}
 
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -308,7 +313,7 @@ public final class Library {
 	 * @throws CloneNotSupportedException Always.
 	 * @since 0.1-build.2
 	 */
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@Internal()
 	@NonExtendable()
 	@NonBlocking()

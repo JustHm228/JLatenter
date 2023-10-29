@@ -32,7 +32,7 @@ import static java.util.Objects.*;
 import static java.lang.System.*;
 import static com.github.justhm228.jlatenter.base.Library.*;
 
-@AvailableSince(value = "0.1-build.1")
+@AvailableSince("0.1-build.1")
 @NonExtendable()
 @NonBlocking()
 @SuppressWarnings({ "suppress", "warningToken" })
@@ -42,7 +42,7 @@ public abstract sealed class LatentException extends RuntimeException
 		        IncompatibleLatentException, InaccessibleLatentException,
 		        LatentInitException, LatentTargetException {
 
-	// @AvailableSince(value = "0.1-build.2")
+	// @AvailableSince("0.1-build.2")
 	// @Internal()
 	// @Serial()
 	// private static final long serialVersionUID = 0L; // TODO: 24.10.2023 Uncomment this later
@@ -51,34 +51,34 @@ public abstract sealed class LatentException extends RuntimeException
 	@NonBlocking()
 	@Contract(pure = true)
 	protected LatentException(
-			@Nullable(value = "Can be null anytime") final String message,
-			@Nullable(value = "Can be null anytime") final Throwable cause
+			@Nullable("Can be null anytime") final String message,
+			@Nullable("Can be null anytime") final Throwable cause
 	                         ) throws Error {
 
 		super(message, cause);
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
 	protected LatentException(
-			@Nullable(value = "Can be null anytime") final Throwable cause
+			@Nullable("Can be null anytime") final Throwable cause
 	                         ) throws Error {
 
 		super(cause);
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
 	protected LatentException(
-			@Nullable(value = "Can be null anytime") final String message
+			@Nullable("Can be null anytime") final String message
 	                         ) throws Error {
 
 		super(message);
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
 	protected LatentException() throws Error {
@@ -86,46 +86,46 @@ public abstract sealed class LatentException extends RuntimeException
 		super();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public @UnknownNullability(value = "Can be null anytime") String getLocalizedMessage() throws Error {
+	public @UnknownNullability("Can be null anytime") String getLocalizedMessage() throws Error {
 
 		return super.getLocalizedMessage();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public @UnknownNullability(value = "Can be null anytime") String getMessage() throws Error {
+	public @UnknownNullability("Can be null anytime") String getMessage() throws Error {
 
 		return super.getMessage();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
-	@Contract(value = "_ -> this")
+	@Contract("_ -> this")
 	@Override()
 	public synchronized @NotNull(exception = NullPointerException.class) LatentException initCause(
-			@Nullable(value = "Can be null anytime") final Throwable cause
+			@Nullable("Can be null anytime") final Throwable cause
 	                                                                                              ) throws Error {
 
 		super.initCause(cause);
 		return this;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
-	public synchronized @UnknownNullability(value = "Can be null anytime") Throwable getCause() throws Error {
+	public synchronized @UnknownNullability("Can be null anytime") Throwable getCause() throws Error {
 
 		return super.getCause();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract()
 	@Override()
@@ -138,9 +138,9 @@ public abstract sealed class LatentException extends RuntimeException
 		super.setStackTrace(requireNonNull(stacktrace));
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
-	@Contract(value = " -> this")
+	@Contract(" -> this")
 	@Override()
 	public synchronized @NotNull(exception = NullPointerException.class) LatentException fillInStackTrace()
 			throws Error {
@@ -149,7 +149,7 @@ public abstract sealed class LatentException extends RuntimeException
 		return this;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
@@ -160,7 +160,7 @@ public abstract sealed class LatentException extends RuntimeException
 		return super.getStackTrace();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
 	@Override()
@@ -171,7 +171,7 @@ public abstract sealed class LatentException extends RuntimeException
 		super.printStackTrace(requireNonNull(out));
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
 	@Override()
@@ -182,7 +182,7 @@ public abstract sealed class LatentException extends RuntimeException
 		super.printStackTrace(requireNonNull(out));
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
@@ -193,7 +193,7 @@ public abstract sealed class LatentException extends RuntimeException
 		super.printStackTrace();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
@@ -202,7 +202,7 @@ public abstract sealed class LatentException extends RuntimeException
 		return super.toString();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	@Override()
@@ -213,7 +213,7 @@ public abstract sealed class LatentException extends RuntimeException
 		return super.equals(another);
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
@@ -222,7 +222,7 @@ public abstract sealed class LatentException extends RuntimeException
 		return super.hashCode();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@Internal()
 	@NonExtendable()
 	@NonBlocking()
@@ -237,7 +237,7 @@ public abstract sealed class LatentException extends RuntimeException
 		return preventClone();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@Internal()
 	@NonExtendable()
 	@NonBlocking()
