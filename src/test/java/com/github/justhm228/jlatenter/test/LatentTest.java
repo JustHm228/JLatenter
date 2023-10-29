@@ -57,8 +57,6 @@ public final class LatentTest {
 	@Test()
 	public void testA() throws Error {
 
-		out.println(TEST_NAME + ".testA(): Before run() test");
-
 		@AvailableSince(value = "0.1-build.1")
 		@Internal()
 		@NonExtendable()
@@ -86,10 +84,9 @@ public final class LatentTest {
 			}
 		}
 
-		out.println(TEST_NAME + ".testA(): Before run()");
+		out.println(TEST_NAME + ".testA(): Before non-static run()");
 		as(new RunTest(), Runnable.class).run();
-		out.println(TEST_NAME + ".testA(): After run()");
-		out.println(TEST_NAME + ".testA(): After run() test");
+		out.println(TEST_NAME + ".testA(): After non-static run()");
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -98,8 +95,6 @@ public final class LatentTest {
 	@Contract()
 	@Test()
 	public void testB() throws Error {
-
-		out.println(TEST_NAME + ".testB(): Before static run() test");
 
 		@AvailableSince(value = "0.1-build.1")
 		@Internal()
@@ -131,7 +126,6 @@ public final class LatentTest {
 		out.println(TEST_NAME + ".testB(): Before static run()");
 		as(new StaticTest(), Runnable.class).run();
 		out.println(TEST_NAME + ".testB(): After static run()");
-		out.println(TEST_NAME + ".testB(): After static run() test");
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -179,7 +173,7 @@ public final class LatentTest {
 
 		boolean thrown = false;
 
-		out.println(TEST_NAME + ".testC(): 1 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #1...");
 
 		try {
 
@@ -191,10 +185,10 @@ public final class LatentTest {
 			nullPointer.printStackTrace();
 		}
 
-		out.println(TEST_NAME + ".testC(): 1 test ended");
-		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #1 has been checked!");
+		assertTrue("Failure #1 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): 2 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #2...");
 
 		try {
 
@@ -206,10 +200,10 @@ public final class LatentTest {
 			nullPointer.printStackTrace();
 		}
 
-		out.println(TEST_NAME + ".testC(): 2 test ended");
-		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #2 has been checked!");
+		assertTrue("Failure #2 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): 3 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #2...");
 
 		try {
 
@@ -221,10 +215,10 @@ public final class LatentTest {
 			nullPointer.printStackTrace();
 		}
 
-		out.println(TEST_NAME + ".testC(): 3 test ended");
-		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #3 has been checked!");
+		assertTrue("Failure #3 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): 4 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #4...");
 
 		try {
 
@@ -236,13 +230,13 @@ public final class LatentTest {
 			notInterface.printStackTrace();
 		}
 
-		out.println(TEST_NAME + ".testC(): 4 test ended");
-		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #4 has been checked!");
+		assertTrue("Failure #4 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): 5 test started");
+		out.println(TEST_NAME + ".testC(): Checking \"failure\" #5...");
 		as(test, Runnable.class);
-		out.println(TEST_NAME + ".testC(): 5 test ended");
-		out.println(TEST_NAME + ".testC(): 6 test started");
+		out.println(TEST_NAME + ".testC(): \"Failure\" #5 has been checked: No exception has occurred!");
+		out.println(TEST_NAME + ".testC(): Checking failure #6...");
 
 		try {
 
@@ -254,10 +248,10 @@ public final class LatentTest {
 			notFound.printStackTrace();
 		}
 
-		out.println(TEST_NAME + ".testC(): 6 test ended");
-		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #6 has been checked!");
+		assertTrue("Failure #6 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): 7 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #7...");
 
 		try {
 
@@ -274,24 +268,24 @@ public final class LatentTest {
 			return;
 		}
 
-		out.println(TEST_NAME + ".testC(): 7 test ended");
-		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #7 has been checked!");
+		assertTrue("Failure #7 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): 8 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #8...");
 
-		// 8 test
+		// TODO: 29.10.2023 Insert here a code of failure #8 later...
 
-		out.println(TEST_NAME + ".testC(): 8 test ended");
-		// assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #8 has been checked!");
+		// assertTrue("Failure #8 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): 9 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #9...");
 
-		// 9 test
+		// TODO: 29.10.2023 Insert here a code of failure #9 later...
 
-		out.println(TEST_NAME + ".testC(): 9 test ended");
-		// assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #9 has been checked!");
+		// assertTrue("Failure #9 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): 10 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #10...");
 
 		try {
 
@@ -303,9 +297,10 @@ public final class LatentTest {
 			target.printStackTrace();
 		}
 
-		out.println(TEST_NAME + ".testC(): 10 test ended");
-		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #10 has been checked!");
+		assertTrue("Failure #10 hasn't been occurred!", thrown);
 		thrown = false;
+		out.println(TEST_NAME + ".testC(): Checking \"failure\" #11...");
 
 		{
 
@@ -318,11 +313,12 @@ public final class LatentTest {
 			} catch (@NotNull(exception = NullPointerException.class) final Throwable anything) {
 
 				anything.printStackTrace();
-				fail("Failure test failed!");
+				fail("\"Failure\" #11 has been checked: An exception has occurred!");
 				return;
 			}
 
 			assertEquals("How did you get here ._.", 0L, ((Integer) result).longValue());
+			out.println(TEST_NAME + ".testC(): \"Failure\" #11 has been checked: An exception hasn't been occurred!");
 		}
 
 		out.println(TEST_NAME + ".testC(): After failure test");
