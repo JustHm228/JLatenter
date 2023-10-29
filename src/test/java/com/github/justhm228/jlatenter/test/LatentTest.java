@@ -40,6 +40,8 @@ import static org.junit.Assert.*;
 @NonExtendable()
 public final class LatentTest {
 
+	private static final String TEST_NAME = LatentTest.class.getSimpleName();
+
 	@AvailableSince(value = "0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
@@ -55,7 +57,7 @@ public final class LatentTest {
 	@Test()
 	public void testA() throws Error {
 
-		out.println("testA(): Before run() test");
+		out.println(TEST_NAME + ".testA(): Before run() test");
 
 		@AvailableSince(value = "0.1-build.1")
 		@Internal()
@@ -79,15 +81,15 @@ public final class LatentTest {
 			@Contract()
 			public int run() throws Error {
 
-				out.println("run(): Hello World!");
+				out.println(TEST_NAME + ".$.run(): Hello World!");
 				return 0;
 			}
 		}
 
-		out.println("testA(): Before run()");
+		out.println(TEST_NAME + ".testA(): Before run()");
 		as(new RunTest(), Runnable.class).run();
-		out.println("testA(): After run()");
-		out.println("testA(): After run() test");
+		out.println(TEST_NAME + ".testA(): After run()");
+		out.println(TEST_NAME + ".testA(): After run() test");
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -97,7 +99,7 @@ public final class LatentTest {
 	@Test()
 	public void testB() throws Error {
 
-		out.println("testB(): Before static run() test");
+		out.println(TEST_NAME + ".testB(): Before static run() test");
 
 		@AvailableSince(value = "0.1-build.1")
 		@Internal()
@@ -121,15 +123,15 @@ public final class LatentTest {
 			@Contract()
 			public static int run() throws Error {
 
-				out.println("static run(): Hello World!");
+				out.println(TEST_NAME + ".$.static run(): Hello World!");
 				return 0;
 			}
 		}
 
-		out.println("testB(): Before static run()");
+		out.println(TEST_NAME + ".testB(): Before static run()");
 		as(new StaticTest(), Runnable.class).run();
-		out.println("testB(): After static run()");
-		out.println("testB(): After static run() test");
+		out.println(TEST_NAME + ".testB(): After static run()");
+		out.println(TEST_NAME + ".testB(): After static run() test");
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -139,7 +141,7 @@ public final class LatentTest {
 	@Test()
 	public void testC() throws Error {
 
-		out.println("testC(): Before failure test");
+		out.println(TEST_NAME + ".testC(): Before failure test");
 
 		@AvailableSince(value = "0.1-build.1")
 		@Internal()
@@ -158,7 +160,7 @@ public final class LatentTest {
 
 			public int call() throws Error {
 
-				out.println("call(): Hello World!");
+				out.println(TEST_NAME + ".$.call(): Hello World!");
 				return 0;
 			}
 
@@ -177,7 +179,7 @@ public final class LatentTest {
 
 		boolean thrown = false;
 
-		out.println("testC(): 1 test started");
+		out.println(TEST_NAME + ".testC(): 1 test started");
 
 		try {
 
@@ -189,10 +191,10 @@ public final class LatentTest {
 			nullPointer.printStackTrace();
 		}
 
-		out.println("testC(): 1 test ended");
+		out.println(TEST_NAME + ".testC(): 1 test ended");
 		assertTrue("Failure test failed!", thrown);
 		thrown = false;
-		out.println("testC(): 2 test started");
+		out.println(TEST_NAME + ".testC(): 2 test started");
 
 		try {
 
@@ -204,10 +206,10 @@ public final class LatentTest {
 			nullPointer.printStackTrace();
 		}
 
-		out.println("testC(): 2 test ended");
+		out.println(TEST_NAME + ".testC(): 2 test ended");
 		assertTrue("Failure test failed!", thrown);
 		thrown = false;
-		out.println("testC(): 3 test started");
+		out.println(TEST_NAME + ".testC(): 3 test started");
 
 		try {
 
@@ -219,10 +221,10 @@ public final class LatentTest {
 			nullPointer.printStackTrace();
 		}
 
-		out.println("testC(): 3 test ended");
+		out.println(TEST_NAME + ".testC(): 3 test ended");
 		assertTrue("Failure test failed!", thrown);
 		thrown = false;
-		out.println("testC(): 4 test started");
+		out.println(TEST_NAME + ".testC(): 4 test started");
 
 		try {
 
@@ -234,13 +236,13 @@ public final class LatentTest {
 			notInterface.printStackTrace();
 		}
 
-		out.println("testC(): 4 test ended");
+		out.println(TEST_NAME + ".testC(): 4 test ended");
 		assertTrue("Failure test failed!", thrown);
 		thrown = false;
-		out.println("testC(): 5 test started");
+		out.println(TEST_NAME + ".testC(): 5 test started");
 		as(test, Runnable.class);
-		out.println("testC(): 5 test ended");
-		out.println("testC(): 6 test started");
+		out.println(TEST_NAME + ".testC(): 5 test ended");
+		out.println(TEST_NAME + ".testC(): 6 test started");
 
 		try {
 
@@ -252,10 +254,10 @@ public final class LatentTest {
 			notFound.printStackTrace();
 		}
 
-		out.println("testC(): 6 test ended");
+		out.println(TEST_NAME + ".testC(): 6 test ended");
 		assertTrue("Failure test failed!", thrown);
 		thrown = false;
-		out.println("testC(): 7 test started");
+		out.println(TEST_NAME + ".testC(): 7 test started");
 
 		try {
 
@@ -272,24 +274,24 @@ public final class LatentTest {
 			return;
 		}
 
-		out.println("testC(): 7 test ended");
+		out.println(TEST_NAME + ".testC(): 7 test ended");
 		assertTrue("Failure test failed!", thrown);
 		thrown = false;
-		out.println("testC(): 8 test started");
+		out.println(TEST_NAME + ".testC(): 8 test started");
 
 		// 8 test
 
-		out.println("testC(): 8 test ended");
+		out.println(TEST_NAME + ".testC(): 8 test ended");
 		//		assertTrue("Failure test failed!", thrown);
 		thrown = false;
-		out.println("testC(): 9 test started");
+		out.println(TEST_NAME + ".testC(): 9 test started");
 
 		// 9 test
 
-		out.println("testC(): 9 test ended");
+		out.println(TEST_NAME + ".testC(): 9 test ended");
 		//		assertTrue("Failure test failed!", thrown);
 		thrown = false;
-		out.println("testC(): 10 test started");
+		out.println(TEST_NAME + ".testC(): 10 test started");
 
 		try {
 
@@ -301,7 +303,7 @@ public final class LatentTest {
 			target.printStackTrace();
 		}
 
-		out.println("testC(): 10 test ended");
+		out.println(TEST_NAME + ".testC(): 10 test ended");
 		assertTrue("Failure test failed!", thrown);
 		thrown = false;
 
@@ -323,7 +325,7 @@ public final class LatentTest {
 			assertEquals("How did you get here ._.", 0L, ((Integer) result).longValue());
 		}
 
-		out.println("testC(): After failure test");
+		out.println(TEST_NAME + ".testC(): After failure test");
 	}
 
 	@AvailableSince(value = "0.1-build.1")
@@ -334,7 +336,7 @@ public final class LatentTest {
 	@SuppressWarnings(value = { "deprecation" })
 	public void testD() throws Error {
 
-		out.println("testD(): Before \"isShadowed()-like\" test");
+		out.println(TEST_NAME + ".testD(): Before \"isShadowed()-like\" test");
 
 		@AvailableSince(value = "0.1-build.1")
 		@Internal()
@@ -358,7 +360,7 @@ public final class LatentTest {
 			@Contract()
 			public static int run() throws Error {
 
-				out.println("run(): Hello World!");
+				out.println(TEST_NAME + ".$.run(): Hello World!");
 				return 0;
 			}
 		}
@@ -366,7 +368,7 @@ public final class LatentTest {
 		@NotNull(exception = NullPointerException.class)
 		final StaticTest test = new StaticTest();
 
-		out.println("testD(): Before \"isShadowed()-like\"");
+		out.println(TEST_NAME + ".testD(): Before \"isShadowed()-like\"");
 
 		@NotNull(exception = NullPointerException.class)
 		final Runnable shadow = as(test, Runnable.class);
@@ -431,8 +433,8 @@ public final class LatentTest {
 		}
 
 		assertNotNull("\"isShadowed()-like\" test failed!", find(shadow));
-		out.println("testD(): After \"isShadowed()-like\"");
-		out.println("testD(): After \"isShadowed()-like\" test");
+		out.println(TEST_NAME + ".testD(): After \"isShadowed()-like\"");
+		out.println(TEST_NAME + ".testD(): After \"isShadowed()-like\" test");
 	}
 
 	@AvailableSince(value = "0.1-build.1")
