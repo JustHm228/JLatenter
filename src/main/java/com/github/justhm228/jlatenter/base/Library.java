@@ -254,7 +254,7 @@ public final class Library {
 
 			try {
 
-				return stack.walk((context) -> context.skip(3L).findFirst());
+				return stack.walk((context) -> context.skip(2L).findFirst());
 
 			} catch (final NullPointerException notFound) {
 
