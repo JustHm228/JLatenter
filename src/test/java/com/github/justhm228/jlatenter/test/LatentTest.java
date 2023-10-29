@@ -38,6 +38,7 @@ import static org.junit.Assert.*;
 
 @AvailableSince("0.1-build.1")
 @NonExtendable()
+@SuppressWarnings({ "suppress", "warningToken" })
 public final class LatentTest {
 
 	@AvailableSince("0.1-build.1")
@@ -98,6 +99,7 @@ public final class LatentTest {
 	@NonBlocking()
 	@Contract()
 	@Test()
+	@SuppressWarnings("InstantiationOfUtilityClass")
 	public void testB() throws Error {
 
 		@AvailableSince("0.1-build.1")
@@ -138,6 +140,7 @@ public final class LatentTest {
 	@Blocking()
 	@Contract()
 	@Test()
+	@SuppressWarnings({ "CallToPrintStackTrace", "noEffectAssign" })
 	public void testC() throws Error {
 
 		out.println(TEST_NAME + ".testC(): Before failure test");
@@ -175,7 +178,9 @@ public final class LatentTest {
 			@NonBlocking()
 			@Contract(value = "_ -> fail", pure = true)
 			@SuppressWarnings("unused")
-			public void append(final CharSequence sequence) throws Error {
+			public void append(
+					@Nullable("Can be null anytime") @SuppressWarnings("ignored") final CharSequence sequence
+			                  ) throws Error {
 
 				fail("How did you get here ._.");
 			}
@@ -201,7 +206,8 @@ public final class LatentTest {
 
 		try {
 
-			as(null, null);
+			@SuppressWarnings("ignored")
+			final Object ignored = as(null, null);
 
 		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
@@ -216,7 +222,8 @@ public final class LatentTest {
 
 		try {
 
-			as(test, null);
+			@SuppressWarnings("ignored")
+			final Object ignored = as(test, null);
 
 		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
@@ -231,7 +238,8 @@ public final class LatentTest {
 
 		try {
 
-			as(null, Runnable.class);
+			@SuppressWarnings("ignored")
+			final Object ignored = as(null, Runnable.class);
 
 		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
@@ -246,7 +254,8 @@ public final class LatentTest {
 
 		try {
 
-			as(test, Thread.class);
+			@SuppressWarnings("ignored")
+			final Object ignored = as(test, Thread.class);
 
 		} catch (@NotNull(exception = NullPointerException.class) final IllegalArgumentException notInterface) {
 
@@ -258,7 +267,14 @@ public final class LatentTest {
 		assertTrue("Failure #4 hasn't been occurred!", thrown);
 		thrown = false;
 		out.println(TEST_NAME + ".testC(): Checking \"failure\" #5...");
-		as(test, Runnable.class);
+
+		{
+
+			@NotNull(exception = NullPointerException.class)
+			@SuppressWarnings("ignored")
+			final Object ignored = as(test, Runnable.class);
+		}
+
 		out.println(TEST_NAME + ".testC(): \"Failure\" #5 has been checked: No exception has occurred!");
 		out.println(TEST_NAME + ".testC(): Checking failure #6...");
 
@@ -286,7 +302,8 @@ public final class LatentTest {
 			thrown = true;
 			incompatible.printStackTrace();
 
-		} catch (@NotNull(exception = NullPointerException.class) final Exception impossible) {
+		} catch (@NotNull(exception = NullPointerException.class) @SuppressWarnings("ignored") final
+		Exception impossible) {
 
 			fail("How did you get here ._.");
 			return;
@@ -353,7 +370,7 @@ public final class LatentTest {
 	@NonBlocking()
 	@Contract()
 	@Test()
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "CallToPrintStackTrace" })
 	public void testD() throws Error {
 
 		@AvailableSince("0.1-build.1")
@@ -385,9 +402,10 @@ public final class LatentTest {
 		}
 
 		@NotNull(exception = NullPointerException.class)
+		@SuppressWarnings("InstantiationOfUtilityClass")
 		final StaticTest test = new StaticTest();
 
-		out.println(TEST_NAME + ".testD(): Before \"isShadowed()-like\"");
+		out.println(TEST_NAME + ".testD(): Before \"isShadowed()-like\" calls");
 
 		@NotNull(exception = NullPointerException.class)
 		final Runnable shadow = as(test, Runnable.class);
@@ -398,6 +416,7 @@ public final class LatentTest {
 
 		try {
 
+			@SuppressWarnings("ignored")
 			final Void ignored = find(shadow, Void.class);
 
 			fail("How did you get here ._.");
@@ -413,6 +432,7 @@ public final class LatentTest {
 
 		try {
 
+			@SuppressWarnings("ignored")
 			final Object ignored = find(null);
 
 			fail("How did you get here ._.");
@@ -425,6 +445,7 @@ public final class LatentTest {
 
 		try {
 
+			@SuppressWarnings("ignored")
 			final Void ignored = find(null, Void.class);
 
 			fail("How did you get here ._.");
@@ -452,7 +473,7 @@ public final class LatentTest {
 		}
 
 		assertNotNull("\"isShadowed()-like\" test failed!", find(shadow));
-		out.println(TEST_NAME + ".testD(): After \"isShadowed()-like\"");
+		out.println(TEST_NAME + ".testD(): After \"isShadowed()-like\" calls");
 	}
 
 	@AvailableSince("0.1-build.1")
@@ -490,6 +511,7 @@ public final class LatentTest {
 	@NonBlocking()
 	@Contract(value = " -> fail", pure = true)
 	@Override()
+	@SuppressWarnings({ "super", "CloneDoesntCallSuperClone" })
 	protected LatentTest clone() throws Error, CloneNotSupportedException {
 
 		// throw new CloneNotSupportedException(getClass().getTypeName());
