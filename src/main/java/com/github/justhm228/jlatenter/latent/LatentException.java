@@ -35,6 +35,7 @@ import static com.github.justhm228.jlatenter.base.Library.*;
 @AvailableSince(value = "0.1-build.1")
 @NonExtendable()
 @NonBlocking()
+@SuppressWarnings({ "suppress", "warningToken" })
 public abstract sealed class LatentException extends RuntimeException
 		implements Serializable
 		permits LatentPermException, LatentNotPresentException,
@@ -185,6 +186,7 @@ public abstract sealed class LatentException extends RuntimeException
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
+	@SuppressWarnings("CallToPrintStackTrace")
 	public void printStackTrace() throws Error, NullPointerException {
 
 		requireNonNull(out);
@@ -227,6 +229,7 @@ public abstract sealed class LatentException extends RuntimeException
 	@Contract(value = " -> fail", pure = true)
 	@Deprecated(since = "0.1-build.1")
 	@Override()
+	@SuppressWarnings({ "super", "CloneDoesntCallSuperClone" })
 	protected final LatentException clone() throws Error, CloneNotSupportedException {
 
 		// throw new CloneNotSupportedException(getClass().getTypeName());

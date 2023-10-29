@@ -30,6 +30,7 @@ import java.lang.*;
 
 @AvailableSince(value = "0.1-build.1")
 @NonExtendable()
+@SuppressWarnings({ "suppress", "warningToken" })
 public sealed interface Buildable<T extends Buildable<T>>
 		permits Buildable.XBuildable, Buildable.SelfBuildable, Buildable.GenericBuildable, Buildable.SelfBuildableC,
 		        Buildable.GenericBuildableC {
@@ -38,6 +39,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<XBuildable> buildX() throws Error {
 
 		return XBuildable.class;
@@ -47,6 +49,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<SelfBuildable> buildSelf() throws Error {
 
 		return SelfBuildable.class;
@@ -56,6 +59,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<GenericBuildable> buildGeneric() throws Error {
 
 		return GenericBuildable.class;
@@ -65,6 +69,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<SelfBuildableC> buildSelfC() throws Error {
 
 		return SelfBuildableC.class;
@@ -74,6 +79,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<GenericBuildableC> buildGenericC() throws Error {
 
 		return GenericBuildableC.class;
@@ -91,6 +97,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void build() throws Error, LatentException;
 	}
 
@@ -106,6 +113,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 		@Blocking()
 		@Contract(value = " -> this")
 		@Shadow()
+		@SuppressWarnings("unused")
 		Object build() throws Error, LatentException;
 	}
 
@@ -121,6 +129,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 		@Blocking()
 		@Contract(value = " -> this")
 		@Shadow()
+		@SuppressWarnings("unused")
 		<T> T build() throws Error, LatentException;
 	}
 
@@ -136,6 +145,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 		@Blocking()
 		@Contract(value = " -> _", pure = true)
 		@Shadow()
+		@SuppressWarnings("unused")
 		Object build() throws Error, LatentException;
 	}
 
@@ -151,6 +161,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 		@Blocking()
 		@Contract(value = " -> _", pure = true)
 		@Shadow()
+		@SuppressWarnings("unused")
 		<T> T build() throws Error, LatentException;
 	}
 }

@@ -32,6 +32,7 @@ import java.lang.*;
 @AvailableSince(value = "0.1-build.2")
 @NonExtendable()
 @NonBlocking()
+@SuppressWarnings({ "suppress", "warningToken" })
 public final class LatentPermException extends LatentException
 		implements Serializable {
 
@@ -54,6 +55,7 @@ public final class LatentPermException extends LatentException
 	@AvailableSince(value = "0.1-build.2")
 	@NonBlocking()
 	@Contract(pure = true)
+	@SuppressWarnings("unused")
 	public LatentPermException(
 			@Nullable(value = "Can be null anytime") final Throwable cause
 	                          ) throws Error {
@@ -64,6 +66,7 @@ public final class LatentPermException extends LatentException
 	@AvailableSince(value = "0.1-build.2")
 	@NonBlocking()
 	@Contract(pure = true)
+	@SuppressWarnings("unused")
 	public LatentPermException(
 			@Nullable(value = "Can be null anytime") final String message
 	                          ) throws Error {
@@ -74,6 +77,7 @@ public final class LatentPermException extends LatentException
 	@AvailableSince(value = "0.1-build.2")
 	@NonBlocking()
 	@Contract(pure = true)
+	@SuppressWarnings("unused")
 	public LatentPermException() throws Error {
 
 		super();
@@ -178,6 +182,7 @@ public final class LatentPermException extends LatentException
 	@NonBlocking()
 	@Contract(value = " -> _")
 	@Override()
+	@SuppressWarnings("CallToPrintStackTrace")
 	public void printStackTrace() throws Error, NullPointerException {
 
 		super.printStackTrace();

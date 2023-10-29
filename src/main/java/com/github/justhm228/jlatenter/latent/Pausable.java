@@ -41,6 +41,7 @@ import java.lang.*;
 @Blocking() // <-- Potentially blocking context!
 @FunctionalInterface()
 @Shadow() // <-- Just a stub interface
+@SuppressWarnings({ "suppress", "warningToken" })
 public interface Pausable {
 
 	/**
@@ -56,7 +57,7 @@ public interface Pausable {
 	@NonExtendable() // <-- Shouldn't be implemented!
 	@Blocking() // <-- Potentially blocking context!
 	@Contract() // <-- "pure" is unknown
-	@Shadow()
-	// It's just a stub method:
+	@Shadow() // <-- It's just a stub method
+	@SuppressWarnings("unused")
 	void pause() throws Error, LatentException;
 }

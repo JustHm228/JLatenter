@@ -32,6 +32,7 @@ import java.lang.*;
 @AvailableSince(value = "0.1-build.1")
 @NonExtendable()
 @NonBlocking()
+@SuppressWarnings({ "suppress", "warningToken" })
 public final class LatentTargetException extends LatentException
 		implements Serializable {
 
@@ -189,6 +190,7 @@ public final class LatentTargetException extends LatentException
 	@NonBlocking()
 	@Contract()
 	@Override()
+	@SuppressWarnings("CallToPrintStackTrace")
 	public void printStackTrace() throws Error, NullPointerException {
 
 		super.printStackTrace();

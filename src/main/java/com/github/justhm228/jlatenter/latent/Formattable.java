@@ -30,6 +30,7 @@ import java.lang.*;
 
 @AvailableSince(value = "0.1-build.1")
 @NonExtendable()
+@SuppressWarnings({ "suppress", "warningToken" })
 public sealed interface Formattable<T extends Formattable<T>>
 		permits Formattable.SelfPrintable, Formattable.XPrintable, Formattable.SelfPrintableLN,
 		        Formattable.XPrintableLN, Formattable.SelfFormattable, Formattable.SelfFormatted,
@@ -39,6 +40,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) SelfPrintable> print() throws Error {
@@ -50,6 +52,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) XPrintable> print(final Object ignored) throws Error {
@@ -61,6 +64,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) SelfPrintable> println() throws Error {
@@ -72,6 +76,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) XPrintable> println(
@@ -85,6 +90,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) SelfFormattable> format(
@@ -98,6 +104,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) SelfFormatted> formatted(
@@ -111,6 +118,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) SelfPrintableF> printf(
@@ -124,6 +132,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) XFormattable> format(
@@ -138,6 +147,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) XPrintableF> printf(
@@ -160,6 +170,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void print() throws Error, LatentException;
 	}
 
@@ -175,6 +186,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void print(final Object sequence) throws Error, LatentException;
 	}
 
@@ -190,6 +202,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void println() throws Error, LatentException;
 	}
 
@@ -205,6 +218,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void println(final Object sequence) throws Error, LatentException;
 	}
 
@@ -220,6 +234,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void format(final Object... args) throws Error, LatentException;
 	}
 
@@ -235,6 +250,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		@Blocking()
 		@Contract(value = "_ -> _", pure = true)
 		@Shadow()
+		@SuppressWarnings("unused")
 		String formatted(final Object... args) throws Error, LatentException;
 	}
 
@@ -250,6 +266,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void printf(final Object... args) throws Error, LatentException;
 	}
 
@@ -265,6 +282,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void format(final Object sequence, final Object... args) throws Error, LatentException;
 	}
 
@@ -279,6 +297,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void printf(final Object sequence, final Object... args) throws Error, LatentException;
 	}
 }

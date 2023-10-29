@@ -76,6 +76,7 @@ import static java.util.Optional.*;
 @AvailableSince(value = "0.1-build.2")
 @NonExtendable()
 @NonBlocking()
+@SuppressWarnings({ "suppress", "warningToken" })
 public final class Library {
 
 	/**
@@ -314,6 +315,7 @@ public final class Library {
 	@Contract(value = " -> fail", pure = true)
 	@Deprecated(since = "0.1-build.2")
 	@Override()
+	@SuppressWarnings({ "super", "CloneDoesntCallSuperClone" })
 	protected Library clone() throws Error, CloneNotSupportedException {
 
 		// // Always prevent cloning (even if `Library` will implement `Cloneable`) -

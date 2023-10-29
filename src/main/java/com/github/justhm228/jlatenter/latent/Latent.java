@@ -39,12 +39,14 @@ import java.lang.*;
 @AvailableSince(value = "0.1-build.1")
 @NonExtendable()
 @NonBlocking()
+@SuppressWarnings({ "suppress", "warningToken" })
 public final class Latent {
 
 	@AvailableSince(value = "0.1-build.1")
 	@Internal()
 	@NonBlocking()
 	@Contract(value = " -> fail", pure = true)
+	@SuppressWarnings("unused")
 	private Latent() throws Error, UnsupportedOperationException {
 
 		super();
@@ -130,6 +132,7 @@ public final class Latent {
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
 	@Deprecated(since = "0.1-build.2") // <- Deprecated because it's useless and hard to understand. Please, forget about it.
+	@SuppressWarnings({ "unused", "javadoc" })
 	public static @NotNull(exception = NullPointerException.class) Object as(
 			@NotNull(value = "The specified latent instance is null!") final Object instance,
 			@NotNull(value = "The specified cast type is null!", exception = NullPointerException.class) final Object type
@@ -209,6 +212,7 @@ public final class Latent {
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
+	@SuppressWarnings("unused")
 	public static <T> @NotNull(exception = NullPointerException.class) T as(
 			@NotNull(value = "The specified latent instance is null!", exception = NullPointerException.class) final Object instance,
 			@NotNull(value = "The specified cast type is null!", exception = NullPointerException.class) final Class<T> type
@@ -310,6 +314,7 @@ public final class Latent {
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
 	@Deprecated(since = "0.1-build.2")
+	@SuppressWarnings("unused")
 	public static <T> @UnknownNullability(value = "Will be null if the specified proxy instance isn't a shadowed latent instance") T find(
 			@NotNull(value = "The specified proxy instance is null!", exception = NullPointerException.class) final Object proxy,
 			@Nullable(value = "Can be null anytime") @SuppressWarnings(value = { "unused" }) final Class<T> cast
@@ -423,6 +428,7 @@ public final class Latent {
 	@Contract(value = " -> fail", pure = true)
 	@Deprecated(since = "0.1-build.1")
 	@Override()
+	@SuppressWarnings({ "super", "CloneDoesntCallSuperClone" })
 	protected Latent clone() throws Error, CloneNotSupportedException {
 
 		// throw new CloneNotSupportedException(getClass().getTypeName());
@@ -479,6 +485,7 @@ public final class Latent {
 		@NonExtendable() // <- A non-extendable method
 		@NonBlocking() // <- Non-blocking context
 		@Contract(value = "_ -> new", pure = true)
+		@SuppressWarnings("unused")
 		public static @NotNull(exception = NullPointerException.class) LatentHandler getInstance(
 				@NotNull(value = "The specified shadowed object is null!", exception = NullPointerException.class) final Object shadowed
 		) throws Error, NullPointerException {
@@ -515,6 +522,7 @@ public final class Latent {
 
 			try {
 
+				@NotNull(exception = NullPointerException.class)
 				@SuppressWarnings(value = { "removal" })
 				final Method proxied = AccessController.doPrivileged(
 

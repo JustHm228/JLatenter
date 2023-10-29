@@ -41,6 +41,7 @@ import java.lang.*;
 @Blocking() // <-- Potentially blocking context!
 @FunctionalInterface()
 @Shadow() // <-- Just a stub interface
+@SuppressWarnings({ "suppress", "warningToken" })
 public interface Puttable {
 
 	// TODO: 09.09.2023 Expand this interface with other methods (like Formattable, Buildable, Gettable):
@@ -58,7 +59,7 @@ public interface Puttable {
 	@NonExtendable() // <-- Shouldn't be implemented!
 	@Blocking() // <-- Potentially blocking context!
 	@Contract() // <-- "pure" is unknown
-	@Shadow()
-	// It's just a stub method:
+	@Shadow() // <-- It's just a stub method
+	@SuppressWarnings("unused")
 	void put() throws Error, LatentException;
 }

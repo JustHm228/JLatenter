@@ -32,6 +32,7 @@ import java.lang.*;
 @AvailableSince(value = "0.1-build.1")
 @NonExtendable()
 @NonBlocking()
+@SuppressWarnings({ "suppress", "warningToken" })
 public final class LatentInitException extends LatentException
 		implements Serializable {
 
@@ -74,6 +75,7 @@ public final class LatentInitException extends LatentException
 	@AvailableSince(value = "0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
+	@SuppressWarnings("unused")
 	public LatentInitException() throws Error {
 
 		super();
@@ -189,6 +191,7 @@ public final class LatentInitException extends LatentException
 	@NonBlocking()
 	@Contract()
 	@Override()
+	@SuppressWarnings("CallToPrintStackTrace")
 	public void printStackTrace() throws Error, NullPointerException {
 
 		super.printStackTrace();
