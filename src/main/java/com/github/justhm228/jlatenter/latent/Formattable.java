@@ -28,17 +28,19 @@ import org.jetbrains.annotations.ApiStatus.*;
 import org.jetbrains.annotations.*;
 import java.lang.*;
 
-@AvailableSince(value = "0.1-build.1")
+@AvailableSince("0.1-build.1")
 @NonExtendable()
+@SuppressWarnings({ "suppress", "warningToken" })
 public sealed interface Formattable<T extends Formattable<T>>
 		permits Formattable.SelfPrintable, Formattable.XPrintable, Formattable.SelfPrintableLN,
 		        Formattable.XPrintableLN, Formattable.SelfFormattable, Formattable.SelfFormatted,
 		        Formattable.SelfPrintableF, Formattable.XFormattable, Formattable.XPrintableF {
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) SelfPrintable> print() throws Error {
@@ -46,10 +48,11 @@ public sealed interface Formattable<T extends Formattable<T>>
 		return SelfPrintable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) XPrintable> print(final Object ignored) throws Error {
@@ -57,10 +60,11 @@ public sealed interface Formattable<T extends Formattable<T>>
 		return XPrintable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) SelfPrintable> println() throws Error {
@@ -68,217 +72,229 @@ public sealed interface Formattable<T extends Formattable<T>>
 		return SelfPrintable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
-	) XPrintable> println(
-			@Nullable(value = "Can be null anytime") final Object ignored
-	                     ) throws Error {
+	) XPrintable> println(@Nullable("Can be null anytime") final Object ignored) throws Error {
 
 		return XPrintable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) SelfFormattable> format(
-			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
+			@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored
 	                         ) throws Error {
 
 		return SelfFormattable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) SelfFormatted> formatted(
-			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
+			@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored
 	                          ) throws Error {
 
 		return SelfFormatted.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_ -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
-	) SelfPrintableF> printf(
-			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
-	                        ) throws Error {
+	) SelfPrintableF> printf(@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored)
+			throws Error {
 
 		return SelfPrintableF.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) XFormattable> format(
-			@Nullable(value = "Can be null anytime") final Object sequence,
-			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
+			@Nullable("Can be null anytime") final Object sequence,
+			@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored
 	                      ) throws Error {
 
 		return XFormattable.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "_, _ -> _", pure = true)
+	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) XPrintableF> printf(
-			@Nullable(value = "Can be null anytime") final Object sequence,
-			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
+			@Nullable("Can be null anytime") final Object sequence,
+			@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored
 	                     ) throws Error {
 
 		return XPrintableF.class;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface SelfPrintable extends Formattable<SelfPrintable> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void print() throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface XPrintable extends Formattable<XPrintable> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void print(final Object sequence) throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface SelfPrintableLN extends Formattable<SelfPrintableLN> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void println() throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface XPrintableLN extends Formattable<XPrintableLN> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void println(final Object sequence) throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface SelfFormattable extends Formattable<SelfFormattable> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void format(final Object... args) throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface SelfFormatted extends Formattable<SelfFormatted> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract(value = "_ -> _", pure = true)
 		@Shadow()
+		@SuppressWarnings("unused")
 		String formatted(final Object... args) throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface SelfPrintableF extends Formattable<SelfPrintableF> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void printf(final Object... args) throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@Blocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface XFormattable extends Formattable<XFormattable> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void format(final Object sequence, final Object... args) throws Error, LatentException;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@FunctionalInterface()
 	@Shadow()
 	non-sealed interface XPrintableF extends Formattable<XPrintableF> {
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@NonExtendable()
 		@Blocking()
 		@Contract()
 		@Shadow()
+		@SuppressWarnings("unused")
 		void printf(final Object sequence, final Object... args) throws Error, LatentException;
 	}
 }

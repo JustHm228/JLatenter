@@ -1,5 +1,6 @@
 ### Added by User ###
 out/
+logs/latest.log
 
 ### Default ###
 target/

@@ -36,11 +36,12 @@ import java.lang.*;
  * @see Shadow
  * @since 0.1-build.1
  */
-@AvailableSince(value = "0.1-build.1")
+@AvailableSince("0.1-build.1")
 @NonExtendable() // <-- Shouldn't be implemented!
 @Blocking() // <-- Potentially blocking context!
 @FunctionalInterface()
 @Shadow() // <-- Just a stub interface
+@SuppressWarnings({ "suppress", "warningToken" })
 public interface Startable {
 
 	/**
@@ -52,11 +53,11 @@ public interface Startable {
 	 * @see Shadow
 	 * @since 0.1-build.1
 	 */
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable() // <-- Shouldn't be implemented!
 	@Blocking() // <-- Potentially blocking context!
 	@Contract() // <-- "pure" is unknown
-	@Shadow()
-	// It's just a stub method:
+	@Shadow() // It's just a stub method
+	@SuppressWarnings("unused")
 	void start() throws Error, LatentException;
 }
