@@ -79,9 +79,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
-	) XPrintable> println(
-			@Nullable(value = "Can be null anytime") final Object ignored
-	                     ) throws Error {
+	) XPrintable> println(@Nullable("Can be null anytime") final Object ignored) throws Error {
 
 		return XPrintable.class;
 	}
@@ -94,7 +92,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) SelfFormattable> format(
-			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
+			@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored
 	                         ) throws Error {
 
 		return SelfFormattable.class;
@@ -108,7 +106,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) SelfFormatted> formatted(
-			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
+			@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored
 	                          ) throws Error {
 
 		return SelfFormatted.class;
@@ -121,9 +119,8 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
-	) SelfPrintableF> printf(
-			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
-	                        ) throws Error {
+	) SelfPrintableF> printf(@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored)
+			throws Error {
 
 		return SelfPrintableF.class;
 	}
@@ -136,8 +133,8 @@ public sealed interface Formattable<T extends Formattable<T>>
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) XFormattable> format(
-			@Nullable(value = "Can be null anytime") final Object sequence,
-			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
+			@Nullable("Can be null anytime") final Object sequence,
+			@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored
 	                      ) throws Error {
 
 		return XFormattable.class;
@@ -151,8 +148,8 @@ public sealed interface Formattable<T extends Formattable<T>>
 	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
 			exception = NullPointerException.class
 	) XPrintableF> printf(
-			@Nullable(value = "Can be null anytime") final Object sequence,
-			@Nullable(value = "Can be null anytime") final Object @Nullable(value = "Can be null anytime") ... ignored
+			@Nullable("Can be null anytime") final Object sequence,
+			@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored
 	                     ) throws Error {
 
 		return XPrintableF.class;
