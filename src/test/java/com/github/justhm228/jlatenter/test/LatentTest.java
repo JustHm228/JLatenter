@@ -89,9 +89,9 @@ public final class LatentTest {
 			}
 		}
 
-		out.println(TEST_NAME + ".testA(): Before non-static run()");
+		out.println(TEST_NAME + ".testA(): Before non-static run() call");
 		as(new RunTest(), Runnable.class).run();
-		out.println(TEST_NAME + ".testA(): After non-static run()");
+		out.println(TEST_NAME + ".testA(): After non-static run() call");
 	}
 
 	@AvailableSince("0.1-build.1")
@@ -130,9 +130,9 @@ public final class LatentTest {
 			}
 		}
 
-		out.println(TEST_NAME + ".testB(): Before static run()");
+		out.println(TEST_NAME + ".testB(): Before static run() call");
 		as(new StaticTest(), Runnable.class).run();
-		out.println(TEST_NAME + ".testB(): After static run()");
+		out.println(TEST_NAME + ".testB(): After static run() call");
 	}
 
 	@AvailableSince("0.1-build.1")
