@@ -340,6 +340,7 @@ public final class LatentTest {
 				return;
 			}
 
+			assertNotNull("How did you get here ._.", result);
 			assertEquals("How did you get here ._.", 0L, ((Integer) result).longValue());
 			out.println(TEST_NAME + ".testC(): \"Failure\" #11 has been checked: An exception hasn't been occurred!");
 		}
