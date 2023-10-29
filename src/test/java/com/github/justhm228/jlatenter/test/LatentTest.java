@@ -282,14 +282,14 @@ public final class LatentTest {
 		// 8 test
 
 		out.println(TEST_NAME + ".testC(): 8 test ended");
-		//		assertTrue("Failure test failed!", thrown);
+		// assertTrue("Failure test failed!", thrown);
 		thrown = false;
 		out.println(TEST_NAME + ".testC(): 9 test started");
 
 		// 9 test
 
 		out.println(TEST_NAME + ".testC(): 9 test ended");
-		//		assertTrue("Failure test failed!", thrown);
+		// assertTrue("Failure test failed!", thrown);
 		thrown = false;
 		out.println(TEST_NAME + ".testC(): 10 test started");
 
