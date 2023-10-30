@@ -1,6 +1,23 @@
 Manifest-Version: 1.0
 Class-Path: annotations-24.0.1.jar
 
+Name: com/github/justhm228/jlatenter/
+Specification-Title: JLatenter
+Specification-Version: 0.1-build.2
+Specification-Vendor: JustHuman228
+Implementation-Title: com.github.justhm228.jlatenter
+Implementation-Version: 0.1-build.2
+Implementation-Vendor: JustHuman228
+
+Name: com/github/justhm228/jlatenter/base/
+Specification-Title: JLatenter
+Specification-Version: 0.1-build.2
+Specification-Vendor: JustHuman228
+Implementation-Title: com.github.justhm228.jlatenter
+Implementation-Version: 0.1-build.2
+Implementation-Vendor: JustHuman228
+
+Name: com/github/justhm228/jlatenter/latent/
 Specification-Title: JLatenter
 Specification-Version: 0.1-build.2
 Specification-Vendor: JustHuman228
