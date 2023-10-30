@@ -22,52 +22,43 @@
  * SOFTWARE.
  */
 
-package com.github.justhm228.jlatenter.latent;
+package com.github.justhm228.jlatenter.latent.stub;
 
 import org.jetbrains.annotations.ApiStatus.*;
 import org.jetbrains.annotations.*;
-import java.lang.annotation.*;
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.*;
+import java.lang.*;
+import com.github.justhm228.jlatenter.latent.*;
 
 /**
- * Just a decorative annotation which should be used to mark all stub interfaces/methods used in
- * {@link Latent latent typing}.
+ * Just a stub interface with <code>{@link #forward() forward}()</code> method (returns <code>void</code>) which can be
+ * used in {@link Latent latent typing}.
  *
  * @author JustHuman228
- * @see Startable
- * @see Stoppable
- * @see Pausable
- * @see Formattable
- * @see Formattable.SelfPrintable
- * @see Formattable.XPrintable
- * @see Formattable.SelfPrintableLN
- * @see Formattable.XPrintableLN
- * @see Formattable.SelfFormattable
- * @see Formattable.SelfFormatted
- * @see Formattable.SelfPrintableF
- * @see Formattable.XFormattable
- * @see Formattable.XPrintableF
- * @see Buildable
- * @see Buildable.XBuildable
- * @see Buildable.SelfBuildable
- * @see Buildable.GenericBuildable
- * @see Buildable.SelfBuildableC
- * @see Buildable.GenericBuildableC
- * @see Renderable
- * @see Drawable
- * @see Paintable
- * @see Steppable
- * @see Gettable
- * @see Puttable
- * @since 0.1-build.1
+ * @see Shadow
+ * @since 0.1-build.2
  */
-@AvailableSince("0.1-build.1")
-@NonExtendable()
-@NonBlocking()
-@Target({ TYPE, METHOD })
-@Retention(RUNTIME)
-@Documented()
-public @interface Shadow {
+@AvailableSince("0.1-build.2")
+@NonExtendable() // <-- Shouldn't be implemented!
+@Blocking() // <-- Potentially blocking context!
+@FunctionalInterface()
+@Shadow() // <-- Just a stub interface
+@SuppressWarnings({ "suppress", "warningToken", "deprecation" })
+public interface Forwardable extends com.github.justhm228.jlatenter.latent.Forwardable {
 
+	/**
+	 * A stub method which can be called with {@link Latent latent typing}.
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws LatentException If something went wrong with {@link Latent latent typing} implementation.
+	 * @see Forwardable
+	 * @see Shadow
+	 * @since 0.1-build.2
+	 */
+	@AvailableSince("0.1-build.2")
+	@NonExtendable() // <-- Shouldn't be implemented!
+	@Blocking() // <-- Potentially blocking context!
+	@Contract() // <-- "pure" is unknown
+	@Shadow() // <-- It's just a stub method
+	@Override()
+	void forward() throws Error, LatentException;
 }

@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2023 JustHuman228
+ * The MIT License
+ *
+ * Copyright (c) 2023 Chirkunov Egor
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +22,7 @@
  * SOFTWARE.
  */
 
-@AvailableSince(value = "0.1-build.1")
-package com.github.justhm228.jlatenter;
+@AvailableSince("0.1-build.2")
+package com.github.justhm228.jlatenter.latent.stub;
 
 import org.jetbrains.annotations.ApiStatus.*;

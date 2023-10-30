@@ -29,11 +29,11 @@ import org.jetbrains.annotations.ApiStatus.*;
 import org.jetbrains.annotations.*;
 import java.lang.*;
 
-@AvailableSince("0.1-build.1")
+@AvailableSince("0.1-build.2")
 @NonExtendable()
 @NonBlocking()
 @SuppressWarnings({ "suppress", "warningToken" })
-public final class InaccessibleLatentException extends LatentException
+public final class LatentPermException extends LatentException
 		implements Serializable {
 
 	// @AvailableSince("0.1-build.2")
@@ -41,48 +41,49 @@ public final class InaccessibleLatentException extends LatentException
 	// @Serial()
 	// private static final long serialVersionUID = 0L; // TODO: 24.10.2023 Uncomment this later
 
-	@AvailableSince("0.1-build.1")
+	@AvailableSince("0.1-build.2")
 	@NonBlocking()
 	@Contract(pure = true)
-	public InaccessibleLatentException(
+	public LatentPermException(
 			@Nullable("Can be null anytime") final String message,
 			@Nullable("Can be null anytime") final Throwable cause
-	                                  ) throws Error {
+	                          ) throws Error {
 
 		super(message, cause);
 	}
 
-	@AvailableSince("0.1-build.1")
+	@AvailableSince("0.1-build.2")
 	@NonBlocking()
 	@Contract(pure = true)
-	public InaccessibleLatentException(
+	@SuppressWarnings("unused")
+	public LatentPermException(
 			@Nullable("Can be null anytime") final Throwable cause
-	                                  ) throws Error {
+	                          ) throws Error {
 
 		super(cause);
 	}
 
-	@AvailableSince("0.1-build.1")
+	@AvailableSince("0.1-build.2")
 	@NonBlocking()
 	@Contract(pure = true)
-	public InaccessibleLatentException(
+	@SuppressWarnings("unused")
+	public LatentPermException(
 			@Nullable("Can be null anytime") final String message
-	                                  ) throws Error {
+	                          ) throws Error {
 
 		super(message);
 	}
 
-	@AvailableSince("0.1-build.1")
+	@AvailableSince("0.1-build.2")
 	@NonBlocking()
 	@Contract(pure = true)
 	@SuppressWarnings("unused")
-	public InaccessibleLatentException() throws Error {
+	public LatentPermException() throws Error {
 
 		super();
 	}
 
-	@AvailableSince("0.1-build.1")
-	@NonExtendable()
+	@AvailableSince("0.1-build.2")
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
@@ -91,8 +92,7 @@ public final class InaccessibleLatentException extends LatentException
 		return super.getLocalizedMessage();
 	}
 
-	@AvailableSince("0.1-build.1")
-	@NonExtendable()
+	@AvailableSince("0.1-build.2")
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
@@ -101,22 +101,19 @@ public final class InaccessibleLatentException extends LatentException
 		return super.getMessage();
 	}
 
-	@AvailableSince("0.1-build.1")
-	@NonExtendable()
+	@AvailableSince("0.1-build.2")
 	@NonBlocking()
 	@Contract("_ -> this")
 	@Override()
-	public synchronized @NotNull(exception = NullPointerException.class) InaccessibleLatentException initCause(
+	public synchronized @NotNull(exception = NullPointerException.class) LatentPermException initCause(
 			@Nullable("Can be null anytime") final Throwable cause
-	                                                                                                          )
-			throws Error {
+	                                                                                                  ) throws Error {
 
 		super.initCause(cause);
 		return this;
 	}
 
-	@AvailableSince("0.1-build.1")
-	@NonExtendable()
+	@AvailableSince("0.1-build.2")
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
@@ -125,13 +122,12 @@ public final class InaccessibleLatentException extends LatentException
 		return super.getCause();
 	}
 
-	@AvailableSince("0.1-build.1")
-	@NonExtendable()
+	@AvailableSince("0.1-build.2")
 	@NonBlocking()
 	@Contract()
 	@Override()
 	public void setStackTrace(
-			@NotNull(exception = NullPointerException.class) final StackTraceElement @NotNull(
+			@NotNull(exception = NullPointerException.class) StackTraceElement @NotNull(
 					exception = NullPointerException.class
 			) [] stacktrace
 	                         ) throws Error, NullPointerException {
@@ -139,20 +135,17 @@ public final class InaccessibleLatentException extends LatentException
 		super.setStackTrace(stacktrace);
 	}
 
-	@AvailableSince("0.1-build.1")
-	@NonExtendable()
+	@AvailableSince("0.1-build.2")
 	@NonBlocking()
 	@Contract(" -> this")
 	@Override()
-	public synchronized @NotNull(exception = NullPointerException.class) InaccessibleLatentException fillInStackTrace()
+	public synchronized @NotNull(exception = NullPointerException.class) LatentException fillInStackTrace()
 			throws Error {
 
-		super.fillInStackTrace();
-		return this;
+		return super.fillInStackTrace();
 	}
 
-	@AvailableSince("0.1-build.1")
-	@NonExtendable()
+	@AvailableSince("0.1-build.2")
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
 	@Override()
@@ -163,10 +156,9 @@ public final class InaccessibleLatentException extends LatentException
 		return super.getStackTrace();
 	}
 
-	@AvailableSince("0.1-build.1")
-	@NonExtendable()
+	@AvailableSince("0.1-build.2")
 	@NonBlocking()
-	@Contract()
+	@Contract(value = "_ -> _")
 	@Override()
 	public void printStackTrace(
 			@NotNull(exception = NullPointerException.class) final PrintStream out
@@ -175,10 +167,9 @@ public final class InaccessibleLatentException extends LatentException
 		super.printStackTrace(out);
 	}
 
-	@AvailableSince("0.1-build.1")
-	@NonExtendable()
+	@AvailableSince("0.1-build.2")
 	@NonBlocking()
-	@Contract()
+	@Contract(value = "_ -> _")
 	@Override()
 	public void printStackTrace(
 			@NotNull(exception = NullPointerException.class) final PrintWriter out
@@ -187,10 +178,9 @@ public final class InaccessibleLatentException extends LatentException
 		super.printStackTrace(out);
 	}
 
-	@AvailableSince("0.1-build.1")
-	@NonExtendable()
+	@AvailableSince("0.1-build.2")
 	@NonBlocking()
-	@Contract()
+	@Contract(value = " -> _")
 	@Override()
 	@SuppressWarnings("CallToPrintStackTrace")
 	public void printStackTrace() throws Error, NullPointerException {
@@ -198,7 +188,7 @@ public final class InaccessibleLatentException extends LatentException
 		super.printStackTrace();
 	}
 
-	@AvailableSince("0.1-build.1")
+	@AvailableSince("0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -208,7 +198,7 @@ public final class InaccessibleLatentException extends LatentException
 		return super.toString();
 	}
 
-	@AvailableSince("0.1-build.1")
+	@AvailableSince("0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
@@ -218,7 +208,7 @@ public final class InaccessibleLatentException extends LatentException
 		return super.equals(another);
 	}
 
-	@AvailableSince("0.1-build.1")
+	@AvailableSince("0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -228,12 +218,12 @@ public final class InaccessibleLatentException extends LatentException
 		return super.hashCode();
 	}
 
-	@AvailableSince("0.1-build.1")
+	@AvailableSince("0.1-build.2")
 	@Internal()
 	@NonExtendable()
 	@NonBlocking()
 	@Contract()
-	@Deprecated(since = "0.1-build.1", forRemoval = true)
+	@Deprecated(since = "0.1-build.2", forRemoval = true)
 	@Override()
 	@SuppressWarnings("removal")
 	protected void finalize() throws Throwable {
