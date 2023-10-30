@@ -44,9 +44,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@Contract(value = " -> _", pure = true)
 	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
-			exception = NullPointerException.class
-	) SelfPrintable> print() throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<SelfPrintable> print() throws Error {
 
 		return SelfPrintable.class;
 	}
@@ -57,9 +55,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@Contract(value = "_ -> _", pure = true)
 	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
-			exception = NullPointerException.class
-	) XPrintable> print(final Object ignored) throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<XPrintable> print(final Object ignored) throws Error {
 
 		return XPrintable.class;
 	}
@@ -70,9 +66,7 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@Contract(value = " -> _", pure = true)
 	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
-			exception = NullPointerException.class
-	) SelfPrintable> println() throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<SelfPrintable> println() throws Error {
 
 		return SelfPrintable.class;
 	}
@@ -83,9 +77,9 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@Contract(value = "_ -> _", pure = true)
 	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
-			exception = NullPointerException.class
-	) XPrintable> println(@Nullable("Can be null anytime") final Object ignored) throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<XPrintable> println(
+			@Nullable("Can be null anytime") final Object ignored
+	                                                                                 ) throws Error {
 
 		return XPrintable.class;
 	}
@@ -96,11 +90,9 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@Contract(value = "_ -> _", pure = true)
 	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
-			exception = NullPointerException.class
-	) SelfFormattable> format(
+	static @NotNull(exception = NullPointerException.class) Class<SelfFormattable> format(
 			@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored
-	                         ) throws Error {
+	                                                                                     ) throws Error {
 
 		return SelfFormattable.class;
 	}
@@ -111,11 +103,9 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@Contract(value = "_ -> _", pure = true)
 	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
-			exception = NullPointerException.class
-	) SelfFormatted> formatted(
+	static @NotNull(exception = NullPointerException.class) Class<SelfFormatted> formatted(
 			@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored
-	                          ) throws Error {
+	                                                                                      ) throws Error {
 
 		return SelfFormatted.class;
 	}
@@ -126,10 +116,9 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@Contract(value = "_ -> _", pure = true)
 	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
-			exception = NullPointerException.class
-	) SelfPrintableF> printf(@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored)
-			throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<SelfPrintableF> printf(
+			@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored
+	                                                                                    ) throws Error {
 
 		return SelfPrintableF.class;
 	}
@@ -140,12 +129,10 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@Contract(value = "_, _ -> _", pure = true)
 	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
-			exception = NullPointerException.class
-	) XFormattable> format(
+	static @NotNull(exception = NullPointerException.class) Class<XFormattable> format(
 			@Nullable("Can be null anytime") final Object sequence,
 			@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored
-	                      ) throws Error {
+	                                                                                  ) throws Error {
 
 		return XFormattable.class;
 	}
@@ -156,12 +143,11 @@ public sealed interface Formattable<T extends Formattable<T>>
 	@Contract(value = "_, _ -> _", pure = true)
 	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
-	static @NotNull(exception = NullPointerException.class) Class<@NotNull(
-			exception = NullPointerException.class
-	) XPrintableF> printf(
-			@Nullable("Can be null anytime") final Object sequence,
-			@Nullable("Can be null anytime") final Object @Nullable("Can be null anytime") ... ignored
-	                     ) throws Error {
+	static @NotNull(exception = NullPointerException.class) Class<XPrintableF> printf(
+			final Object sequence, final Object @Nullable(
+			"Can be null anytime"
+	) ... ignored
+	                                                                                 ) throws Error {
 
 		return XPrintableF.class;
 	}
