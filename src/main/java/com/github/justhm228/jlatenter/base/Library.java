@@ -87,10 +87,11 @@ public final class Library {
 	@AvailableSince("0.1-build.2")
 	@NotNull(exception = NullPointerException.class)
 	@SuppressWarnings("unused") // <-- This constant WILL BE used
+	// Obtain the author name from `MANIFEST.MF`:
 	public static final String AUTHOR = requireNonNullElse(
 			Library.class.getPackage().getSpecificationVendor(),
 			"JustHuman228"
-	                                                      ); // <-- Obtain the author name from `MANIFEST.MF`
+	                                                      );
 
 	/**
 	 * A link to the project repository.
@@ -110,10 +111,11 @@ public final class Library {
 	@AvailableSince("0.1-build.2")
 	@NotNull(exception = NullPointerException.class)
 	@SuppressWarnings("unused") // <-- This constant WILL BE used
+	// Obtain the project name from `MANIFEST.MF`:
 	public static final String NAME = requireNonNullElse(
 			Library.class.getPackage().getSpecificationTitle(),
 			"JLatenter"
-	                                                    ); // <-- Obtain the project name from `MANIFEST.MF`
+	                                                    );
 
 	/**
 	 * An internal name of the implementation.
@@ -145,11 +147,11 @@ public final class Library {
 	@AvailableSince("0.1-build.2")
 	@NotNull(exception = NullPointerException.class)
 	@SuppressWarnings("unused") // <-- This constant WILL BE used
+	// Obtain the project version's display name from `MANIFEST.MF`:
 	public static final String VERSION = requireNonNullElse(
 			Library.class.getPackage().getSpecificationVersion(),
 			"0.1-build.2"
 	                                                       );
-			// <-- Obtain the project version's display name from `MANIFEST.MF`
 
 	/**
 	 * An integer version identifier of the used implementation.
