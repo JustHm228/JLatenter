@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2023 JustHuman228
+ * The MIT License
+ *
+ * Copyright (c) 2023 Chirkunov Egor
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +25,7 @@
 package com.github.justhm228.jlatenter.test;
 
 import com.github.justhm228.jlatenter.latent.*;
+import static com.github.justhm228.jlatenter.base.Library.*;
 import static com.github.justhm228.jlatenter.latent.Latent.*;
 import static java.lang.System.*;
 import java.util.*;
@@ -33,12 +36,17 @@ import java.lang.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-@AvailableSince(value = "0.1-build.1")
+@AvailableSince("0.1-build.1")
 @NonExtendable()
-@NonBlocking()
+@SuppressWarnings({ "suppress", "warningToken" })
 public final class LatentTest {
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
+	@Internal()
+	@NotNull(exception = NullPointerException.class)
+	private static final String TEST_NAME = LatentTest.class.getSimpleName();
+
+	@AvailableSince("0.1-build.1")
 	@NonBlocking()
 	@Contract(pure = true)
 	public LatentTest() throws Error {
@@ -46,18 +54,20 @@ public final class LatentTest {
 		super();
 	}
 
+	@AvailableSince("0.1-build.1")
+	@NonExtendable()
+	@NonBlocking()
+	@Contract()
 	@Test()
 	public void testA() throws Error {
 
-		out.println("testA(): Before run() test");
-
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@Internal()
 		@NonExtendable()
 		@NonBlocking()
 		final class RunTest {
 
-			@AvailableSince(value = "0.1-build.1")
+			@AvailableSince("0.1-build.1")
 			@Internal()
 			@NonBlocking()
 			@Contract(pure = true)
@@ -66,36 +76,39 @@ public final class LatentTest {
 				super();
 			}
 
-			@AvailableSince(value = "0.1-build.1")
+			@AvailableSince("0.1-build.1")
 			@Internal()
 			@NonExtendable()
 			@NonBlocking()
-			@Contract()
+			@Contract(" -> _")
+			@SuppressWarnings("unused")
 			public int run() throws Error {
 
-				out.println("run(): Hello World!");
+				out.println(TEST_NAME + ".$.run(): Hello World!");
 				return 0;
 			}
 		}
 
-		out.println("testA(): Before run()");
+		out.println(TEST_NAME + ".testA(): Before non-static run() call");
 		as(new RunTest(), Runnable.class).run();
-		out.println("testA(): After run()");
-		out.println("testA(): After run() test");
+		out.println(TEST_NAME + ".testA(): After non-static run() call");
 	}
 
+	@AvailableSince("0.1-build.1")
+	@NonExtendable()
+	@NonBlocking()
+	@Contract()
 	@Test()
+	@SuppressWarnings("InstantiationOfUtilityClass")
 	public void testB() throws Error {
 
-		out.println("testB(): Before static run() test");
-
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@Internal()
 		@NonExtendable()
 		@NonBlocking()
 		final class StaticTest {
 
-			@AvailableSince(value = "0.1-build.1")
+			@AvailableSince("0.1-build.1")
 			@Internal()
 			@NonBlocking()
 			@Contract(pure = true)
@@ -104,36 +117,41 @@ public final class LatentTest {
 				super();
 			}
 
-			@AvailableSince(value = "0.1-build.1")
+			@AvailableSince("0.1-build.1")
 			@Internal()
 			@NonExtendable()
 			@NonBlocking()
-			@Contract()
+			@Contract(" -> _")
+			@SuppressWarnings("unused")
 			public static int run() throws Error {
 
-				out.println("static run(): Hello World!");
+				out.println(TEST_NAME + ".$.static run(): Hello World!");
 				return 0;
 			}
 		}
 
-		out.println("testB(): Before static run()");
+		out.println(TEST_NAME + ".testB(): Before static run() call");
 		as(new StaticTest(), Runnable.class).run();
-		out.println("testB(): After static run()");
-		out.println("testB(): After static run() test");
+		out.println(TEST_NAME + ".testB(): After static run() call");
 	}
 
+	@AvailableSince("0.1-build.1")
+	@NonExtendable()
+	@Blocking()
+	@Contract()
 	@Test()
+	@SuppressWarnings({ "CallToPrintStackTrace", "UnusedAssignment", "noEffectAssign" })
 	public void testC() throws Error {
 
-		out.println("testC(): Before failure test");
+		out.println(TEST_NAME + ".testC(): Before failure test");
 
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@Internal()
 		@NonExtendable()
 		@NonBlocking()
 		final class FailureTest {
 
-			@AvailableSince(value = "0.1-build.1")
+			@AvailableSince("0.1-build.1")
 			@Internal()
 			@NonBlocking()
 			@Contract(pure = true)
@@ -142,154 +160,187 @@ public final class LatentTest {
 				super();
 			}
 
+			@AvailableSince("0.1-build.1")
+			@Internal()
+			@NonExtendable()
+			@NonBlocking()
+			@Contract(" -> _")
+			@SuppressWarnings("unused")
 			public int call() throws Error {
 
-				out.println("call(): Hello World!");
+				out.println(TEST_NAME + ".$.call(): Hello World!");
 				return 0;
 			}
 
-			public void append(final CharSequence sequence) throws Error {
+			@AvailableSince("0.1-build.1")
+			@Internal()
+			@NonExtendable()
+			@NonBlocking()
+			@Contract(value = "_ -> fail", pure = true)
+			@SuppressWarnings("unused")
+			public void append(
+					@Nullable("Can be null anytime") @SuppressWarnings("ignored") final CharSequence sequence
+			                  ) throws Error {
 
 				fail("How did you get here ._.");
 			}
 
+			@AvailableSince("0.1-build.1")
+			@Internal()
+			@NonExtendable()
+			@NonBlocking()
+			@Contract(value = " -> fail", pure = true)
+			@SuppressWarnings("unused")
 			public Iterator<?> iterator() throws Error, UnsupportedOperationException {
 
 				throw new UnsupportedOperationException("iterator() is unsupported!");
 			}
 		}
 
+		@NotNull(exception = NullPointerException.class)
 		final FailureTest test = new FailureTest();
 
 		boolean thrown = false;
 
-		out.println("testC(): 1 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #1...");
 
 		try {
 
-			as(null, null);
+			@SuppressWarnings("ignored")
+			final Object ignored = as(null, null);
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			thrown = true;
 			nullPointer.printStackTrace();
 		}
 
-		out.println("testC(): 1 test ended");
-		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #1 has been checked!");
+		assertTrue("Failure #1 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println("testC(): 2 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #2...");
 
 		try {
 
-			as(test, null);
+			@SuppressWarnings("ignored")
+			final Object ignored = as(test, null);
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			thrown = true;
 			nullPointer.printStackTrace();
 		}
 
-		out.println("testC(): 2 test ended");
-		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #2 has been checked!");
+		assertTrue("Failure #2 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println("testC(): 3 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #2...");
 
 		try {
 
-			as(null, Runnable.class);
+			@SuppressWarnings("ignored")
+			final Object ignored = as(null, Runnable.class);
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			thrown = true;
 			nullPointer.printStackTrace();
 		}
 
-		out.println("testC(): 3 test ended");
-		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #3 has been checked!");
+		assertTrue("Failure #3 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println("testC(): 4 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #4...");
 
 		try {
 
-			as(test, Thread.class);
+			@SuppressWarnings("ignored")
+			final Object ignored = as(test, Thread.class);
 
-		} catch (final IllegalArgumentException notInterface) {
+		} catch (@NotNull(exception = NullPointerException.class) final IllegalArgumentException notInterface) {
 
 			thrown = true;
 			notInterface.printStackTrace();
 		}
 
-		out.println("testC(): 4 test ended");
-		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #4 has been checked!");
+		assertTrue("Failure #4 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println("testC(): 5 test started");
-		as(test, Runnable.class);
-		out.println("testC(): 5 test ended");
-		out.println("testC(): 6 test started");
+		out.println(TEST_NAME + ".testC(): Checking \"failure\" #5...");
+
+		{
+
+			@NotNull(exception = NullPointerException.class)
+			@SuppressWarnings("ignored")
+			final Object ignored = as(test, Runnable.class);
+		}
+
+		out.println(TEST_NAME + ".testC(): \"Failure\" #5 has been checked: No exception has occurred!");
+		out.println(TEST_NAME + ".testC(): Checking failure #6...");
 
 		try {
 
 			as(test, Runnable.class).run();
 
-		} catch (final LatentNotPresentException notFound) {
+		} catch (@NotNull(exception = NullPointerException.class) final LatentNotPresentException notFound) {
 
 			thrown = true;
 			notFound.printStackTrace();
 		}
 
-		out.println("testC(): 6 test ended");
-		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #6 has been checked!");
+		assertTrue("Failure #6 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println("testC(): 7 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #7...");
 
 		try {
 
 			as(test, Appendable.class).append("Hello World!").append("How did you get here ._.");
 
-		} catch (final IncompatibleLatentException incompatible) {
+		} catch (@NotNull(exception = NullPointerException.class) final IncompatibleLatentException incompatible) {
 
 			thrown = true;
 			incompatible.printStackTrace();
 
-		} catch (final Exception impossible) {
+		} catch (@NotNull(exception = NullPointerException.class) @SuppressWarnings("ignored") final
+		Exception impossible) {
 
 			fail("How did you get here ._.");
 			return;
 		}
 
-		out.println("testC(): 7 test ended");
-		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #7 has been checked!");
+		assertTrue("Failure #7 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println("testC(): 8 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #8...");
 
-		// 8 test
+		// TODO: 29.10.2023 Insert here a code of failure #8 later...
 
-		out.println("testC(): 8 test ended");
-//		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #8 has been checked!");
+		// assertTrue("Failure #8 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println("testC(): 9 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #9...");
 
-		// 9 test
+		// TODO: 29.10.2023 Insert here a code of failure #9 later...
 
-		out.println("testC(): 9 test ended");
-//		assertTrue("Failure test failed!", thrown);
+		out.println(TEST_NAME + ".testC(): Failure #9 has been checked!");
+		// assertTrue("Failure #9 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println("testC(): 10 test started");
+		out.println(TEST_NAME + ".testC(): Checking failure #10...");
 
 		try {
 
 			as(test, Iterable.class).iterator();
 
-		} catch (final LatentTargetException target) {
+		} catch (@NotNull(exception = NullPointerException.class) final LatentTargetException target) {
 
 			thrown = true;
 			target.printStackTrace();
 		}
 
-		out.println("testC(): 10 test ended");
-		assertTrue("Failure test failed!", thrown);
-		thrown = false;
+		out.println(TEST_NAME + ".testC(): Failure #10 has been checked!");
+		assertTrue("Failure #10 hasn't been occurred!", thrown);
+		out.println(TEST_NAME + ".testC(): Checking \"failure\" #11...");
 
 		{
 
@@ -299,31 +350,36 @@ public final class LatentTest {
 
 				result = as(test, Callable.class).call();
 
-			} catch (final Throwable anything) {
+			} catch (@NotNull(exception = NullPointerException.class) final Throwable anything) {
 
 				anything.printStackTrace();
-				fail("Failure test failed!");
+				fail("\"Failure\" #11 has been checked: An exception has occurred!");
 				return;
 			}
 
+			assertNotNull("How did you get here ._.", result);
 			assertEquals("How did you get here ._.", 0L, ((Integer) result).longValue());
+			out.println(TEST_NAME + ".testC(): \"Failure\" #11 has been checked: No exception has occurred!");
 		}
 
-		out.println("testC(): After failure test");
+		out.println(TEST_NAME + ".testC(): After failure test");
 	}
 
+	@AvailableSince("0.1-build.1")
+	@NonExtendable()
+	@NonBlocking()
+	@Contract()
 	@Test()
+	@SuppressWarnings({ "deprecation", "CallToPrintStackTrace" })
 	public void testD() throws Error {
 
-		out.println("testD(): Before \"isShadowed()-like\" test");
-
-		@AvailableSince(value = "0.1-build.1")
+		@AvailableSince("0.1-build.1")
 		@Internal()
 		@NonExtendable()
 		@NonBlocking()
 		final class StaticTest {
 
-			@AvailableSince(value = "0.1-build.1")
+			@AvailableSince("0.1-build.1")
 			@Internal()
 			@NonBlocking()
 			@Contract(pure = true)
@@ -332,22 +388,24 @@ public final class LatentTest {
 				super();
 			}
 
-			@AvailableSince(value = "0.1-build.1")
+			@AvailableSince("0.1-build.1")
 			@Internal()
 			@NonExtendable()
 			@NonBlocking()
-			@Contract()
+			@Contract(" -> _")
+			@SuppressWarnings("unused")
 			public static int run() throws Error {
 
-				out.println("run(): Hello World!");
+				out.println(TEST_NAME + ".$.run(): Hello World!");
 				return 0;
 			}
 		}
 
 		@NotNull(exception = NullPointerException.class)
+		@SuppressWarnings("InstantiationOfUtilityClass")
 		final StaticTest test = new StaticTest();
 
-		out.println("testD(): Before \"isShadowed()-like\"");
+		out.println(TEST_NAME + ".testD(): Before \"isShadowed()-like\" calls");
 
 		@NotNull(exception = NullPointerException.class)
 		final Runnable shadow = as(test, Runnable.class);
@@ -358,12 +416,13 @@ public final class LatentTest {
 
 		try {
 
+			@SuppressWarnings("ignored")
 			final Void ignored = find(shadow, Void.class);
 
 			fail("How did you get here ._.");
 			return;
 
-		} catch (final ClassCastException cast) {
+		} catch (@NotNull(exception = NullPointerException.class) final ClassCastException cast) {
 
 			cast.printStackTrace();
 		}
@@ -373,27 +432,29 @@ public final class LatentTest {
 
 		try {
 
+			@SuppressWarnings("ignored")
 			final Object ignored = find(null);
 
 			fail("How did you get here ._.");
 			return;
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			nullPointer.printStackTrace();
 		}
 
 		try {
 
+			@SuppressWarnings("ignored")
 			final Void ignored = find(null, Void.class);
 
 			fail("How did you get here ._.");
 
-		} catch (final NullPointerException nullPointer) {
+		} catch (@NotNull(exception = NullPointerException.class) final NullPointerException nullPointer) {
 
 			nullPointer.printStackTrace();
 
-		} catch (final ClassCastException cast) {
+		} catch (@NotNull(exception = NullPointerException.class) final ClassCastException cast) {
 
 			fail("How did you get here ._.");
 			return;
@@ -405,18 +466,17 @@ public final class LatentTest {
 
 			assertNotNull("\"isShadowed()-like\" test failed!", find(shadow, Void.class));
 
-		} catch (final ClassCastException cast) {
+		} catch (@NotNull(exception = NullPointerException.class) final ClassCastException cast) {
 
 			fail("How did you get here ._.");
 			return;
 		}
 
 		assertNotNull("\"isShadowed()-like\" test failed!", find(shadow));
-		out.println("testD(): After \"isShadowed()-like\"");
-		out.println("testD(): After \"isShadowed()-like\" test");
+		out.println(TEST_NAME + ".testD(): After \"isShadowed()-like\" calls");
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -426,17 +486,17 @@ public final class LatentTest {
 		return super.toString();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	@Override()
-	public boolean equals(@Nullable(value = "Can be null anytime") final Object another) throws Error {
+	public boolean equals(@Nullable("Can be null anytime") final Object another) throws Error {
 
 		return another instanceof LatentTest;
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -446,26 +506,27 @@ public final class LatentTest {
 		return super.hashCode();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
-	@Internal()
+	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> fail", pure = true)
-	@Deprecated(since = "0.1-build.1")
 	@Override()
+	@SuppressWarnings({ "super", "CloneDoesntCallSuperClone" })
 	protected LatentTest clone() throws Error, CloneNotSupportedException {
 
-		throw new CloneNotSupportedException(getClass().getTypeName());
+		// throw new CloneNotSupportedException(getClass().getTypeName());
+
+		return preventClone();
 	}
 
-	@AvailableSince(value = "0.1-build.1")
+	@AvailableSince("0.1-build.1")
 	@Internal()
 	@NonExtendable()
 	@NonBlocking()
 	@Contract()
 	@Deprecated(since = "0.1-build.1", forRemoval = true)
 	@Override()
-	@SuppressWarnings(value = { "removal" })
+	@SuppressWarnings("removal")
 	protected void finalize() throws Throwable {
 
 		super.finalize();

@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="JLatenter: Test" type="JUnit" factoryName="JUnit" editBeforeRun="true" focusToolWindowBeforeRun="true">
+  <configuration default="false" name="Test" type="JUnit" factoryName="JUnit" editBeforeRun="true" focusToolWindowBeforeRun="true">
     <output_file path="logs/latest.log" is_save="true" />
     <module name="jlatenter" />
     <option name="PACKAGE_NAME" value="com.github.justhm228.jlatenter.test" />
