@@ -30,15 +30,18 @@ import java.lang.*;
 
 @AvailableSince("0.1-build.1")
 @NonExtendable()
+@Deprecated(since = "0.1-build.2")
 @SuppressWarnings({ "suppress", "warningToken" })
 public sealed interface Buildable<T extends Buildable<T>>
-		permits Buildable.XBuildable, Buildable.SelfBuildable, Buildable.GenericBuildable, Buildable.SelfBuildableC,
+		permits com.github.justhm228.jlatenter.latent.stub.Buildable, Buildable.XBuildable, Buildable.SelfBuildable,
+		        Buildable.GenericBuildable, Buildable.SelfBuildableC,
 		        Buildable.GenericBuildableC {
 
 	@AvailableSince("0.1-build.1")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
+	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<XBuildable> buildX() throws Error {
 
@@ -49,6 +52,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
+	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<SelfBuildable> buildSelf() throws Error {
 
@@ -59,6 +63,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
+	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<GenericBuildable> buildGeneric() throws Error {
 
@@ -69,6 +74,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
+	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<SelfBuildableC> buildSelfC() throws Error {
 
@@ -79,6 +85,7 @@ public sealed interface Buildable<T extends Buildable<T>>
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
+	@Deprecated(since = "0.1-build.2")
 	@SuppressWarnings("unused")
 	static @NotNull(exception = NullPointerException.class) Class<GenericBuildableC> buildGenericC() throws Error {
 
