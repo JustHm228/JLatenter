@@ -140,7 +140,7 @@ public final class LatentTest {
 	@Blocking()
 	@Contract()
 	@Test()
-	@SuppressWarnings({ "CallToPrintStackTrace", "noEffectAssign" })
+	@SuppressWarnings({ "CallToPrintStackTrace", "UnusedAssignment", "noEffectAssign" })
 	public void testC() throws Error {
 
 		out.println(TEST_NAME + ".testC(): Before failure test");
