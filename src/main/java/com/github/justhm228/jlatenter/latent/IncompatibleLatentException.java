@@ -213,9 +213,7 @@ public final class IncompatibleLatentException extends LatentException
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	@Override()
-	public boolean equals(
-			@Nullable("Can be null anytime") final Object another
-	                     ) throws Error {
+	public boolean equals(@Nullable("Can be null anytime") final Object another) throws Error {
 
 		return super.equals(another);
 	}
@@ -237,7 +235,7 @@ public final class IncompatibleLatentException extends LatentException
 	@Contract()
 	@Deprecated(since = "0.1-build.1", forRemoval = true)
 	@Override()
-	@SuppressWarnings(value = { "removal" })
+	@SuppressWarnings("removal")
 	protected void finalize() throws Throwable {
 
 		super.finalize();

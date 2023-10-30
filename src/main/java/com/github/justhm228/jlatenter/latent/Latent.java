@@ -554,9 +554,10 @@ public final class Latent {
 				                                                    ); // <- The proxied method
 
 				@NotNull(exception = NullPointerException.class)
-				Class<?> obtained = proxied.getReturnType(), // <- The return value of the proxied method
+				Class<?> obtained = proxied.getReturnType(); // <- The return value of the proxied method
 
-						casted = method.getReturnType(); // <- The return value of the called method
+				@NotNull(exception = NullPointerException.class)
+				Class<?> casted = method.getReturnType(); // <- The return value of the called method
 
 				boolean defVoid = false; // <- If the current method returns primitive `void`
 

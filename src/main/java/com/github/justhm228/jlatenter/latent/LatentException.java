@@ -206,9 +206,7 @@ public abstract sealed class LatentException extends RuntimeException
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
 	@Override()
-	public boolean equals(
-			@Nullable(value = "Can be null anytime") final Object another
-	                     ) throws Error {
+	public boolean equals(@Nullable(value = "Can be null anytime") final Object another) throws Error {
 
 		return super.equals(another);
 	}
@@ -244,7 +242,7 @@ public abstract sealed class LatentException extends RuntimeException
 	@Contract()
 	@Deprecated(since = "0.1-build.1", forRemoval = true)
 	@Override()
-	@SuppressWarnings(value = { "removal" })
+	@SuppressWarnings("removal")
 	protected void finalize() throws Throwable {
 
 		super.finalize();

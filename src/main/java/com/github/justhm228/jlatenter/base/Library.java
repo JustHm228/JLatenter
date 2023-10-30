@@ -86,54 +86,70 @@ public final class Library {
 	 */
 	@AvailableSince("0.1-build.2")
 	@NotNull(exception = NullPointerException.class)
-	@SuppressWarnings("unused") // <-- These constants WILL BE used
+	@SuppressWarnings("unused") // <-- This constant WILL BE used
 	public static final String AUTHOR = requireNonNullElse(
 			Library.class.getPackage().getSpecificationVendor(),
 			"JustHuman228"
-	                                                      ), // <-- Obtain the author name from `MANIFEST.MF`
+	                                                      ); // <-- Obtain the author name from `MANIFEST.MF`
 
 	/**
 	 * A link to the project repository.
 	 *
 	 * @since 0.1-build.2
 	 */
-	URL = "https://github.com/JustHm228/JLatenter",
+	@AvailableSince("0.1-build.2")
+	@NotNull(exception = NullPointerException.class)
+	@SuppressWarnings("unused") // <-- This constant WILL BE used
+	public static String URL = "https://github.com/JustHm228/JLatenter";
 
 	/**
 	 * A {@link String string} display name/title of the implementation.
 	 *
 	 * @since 0.1-build.2
 	 */
-	NAME = requireNonNullElse(
+	@AvailableSince("0.1-build.2")
+	@NotNull(exception = NullPointerException.class)
+	@SuppressWarnings("unused") // <-- This constant WILL BE used
+	public static final String NAME = requireNonNullElse(
 			Library.class.getPackage().getSpecificationTitle(),
 			"JLatenter"
-	                         ), // <-- Obtain the project name from `MANIFEST.MF`
+	                                                    ); // <-- Obtain the project name from `MANIFEST.MF`
 
 	/**
 	 * An internal name of the implementation.
 	 *
 	 * @since 0.1-build.2
 	 */
-	INTERNAL_NAME = "jlatenter",
+	@AvailableSince("0.1-build.2")
+	@NotNull(exception = NullPointerException.class)
+	@SuppressWarnings("unused") // <-- This constant WILL BE used
+	public static final String INTERNAL_NAME = "jlatenter";
 
 	/**
 	 * A short {@link String string} description of the implementation.
 	 *
 	 * @since 0.1-build.2
 	 */
-	DESCRIPTION =
+	@AvailableSince("0.1-build.2")
+	@NotNull(exception = NullPointerException.class)
+	@SuppressWarnings("unused") // <-- This constant WILL BE used
+	public static final String DESCRIPTION =
 			"A small library which allows you to \"interpret\" any object of any type as an object that implements " +
-			"an interface you specify",
+			"an interface you specify";
 
 	/**
 	 * A {@link String string} version name of the used implementation.
 	 *
 	 * @since 0.1-build.2
 	 */
-	VERSION = requireNonNullElse(
+	@AvailableSince("0.1-build.2")
+	@NotNull(exception = NullPointerException.class)
+	@SuppressWarnings("unused") // <-- This constant WILL BE used
+	public static final String VERSION = requireNonNullElse(
 			Library.class.getPackage().getSpecificationVersion(),
 			"0.1-build.2"
-	                            ); // <-- Obtain the project version's display name from `MANIFEST.MF`
+	                                                       );
+			// <-- Obtain the project version's display name from `MANIFEST.MF`
 
 	/**
 	 * An integer version identifier of the used implementation.
