@@ -37,7 +37,7 @@
 
 	<groupId>com.github.justhm228</groupId>
 	<artifactId>jlatenter</artifactId>
-	<version>0.1-build.2</version>
+	<version>0.1-build.3</version>
 	<packaging>jar</packaging>
 
 	<developers>
