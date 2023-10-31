@@ -637,7 +637,8 @@ public final class Latent {
 					}
 				}
 
-				if (defVoid || casted.isAssignableFrom(obtained)) { // If the return values are compatible:
+				if (defVoid || (!Objects.equals(obtained, Void.class) &&
+						casted.isAssignableFrom(obtained))) { // If the return values are compatible:
 
 					// Try set the method to be accessible:
 					if (!proxied.canAccess(Modifier.isStatic(proxied.getModifiers()) ? null : shadowed)) {
