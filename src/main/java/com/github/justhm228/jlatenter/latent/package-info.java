@@ -22,6 +22,11 @@
  * SOFTWARE.
  */
 
+/**
+ * Stores the "general" implementation of {@link com.github.justhm228.jlatenter.latent.Latent latent typing}.
+ *
+ * @since 0.1-build.1
+ */
 @AvailableSince("0.1-build.1")
 package com.github.justhm228.jlatenter.latent;
 
