@@ -22,6 +22,11 @@
  * SOFTWARE.
  */
 
+/**
+ * Stores all classes of the JLatenter library.
+ *
+ * @since 0.1-build.1
+ */
 @AvailableSince("0.1-build.1")
 package com.github.justhm228.jlatenter;
 
