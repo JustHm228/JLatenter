@@ -22,6 +22,11 @@
  * SOFTWARE.
  */
 
+/**
+ * Stores all built-in {@link com.github.justhm228.jlatenter.latent.Shadow stub} interfaces.
+ *
+ * @since 0.1-build.2
+ */
 @AvailableSince("0.1-build.2")
 package com.github.justhm228.jlatenter.latent.stub;
 
