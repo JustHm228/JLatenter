@@ -22,6 +22,19 @@
  * SOFTWARE.
  */
 
+/**
+ * Stores all the unit tests of the JLatenter library.
+ *
+ * <p>
+ * <b>
+ * This package is considered internal, so the user can't and shouldn't access anything in this module, including
+ * Javadocs. All the Javadocs here provided only and only because why not, and not included in the global
+ * documentation.
+ * </b>
+ * </p>
+ *
+ * @since 0.1-build.1
+ */
 @AvailableSince("0.1-build.1")
 package com.github.justhm228.jlatenter.test;
 
