@@ -27,11 +27,11 @@ package com.github.justhm228.jlatenter.test;
 import org.jetbrains.annotations.*;
 import org.jetbrains.annotations.ApiStatus.*;
 import org.junit.*;
+import org.junit.rules.*;
 import static com.github.justhm228.jlatenter.base.Library.*;
 import static java.lang.System.*;
 import static org.junit.Assert.*;
 import static java.util.Objects.*;
-import org.junit.rules.*;
 
 /**
  * Tests the internal functions of the JLatenter library.
