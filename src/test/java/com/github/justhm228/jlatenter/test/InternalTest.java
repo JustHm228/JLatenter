@@ -240,7 +240,7 @@ public final class InternalTest {
 	@Override()
 	public @NotNull(exception = NullPointerException.class) String toString() throws Error {
 
-		return getClass().getSimpleName();
+		return TEST_NAME;
 	}
 
 	/**
