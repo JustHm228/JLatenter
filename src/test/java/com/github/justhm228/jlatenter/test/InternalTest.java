@@ -65,7 +65,7 @@ public final class InternalTest {
 	 *
 	 * @since 0.1-build.4
 	 */
-	@AvailableSince(value = "0.1-build.4")
+	@AvailableSince("0.1-build.4")
 	@Internal()
 	@NotNull(exception = NullPointerException.class)
 	private static final String TEST_NAME = InternalTest.class.getSimpleName(); // A string name of the current test
@@ -197,7 +197,7 @@ public final class InternalTest {
 	 * @throws CloneNotSupportedException Should be thrown anyway.
 	 * @since 0.1-build.2
 	 */
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract()
@@ -236,7 +236,7 @@ public final class InternalTest {
 	 * @throws Error If something went wrong in the JVM.
 	 * @throws AssertionError If the test failed.
 	 */
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract()
@@ -280,7 +280,7 @@ public final class InternalTest {
 	 * @throws Error If something went wrong in the JVM.
 	 * @since 0.1-build.2
 	 */
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -301,7 +301,7 @@ public final class InternalTest {
 	 * @return If {@link InternalTest this object} is equal to the {@link Object argument}, then returns <code>true</code>, otherwise - <code>false</code>.
 	 * @throws Error If something went wrong in the JVM.
 	 */
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = "null -> false; !null -> _", pure = true)
@@ -322,7 +322,7 @@ public final class InternalTest {
 	 * @throws Error If something went wrong in the JVM.
 	 * @since 0.1-build.2
 	 */
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
 	@Contract(value = " -> _", pure = true)
@@ -345,7 +345,7 @@ public final class InternalTest {
 	 * @throws CloneNotSupportedException Always.
 	 * @since 0.1-build.2
 	 */
-	@AvailableSince(value = "0.1-build.2")
+	@AvailableSince("0.1-build.2")
 	@Internal()
 	@NonExtendable()
 	@NonBlocking()
