@@ -234,7 +234,7 @@ public final class InternalTest {
 	@Override()
 	public @NotNull(exception = NullPointerException.class) String toString() throws Error {
 
-		return super.toString();
+		return getClass().getSimpleName();
 	}
 
 	/**
