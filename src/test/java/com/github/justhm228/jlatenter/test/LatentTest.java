@@ -35,6 +35,7 @@ import org.jetbrains.annotations.*;
 import java.lang.*;
 import org.junit.*;
 import static org.junit.Assert.*;
+import org.junit.rules.*;
 
 @AvailableSince("0.1-build.1")
 @NonExtendable()
@@ -45,6 +46,12 @@ public final class LatentTest {
 	@Internal()
 	@NotNull(exception = NullPointerException.class)
 	private static final String TEST_NAME = LatentTest.class.getSimpleName();
+
+	@AvailableSince("0.1-build.4")
+	@Internal()
+	@NotNull(exception = NullPointerException.class)
+	@Rule()
+	public final TestName status = new TestName();
 
 	@AvailableSince("0.1-build.1")
 	@NonBlocking()
@@ -89,9 +96,9 @@ public final class LatentTest {
 			}
 		}
 
-		out.println(TEST_NAME + ".testA(): Before non-static run() call");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Before non-static run() call");
 		as(new RunTest(), Runnable.class).run();
-		out.println(TEST_NAME + ".testA(): After non-static run() call");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): After non-static run() call");
 	}
 
 	@AvailableSince("0.1-build.1")
@@ -130,9 +137,9 @@ public final class LatentTest {
 			}
 		}
 
-		out.println(TEST_NAME + ".testB(): Before static run() call");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Before static run() call");
 		as(new StaticTest(), Runnable.class).run();
-		out.println(TEST_NAME + ".testB(): After static run() call");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): After static run() call");
 	}
 
 	@AvailableSince("0.1-build.1")
@@ -143,7 +150,7 @@ public final class LatentTest {
 	@SuppressWarnings({ "CallToPrintStackTrace", "UnusedAssignment", "noEffectAssign" })
 	public void testC() throws Error {
 
-		out.println(TEST_NAME + ".testC(): Before failure test");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Before failure test");
 
 		@AvailableSince("0.1-build.1")
 		@Internal()
@@ -202,7 +209,7 @@ public final class LatentTest {
 
 		boolean thrown = false;
 
-		out.println(TEST_NAME + ".testC(): Checking failure #1...");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Checking failure #1...");
 
 		try {
 
@@ -215,10 +222,10 @@ public final class LatentTest {
 			nullPointer.printStackTrace();
 		}
 
-		out.println(TEST_NAME + ".testC(): Failure #1 has been checked!");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Failure #1 has been checked!");
 		assertTrue("Failure #1 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): Checking failure #2...");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Checking failure #2...");
 
 		try {
 
@@ -231,10 +238,10 @@ public final class LatentTest {
 			nullPointer.printStackTrace();
 		}
 
-		out.println(TEST_NAME + ".testC(): Failure #2 has been checked!");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Failure #2 has been checked!");
 		assertTrue("Failure #2 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): Checking failure #2...");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Checking failure #2...");
 
 		try {
 
@@ -247,10 +254,10 @@ public final class LatentTest {
 			nullPointer.printStackTrace();
 		}
 
-		out.println(TEST_NAME + ".testC(): Failure #3 has been checked!");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Failure #3 has been checked!");
 		assertTrue("Failure #3 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): Checking failure #4...");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Checking failure #4...");
 
 		try {
 
@@ -263,10 +270,10 @@ public final class LatentTest {
 			notInterface.printStackTrace();
 		}
 
-		out.println(TEST_NAME + ".testC(): Failure #4 has been checked!");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Failure #4 has been checked!");
 		assertTrue("Failure #4 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): Checking \"failure\" #5...");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Checking \"failure\" #5...");
 
 		{
 
@@ -275,8 +282,9 @@ public final class LatentTest {
 			final Object ignored = as(test, Runnable.class);
 		}
 
-		out.println(TEST_NAME + ".testC(): \"Failure\" #5 has been checked: No exception has occurred!");
-		out.println(TEST_NAME + ".testC(): Checking failure #6...");
+		out.println(TEST_NAME + "." + status.getMethodName() +
+				"(): \"Failure\" #5 has been checked: No exception has occurred!");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Checking failure #6...");
 
 		try {
 
@@ -288,10 +296,10 @@ public final class LatentTest {
 			notFound.printStackTrace();
 		}
 
-		out.println(TEST_NAME + ".testC(): Failure #6 has been checked!");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Failure #6 has been checked!");
 		assertTrue("Failure #6 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): Checking failure #7...");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Checking failure #7...");
 
 		try {
 
@@ -309,24 +317,24 @@ public final class LatentTest {
 			return;
 		}
 
-		out.println(TEST_NAME + ".testC(): Failure #7 has been checked!");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Failure #7 has been checked!");
 		assertTrue("Failure #7 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): Checking failure #8...");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Checking failure #8...");
 
 		// TODO: 29.10.2023 Insert here a code of failure #8 later...
 
-		out.println(TEST_NAME + ".testC(): Failure #8 has been checked!");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Failure #8 has been checked!");
 		// assertTrue("Failure #8 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): Checking failure #9...");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Checking failure #9...");
 
 		// TODO: 29.10.2023 Insert here a code of failure #9 later...
 
-		out.println(TEST_NAME + ".testC(): Failure #9 has been checked!");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Failure #9 has been checked!");
 		// assertTrue("Failure #9 hasn't been occurred!", thrown);
 		thrown = false;
-		out.println(TEST_NAME + ".testC(): Checking failure #10...");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Checking failure #10...");
 
 		try {
 
@@ -338,9 +346,9 @@ public final class LatentTest {
 			target.printStackTrace();
 		}
 
-		out.println(TEST_NAME + ".testC(): Failure #10 has been checked!");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Failure #10 has been checked!");
 		assertTrue("Failure #10 hasn't been occurred!", thrown);
-		out.println(TEST_NAME + ".testC(): Checking \"failure\" #11...");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Checking \"failure\" #11...");
 
 		{
 
@@ -359,10 +367,11 @@ public final class LatentTest {
 
 			assertNotNull("How did you get here ._.", result);
 			assertEquals("How did you get here ._.", 0L, ((Integer) result).longValue());
-			out.println(TEST_NAME + ".testC(): \"Failure\" #11 has been checked: No exception has occurred!");
+			out.println(TEST_NAME + "." + status.getMethodName() +
+					"(): \"Failure\" #11 has been checked: No exception has occurred!");
 		}
 
-		out.println(TEST_NAME + ".testC(): After failure test");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): After failure test");
 	}
 
 	@AvailableSince("0.1-build.1")
@@ -405,7 +414,7 @@ public final class LatentTest {
 		@SuppressWarnings("InstantiationOfUtilityClass")
 		final StaticTest test = new StaticTest();
 
-		out.println(TEST_NAME + ".testD(): Before \"isShadowed()-like\" calls");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): Before \"isShadowed()-like\" calls");
 
 		@NotNull(exception = NullPointerException.class)
 		final Runnable shadow = as(test, Runnable.class);
@@ -473,7 +482,7 @@ public final class LatentTest {
 		}
 
 		assertNotNull("\"isShadowed()-like\" test failed!", find(shadow));
-		out.println(TEST_NAME + ".testD(): After \"isShadowed()-like\" calls");
+		out.println(TEST_NAME + "." + status.getMethodName() + "(): After \"isShadowed()-like\" calls");
 	}
 
 	@AvailableSince("0.1-build.1")
