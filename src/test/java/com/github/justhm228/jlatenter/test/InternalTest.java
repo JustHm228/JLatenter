@@ -31,12 +31,34 @@ import static com.github.justhm228.jlatenter.base.Library.*;
 import static java.lang.System.*;
 import static org.junit.Assert.*;
 
+/**
+ * Tests the internal functions of the JLatenter library.
+ *
+ * <p>
+ * <b>
+ * Note: This test is considered the most "quiet" and/or "calm" because there were almost never any problems with the
+ * internal API itself (the only problem that happened with it was precisely what led to the creation of this test).
+ * Also, the internal API, at the time of writing the documentation, isn't particularly important. But despite this, the
+ * existence of this test can't be ignored, and any change in the internal API should necessarily be accompanied by
+ * changes to this test. And note that if one day this test fails, then you're very lucky.
+ * </b>
+ * </p>
+ *
+ * @author JustHuman228
+ * @since 0.1-build.2
+ */
 @AvailableSince("0.1-build.2")
 @NonExtendable()
 @NonBlocking()
 @SuppressWarnings({ "suppress", "warningToken" })
 public final class InternalTest {
 
+	/**
+	 * Instantiates a new instance of {@link InternalTest InternalTest}.
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @since 0.1-build.2
+	 */
 	@AvailableSince("0.1-build.2")
 	@NonBlocking()
 	@Contract(pure = true)
@@ -45,6 +67,21 @@ public final class InternalTest {
 		super();
 	}
 
+	/**
+	 * Tests whether the
+	 * <code>{@link com.github.justhm228.jlatenter.base.Library Library}.{@link com.github.justhm228.jlatenter.base.Library#preventInstantiation() preventInstantiation}()</code>
+	 * method will throw an {@link UnsupportedOperationException exception}.
+	 *
+	 * <p>
+	 *     If the {@link UnsupportedOperationException exception} isn't thrown,
+	 *     the test fails because this method should throw the
+	 *     {@link UnsupportedOperationException exception} anyway.
+	 * </p>
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws UnsupportedOperationException Should be thrown anyway. If it isn't, then the test failed.
+	 * @since 0.1-build.2
+	 */
 	@AvailableSince("0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
@@ -58,6 +95,26 @@ public final class InternalTest {
 				"InternalTest.testA(): After preventInstantiation() call: Already failed due to no exception has been thrown!");
 	}
 
+	/**
+	 * Tests the message of the thrown by the
+	 * <code>{@link com.github.justhm228.jlatenter.base.Library Library}.{@link com.github.justhm228.jlatenter.base.Library#preventInstantiation() preventInstantiation}()</code>
+	 * method for matching a template.
+	 *
+	 * <p>
+	 *     Calls the
+	 *     <code>{@link com.github.justhm228.jlatenter.base.Library Library}.{@link com.github.justhm228.jlatenter.base.Library#preventInstantiation() preventInstantiation}()</code>
+	 *     method, catches the {@link UnsupportedOperationException exception} it
+	 *     throws (if none is thrown, the test automatically fails), and
+	 *     compares its message with the expected one, which is equal to string
+	 *     <code>{@link com.github.justhm228.jlatenter.base.Library Library}.{@link com.github.justhm228.jlatenter.base.Library#CONST_EMSG_UTILCLASS CONST_EMSG_UTILCLASS}</code>
+	 *     formatted with the test class name as an argument. If it's equal, the test succeeds; otherwise,
+	 *     the test fails and throws an {@link AssertionError AssertionError}. <b>This is needed to check
+	 *     whether the method found the caller class correctly, because it's already found it incorrectly once.</b>
+	 * </p>
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws AssertionError If the test failed.
+	 */
 	@AvailableSince("0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
@@ -86,6 +143,21 @@ public final class InternalTest {
 		fail("Test failed due to no exception has been thrown!");
 	}
 
+	/**
+	 * Tests whether the
+	 * <code>{@link com.github.justhm228.jlatenter.base.Library Library}.{@link com.github.justhm228.jlatenter.base.Library#preventClone() preventClone}()</code>
+	 * method will throw an {@link CloneNotSupportedException exception}.
+	 *
+	 * <p>
+	 *     If the {@link CloneNotSupportedException exception} isn't thrown,
+	 *     the test fails because this method should throw the
+	 *     {@link CloneNotSupportedException exception} anyway.
+	 * </p>
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws CloneNotSupportedException Should be thrown anyway.
+	 * @since 0.1-build.2
+	 */
 	@AvailableSince(value = "0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
@@ -99,6 +171,26 @@ public final class InternalTest {
 				"InternalTest.testC(): After preventClone() call: Already failed due to no exception has been thrown!");
 	}
 
+	/**
+	 * Tests the message of the thrown by the
+	 * <code>{@link com.github.justhm228.jlatenter.base.Library Library}.{@link com.github.justhm228.jlatenter.base.Library#preventClone() preventClone}()</code>
+	 * method for matching a template.
+	 *
+	 * <p>
+	 *     Calls the
+	 *     <code>{@link com.github.justhm228.jlatenter.base.Library Library}.{@link com.github.justhm228.jlatenter.base.Library#preventClone() preventClone}()</code>
+	 *     method, catches the {@link CloneNotSupportedException exception} it
+	 *     throws (if none is thrown, the test automatically fails), and
+	 *     compares its message with the expected one, which is equal to string
+	 *     <code>{@link com.github.justhm228.jlatenter.base.Library Library}.{@link com.github.justhm228.jlatenter.base.Library#CONST_EMSG_IMMUTABLE CONST_EMSG_IMMUTABLE}</code>
+	 *     formatted with the test class name as an argument. If it's equal, the test succeeds; otherwise,
+	 *     the test fails and throws an {@link AssertionError AssertionError}. <b>This is needed to check
+	 *     whether the method found the caller class correctly, because it's already found it incorrectly once.</b>
+	 * </p>
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws AssertionError If the test failed.
+	 */
 	@AvailableSince(value = "0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
@@ -126,6 +218,15 @@ public final class InternalTest {
 		fail("Test failed due to no exception has been thrown!");
 	}
 
+	/**
+	 * Returns a string representation of {@link InternalTest this object}.
+	 *
+	 * <p>Yeah, it just uses the {@link Object#toString() default implementation}.</p>
+	 *
+	 * @return A string representation of {@link InternalTest this object}.
+	 * @throws Error If something went wrong in the JVM.
+	 * @since 0.1-build.2
+	 */
 	@AvailableSince(value = "0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
@@ -136,6 +237,15 @@ public final class InternalTest {
 		return super.toString();
 	}
 
+	/**
+	 * Indicates whether some {@link Object other object} is "equal to" {@link InternalTest this one}.
+	 *
+	 * <p>It just checks if the {@link Object passed object} is an instance of {@link InternalTest InternalTest}.</p>
+	 *
+	 * @param another A {@link Object reference object} with which to compare.
+	 * @return If {@link InternalTest this object} is equal to the {@link Object argument}, then returns <code>true</code>, otherwise - <code>false</code>.
+	 * @throws Error If something went wrong in the JVM.
+	 */
 	@AvailableSince(value = "0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
@@ -146,6 +256,15 @@ public final class InternalTest {
 		return another instanceof InternalTest;
 	}
 
+	/**
+	 * Returns a hash code value for {@link InternalTest this object}.
+	 *
+	 * <p>Yeah, it just uses the {@link Object#hashCode() default implementation}.</p>
+	 *
+	 * @return A hash code value for {@link InternalTest this object}.
+	 * @throws Error If something went wrong in the JVM.
+	 * @since 0.1-build.2
+	 */
 	@AvailableSince(value = "0.1-build.2")
 	@NonExtendable()
 	@NonBlocking()
@@ -156,6 +275,17 @@ public final class InternalTest {
 		return super.hashCode();
 	}
 
+	/**
+	 * Prevents cloning.
+	 *
+	 * <p>Yeah, it just throws an {@link CloneNotSupportedException exception}.</p>
+	 *
+	 * @return Never returns.
+	 *
+	 * @throws Error If something went wrong in the JVM.
+	 * @throws CloneNotSupportedException Always.
+	 * @since 0.1-build.2
+	 */
 	@AvailableSince(value = "0.1-build.2")
 	@Internal()
 	@NonExtendable()
