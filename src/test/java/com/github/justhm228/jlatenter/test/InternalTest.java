@@ -66,7 +66,7 @@ public final class InternalTest {
 	@AvailableSince(value = "0.1-build.4")
 	@Internal()
 	@NotNull(exception = NullPointerException.class)
-	private static final String TEST_NAME = InternalTest.class.getSimpleName();
+	private static final String TEST_NAME = InternalTest.class.getSimpleName(); // A string name of the current test
 
 	/**
 	 * Instantiates a new instance of {@link InternalTest InternalTest}.
@@ -79,8 +79,13 @@ public final class InternalTest {
 	@Contract(pure = true)
 	public InternalTest() throws Error {
 
-		super();
+		super(); // Just instantiate a new instance of `InternalTest` for JUnit 4 runner.
 	}
+
+	// ---------------------------------------- TEST START ----------------------------------------
+
+	// Note: All the tests presented here will be invoked in declaration order because their names arranged according
+	//       to the alphabet, and the JUnit 4 runner uses alphabetical sorting by default. You can sleep peacefully :)
 
 	/**
 	 * Tests whether the
@@ -101,13 +106,18 @@ public final class InternalTest {
 	@NonExtendable()
 	@NonBlocking()
 	@Contract()
-	@Test(expected = UnsupportedOperationException.class)
+	@Test(expected = UnsupportedOperationException.class) // <- This test MUST end up with this exception!
 	public void testA() throws Error, UnsupportedOperationException {
 
 		out.println(TEST_NAME + ".testA(): Before preventInstantiation() call");
-		preventInstantiation();
+		preventInstantiation(); // <- This should always throw an exception if the internal API is OK
+
+		// The code below should never be reached because of the exception thrown above:
 		err.println(TEST_NAME +
 				".testA(): After preventInstantiation() call: Already failed due to no exception has been thrown!");
+
+		// Note: After the above statement reached, the test will automatically be failed because JUnit 4 runner won't
+		//       receive the exception specified in the method descriptor!
 	}
 
 	/**
@@ -141,20 +151,25 @@ public final class InternalTest {
 
 		try {
 
-			preventInstantiation();
+			preventInstantiation(); // <- This should always throw an exception if the internal API is OK
 
 		} catch (@NotNull(exception = NullPointerException.class) @SuppressWarnings("ignored") final
-		UnsupportedOperationException init) {
+		UnsupportedOperationException init) { // <- This exception MUST be thrown if everything is OK!
 
 			out.println(
 					TEST_NAME + ".testB(): After preventInstantiation() call (exception has been thrown and caught)");
+
+			// Compare the actual exception message with the expected one to check if the caller search algorithm
+			// is still working good:
 			assertEquals(
 					"Test failed due to the actual exception message isn't equal to the expected (possibly a caller search error)!",
 					CONST_EMSG_UTILCLASS.formatted(getClass().getTypeName()), init.getMessage()
 			            );
-			return;
+
+			return; // <- If this statement is reached, then the test is succeeded and we should finish it
 		}
 
+		// If the below statement is reached, then no exception has been thrown so the test should fail:
 		fail("Test failed due to no exception has been thrown!");
 	}
 
@@ -177,13 +192,18 @@ public final class InternalTest {
 	@NonExtendable()
 	@NonBlocking()
 	@Contract()
-	@Test(expected = CloneNotSupportedException.class)
+	@Test(expected = CloneNotSupportedException.class) // <- This test MUST end up with this exception!
 	public void testC() throws Error, CloneNotSupportedException {
 
 		out.println(TEST_NAME + ".testC(): Before preventClone() call");
-		preventClone();
+		preventClone(); // <- This should always throw an exception if the internal API is OK
+
+		// The code below should never be reached because of the exception thrown above:
 		err.println(
 				TEST_NAME + ".testC(): After preventClone() call: Already failed due to no exception has been thrown!");
+
+		// Note: After the above statement reached, the test will automatically be failed because JUnit 4 runner won't
+		//       receive the exception specified in the method descriptor!
 	}
 
 	/**
@@ -217,21 +237,28 @@ public final class InternalTest {
 
 		try {
 
-			preventClone();
+			preventClone(); // <- This should always throw an exception if the internal API is OK
 
 		} catch (@NotNull(exception = NullPointerException.class) @SuppressWarnings("ignored") final
-		CloneNotSupportedException unsupported) {
+		CloneNotSupportedException unsupported) { // <- This exception MUST be thrown if everything is OK!
 
 			out.println(TEST_NAME + ".testD(): After preventClone() call (exception has been thrown and caught)");
+
+			// Compare the actual exception message with the expected one to check if the caller search algorithm
+			// is still working good:
 			assertEquals(
 					"Test failed due to the actual exception message isn't equal to the expected (possibly a caller search error)!",
 					CONST_EMSG_IMMUTABLE.formatted(getClass().getTypeName()), unsupported.getMessage()
 			            );
-			return;
+
+			return; // <- If this statement is reached, then the test is succeeded and we should finish it
 		}
 
+		// If the below statement is reached, then no exception has been thrown so the test should fail:
 		fail("Test failed due to no exception has been thrown!");
 	}
+
+	// ---------------------------------------- TEST END ----------------------------------------
 
 	/**
 	 * Returns a string representation of {@link InternalTest this object}.
@@ -249,6 +276,8 @@ public final class InternalTest {
 	@Override()
 	public @NotNull(exception = NullPointerException.class) String toString() throws Error {
 
+		// Due to all `InternalTest` objects are "the same" and can't store any data, then we don't need to add here
+		// some other information, so we can just return `TEST_NAME`:
 		return TEST_NAME;
 	}
 
@@ -268,6 +297,8 @@ public final class InternalTest {
 	@Override()
 	public boolean equals(@Nullable(value = "Can be null anytime") final Object another) throws Error {
 
+		// `InternalTest` can't store any data so if the passed object is an instance of `InternalTest` -
+		// it's already equal to this object:
 		return another instanceof InternalTest;
 	}
 
@@ -287,6 +318,8 @@ public final class InternalTest {
 	@Override()
 	public int hashCode() throws Error {
 
+		// Due to all `InternalTest` objects are "the same" and can't sore any data, then we don't need to calculate
+		// a unique hash code for every object, so we can just return the hash of the object class:
 		return hash(getClass());
 	}
 
@@ -310,6 +343,8 @@ public final class InternalTest {
 	@SuppressWarnings({ "super", "CloneDoesntCallSuperClone" })
 	protected InternalTest clone() throws Error, CloneNotSupportedException {
 
+		// Always prevent cloning (even if `InternalTest` will implement `Cloneable`) -
+		// no instances should be instantiated!
 		return preventClone();
 	}
 }
