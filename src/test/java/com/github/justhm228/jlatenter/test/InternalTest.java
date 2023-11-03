@@ -54,6 +54,15 @@ import static java.util.Objects.*;
 @SuppressWarnings({ "suppress", "warningToken" })
 public final class InternalTest {
 
+	/**
+	 * Stores a test name which is used in {@link System#out test output} and in
+	 * <code>{@link #toString() toString}()</code> implementation.
+	 *
+	 * <p><b>Note: Currently, it's equal to the {@link Class#getSimpleName() simple name} of the
+	 * {@link InternalTest current class}.</b></p>
+	 *
+	 * @since 0.1-build.4
+	 */
 	@AvailableSince(value = "0.1-build.4")
 	@Internal()
 	@NotNull(exception = NullPointerException.class)
