@@ -51,6 +51,7 @@ import static java.util.Objects.*;
 @AvailableSince("0.1-build.2")
 @NonExtendable()
 @NonBlocking()
+@FixMethodOrder()
 @SuppressWarnings({ "suppress", "warningToken" })
 public final class InternalTest {
 
