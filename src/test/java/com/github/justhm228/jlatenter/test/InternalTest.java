@@ -54,6 +54,11 @@ import static java.util.Objects.*;
 @SuppressWarnings({ "suppress", "warningToken" })
 public final class InternalTest {
 
+	@AvailableSince(value = "0.1-build.4")
+	@Internal()
+	@NotNull(exception = NullPointerException.class)
+	private static final String TEST_NAME = InternalTest.class.getSimpleName();
+
 	/**
 	 * Instantiates a new instance of {@link InternalTest InternalTest}.
 	 *
@@ -90,10 +95,10 @@ public final class InternalTest {
 	@Test(expected = UnsupportedOperationException.class)
 	public void testA() throws Error, UnsupportedOperationException {
 
-		out.println("InternalTest.testA(): Before preventInstantiation() call");
+		out.println(TEST_NAME + ".testA(): Before preventInstantiation() call");
 		preventInstantiation();
-		err.println(
-				"InternalTest.testA(): After preventInstantiation() call: Already failed due to no exception has been thrown!");
+		err.println(TEST_NAME +
+				".testA(): After preventInstantiation() call: Already failed due to no exception has been thrown!");
 	}
 
 	/**
@@ -123,7 +128,7 @@ public final class InternalTest {
 	@Test()
 	public void testB() throws Error {
 
-		out.println("InternalTest.testB(): Before preventInstantiation() call");
+		out.println(TEST_NAME + ".testB(): Before preventInstantiation() call");
 
 		try {
 
@@ -133,7 +138,7 @@ public final class InternalTest {
 		UnsupportedOperationException init) {
 
 			out.println(
-					"InternalTest.testB(): After preventInstantiation() call (exception has been thrown and caught)");
+					TEST_NAME + ".testB(): After preventInstantiation() call (exception has been thrown and caught)");
 			assertEquals(
 					"Test failed due to the actual exception message isn't equal to the expected (possibly a caller search error)!",
 					CONST_EMSG_UTILCLASS.formatted(getClass().getTypeName()), init.getMessage()
@@ -166,10 +171,10 @@ public final class InternalTest {
 	@Test(expected = CloneNotSupportedException.class)
 	public void testC() throws Error, CloneNotSupportedException {
 
-		out.println("InternalTest.testC(): Before preventClone() call");
+		out.println(TEST_NAME + ".testC(): Before preventClone() call");
 		preventClone();
 		err.println(
-				"InternalTest.testC(): After preventClone() call: Already failed due to no exception has been thrown!");
+				TEST_NAME + ".testC(): After preventClone() call: Already failed due to no exception has been thrown!");
 	}
 
 	/**
@@ -199,7 +204,7 @@ public final class InternalTest {
 	@Test()
 	public void testD() throws Error {
 
-		out.println("InternalTest.testD(): Before preventClone() call");
+		out.println(TEST_NAME + ".testD(): Before preventClone() call");
 
 		try {
 
@@ -208,7 +213,7 @@ public final class InternalTest {
 		} catch (@NotNull(exception = NullPointerException.class) @SuppressWarnings("ignored") final
 		CloneNotSupportedException unsupported) {
 
-			out.println("InternalTest.testD(): After preventClone() call (exception has been thrown and caught)");
+			out.println(TEST_NAME + ".testD(): After preventClone() call (exception has been thrown and caught)");
 			assertEquals(
 					"Test failed due to the actual exception message isn't equal to the expected (possibly a caller search error)!",
 					CONST_EMSG_IMMUTABLE.formatted(getClass().getTypeName()), unsupported.getMessage()
