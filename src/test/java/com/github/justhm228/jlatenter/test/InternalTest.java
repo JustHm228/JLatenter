@@ -74,7 +74,7 @@ public final class InternalTest {
 	@Internal()
 	@NotNull(exception = NullPointerException.class)
 	@Rule()
-	public final TestName status = new TestName();
+	public final TestName status = new TestName(); // Stores a name of the currently running method
 
 	/**
 	 * Instantiates a new instance of {@link InternalTest InternalTest}.
