@@ -221,7 +221,7 @@ public final class InternalTest {
 	/**
 	 * Returns a string representation of {@link InternalTest this object}.
 	 *
-	 * <p>Yeah, it just uses the {@link Object#toString() default implementation}.</p>
+	 * <p>It just returns a {@link Class#getSimpleName() simple name} of the {@link InternalTest object class}.</p>
 	 *
 	 * @return A string representation of {@link InternalTest this object}.
 	 * @throws Error If something went wrong in the JVM.
