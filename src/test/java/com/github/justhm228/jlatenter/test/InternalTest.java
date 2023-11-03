@@ -30,6 +30,7 @@ import org.junit.*;
 import static com.github.justhm228.jlatenter.base.Library.*;
 import static java.lang.System.*;
 import static org.junit.Assert.*;
+import static java.util.Objects.*;
 
 /**
  * Tests the internal functions of the JLatenter library.
@@ -272,7 +273,7 @@ public final class InternalTest {
 	@Override()
 	public int hashCode() throws Error {
 
-		return super.hashCode();
+		return hash(getClass());
 	}
 
 	/**
