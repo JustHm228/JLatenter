@@ -260,7 +260,7 @@ public final class InternalTest {
 	/**
 	 * Returns a hash code value for {@link InternalTest this object}.
 	 *
-	 * <p>Yeah, it just uses the {@link Object#hashCode() default implementation}.</p>
+	 * <p>It just returns the {@link java.util.Objects#hash(Object...) hash} of the {@link InternalTest object class}.</p>
 	 *
 	 * @return A hash code value for {@link InternalTest this object}.
 	 * @throws Error If something went wrong in the JVM.
