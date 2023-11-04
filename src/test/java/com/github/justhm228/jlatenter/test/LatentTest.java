@@ -29,6 +29,7 @@ import static com.github.justhm228.jlatenter.base.Library.*;
 import static com.github.justhm228.jlatenter.latent.Latent.*;
 import static java.lang.System.*;
 import java.util.*;
+import static java.util.Objects.*;
 import java.util.concurrent.*;
 import org.jetbrains.annotations.ApiStatus.*;
 import org.jetbrains.annotations.*;
@@ -512,7 +513,7 @@ public final class LatentTest {
 	@Override()
 	public int hashCode() throws Error {
 
-		return super.hashCode();
+		return hash(getClass());
 	}
 
 	@AvailableSince("0.1-build.1")
