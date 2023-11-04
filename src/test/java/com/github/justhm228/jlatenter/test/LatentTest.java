@@ -493,7 +493,7 @@ public final class LatentTest {
 	@Override()
 	public @NotNull(exception = NullPointerException.class) String toString() throws Error {
 
-		return super.toString();
+		return TEST_NAME;
 	}
 
 	@AvailableSince("0.1-build.1")
