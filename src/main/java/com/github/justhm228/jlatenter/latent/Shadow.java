@@ -68,6 +68,7 @@ import static java.lang.annotation.RetentionPolicy.*;
 @Target({ TYPE, METHOD })
 @Retention(RUNTIME)
 @Documented()
+@SuppressWarnings({ "suppress", "warningToken", "deprecation" })
 public @interface Shadow {
 
 }
