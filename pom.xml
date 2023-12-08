@@ -44,12 +44,14 @@
 		<developer>
 			<name>JustHuman228</name>
 			<url>https://github.com/JustHm228</url>
+			<timezone>UTC+03:00</timezone>
 		</developer>
 	</developers>
 	<contributors>
 		<contributor>
 			<name>JustHuman228</name>
 			<url>https://github.com/JustHm228</url>
+			<timezone>UTC+03:00</timezone>
 		</contributor>
 	</contributors>
 
@@ -57,14 +59,25 @@
 		<license>
 			<name>MIT</name>
 			<url>https://spdx.org/licenses/MIT.txt</url>
+			<distribution>repo</distribution>
 		</license>
 	</licenses>
 	<inceptionYear>2023</inceptionYear>
 
 	<properties>
+		<maven.resources.directory>${basedir}/src/main/resources</maven.resources.directory>
+		<!-- <maven.testResources.directory>${basedir}/src/test/resources</maven.testResources.directory> -->
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<dependency.junit.version>4.13.2</dependency.junit.version>
+		<dependency.annotations.version>24.0.1</dependency.annotations.version>
+		<plugin.maven-compiler-plugin.version>3.11.0</plugin.maven-compiler-plugin.version>
+		<plugin.maven-resources-plugin.version>3.3.1</plugin.maven-resources-plugin.version>
+		<plugin.maven-jar-plugin.version>3.3.0</plugin.maven-jar-plugin.version>
+		<plugin.maven-source-plugin.version>3.3.0</plugin.maven-source-plugin.version>
+		<plugin.maven-javadoc-plugin.version>3.5.0</plugin.maven-javadoc-plugin.version>
+		<plugin.maven-surefire-plugin.version>3.1.2</plugin.maven-surefire-plugin.version>
 	</properties>
 
 	<!-- <scm> -->
@@ -89,7 +102,7 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.13.2</version>
+				<version>${dependency.junit.version}</version>
 				<type>jar</type>
 				<scope>test</scope>
 				<optional>false</optional>
@@ -97,9 +110,9 @@
 			<dependency>
 				<groupId>org.jetbrains</groupId>
 				<artifactId>annotations</artifactId>
-				<version>24.0.1</version>
+				<version>${dependency.annotations.version}</version>
 				<type>jar</type>
-				<scope>provided</scope>
+				<scope>compile</scope>
 				<optional>true</optional>
 			</dependency>
 		</dependencies>
@@ -109,7 +122,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13.2</version>
+			<version>${dependency.junit.version}</version>
 			<type>jar</type>
 			<scope>test</scope>
 			<optional>false</optional>
@@ -117,9 +130,9 @@
 		<dependency>
 			<groupId>org.jetbrains</groupId>
 			<artifactId>annotations</artifactId>
-			<version>24.0.1</version>
+			<version>${dependency.annotations.version}</version>
 			<type>jar</type>
-			<scope>provided</scope>
+			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 	</dependencies>
@@ -130,7 +143,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.11.0</version>
+					<version>${plugin.maven-compiler-plugin.version}</version>
 					<configuration>
 						<!-- <verbose>true</verbose> -->
 						<detail>true</detail>
@@ -152,7 +165,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>3.3.0</version>
+					<version>${plugin.maven-resources-plugin.version}</version>
 					<configuration>
 						<detail>true</detail>
 					</configuration>
@@ -160,13 +173,11 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.3.0</version>
+					<version>${plugin.maven-jar-plugin.version}</version>
 					<configuration>
 						<detail>true</detail>
 						<archive>
-							<manifest>
-								<addClasspath>true</addClasspath>
-							</manifest>
+							<manifestFile>${maven.resources.directory}/META-INF/MANIFEST.MF</manifestFile>
 						</archive>
 					</configuration>
 					<executions>
@@ -183,7 +194,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
-					<version>3.3.0</version>
+					<version>${plugin.maven-source-plugin.version}</version>
 					<configuration>
 						<detail>true</detail>
 					</configuration>
@@ -201,7 +212,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>3.5.0</version>
+					<version>${plugin.maven-javadoc-plugin.version}</version>
 					<configuration>
 						<verbose>true</verbose>
 						<detail>true</detail>
@@ -224,12 +235,12 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>3.0.0</version>
+					<version>${plugin.maven-surefire-plugin.version}</version>
 					<dependencies>
 						<dependency>
 							<groupId>org.apache.maven.surefire</groupId>
 							<artifactId>surefire-junit4</artifactId>
-							<version>3.0.0</version>
+							<version>${plugin.maven-surefire-plugin.version}</version>
 							<optional>false</optional>
 						</dependency>
 					</dependencies>
@@ -260,7 +271,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
+				<version>${plugin.maven-compiler-plugin.version}</version>
 				<configuration>
 					<!-- <verbose>true</verbose> -->
 					<detail>true</detail>
@@ -282,7 +293,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.3.0</version>
+				<version>${plugin.maven-resources-plugin.version}</version>
 				<configuration>
 					<detail>true</detail>
 				</configuration>
@@ -290,13 +301,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.3.0</version>
+				<version>${plugin.maven-jar-plugin.version}</version>
 				<configuration>
 					<detail>true</detail>
 					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-						</manifest>
+						<manifestFile>${maven.resources.directory}/META-INF/MANIFEST.MF</manifestFile>
 					</archive>
 				</configuration>
 				<executions>
@@ -313,7 +322,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>3.3.0</version>
+				<version>${plugin.maven-source-plugin.version}</version>
 				<configuration>
 					<detail>true</detail>
 				</configuration>
@@ -331,7 +340,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.5.0</version>
+				<version>${plugin.maven-javadoc-plugin.version}</version>
 				<configuration>
 					<verbose>true</verbose>
 					<detail>true</detail>
@@ -354,12 +363,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>${plugin.maven-surefire-plugin.version}</version>
 				<dependencies>
 					<dependency>
 						<groupId>org.apache.maven.surefire</groupId>
 						<artifactId>surefire-junit4</artifactId>
-						<version>3.0.0</version>
+						<version>${plugin.maven-surefire-plugin.version}</version>
 						<optional>false</optional>
 					</dependency>
 				</dependencies>
