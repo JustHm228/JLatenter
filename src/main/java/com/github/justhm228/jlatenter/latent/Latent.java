@@ -30,7 +30,7 @@ import java.lang.reflect.*;
 import static java.lang.reflect.Proxy.*;
 import java.security.*;
 import java.util.*;
-import static java.util.Objects.toIdentityString;
+import static java.lang.Integer.*;
 import static java.util.Objects.hash;
 import org.jetbrains.annotations.ApiStatus.*;
 import org.jetbrains.annotations.*;
@@ -902,7 +902,7 @@ public final class Latent {
 			}
 
 			// Built-in implementation of `toString()`:
-			return toIdentityString(proxy); // <- Default `toString()`
+			return proxy.getClass().getName() + "@" + toHexString(proxy.hashCode()); // <- Default `toString()`
 		}
 
 		// Built-in `equals()`:
